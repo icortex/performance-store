@@ -1,0 +1,50 @@
+# Additional translations at http://github.com/plataformatec/devise/wiki/I18n
+
+en:
+  errors:
+    messages:
+      expired: "ha expirado, por favor solicite una nueva"
+      not_found: "no encontrado"
+      already_confirmed: "ya fue confirmado, por favor intente ingresar"
+      not_locked: "no fue bloqueado"
+      not_saved:
+        one: "1 error no permite que este %{resource} sea guardado:"
+        other: "%{count} errores no permiten que este %{resource} sea guardado:"
+
+  devise:
+    failure:
+      already_authenticated: 'Ya has iniciado sesion..'
+      unauthenticated: 'Necesitas iniciar sesion o registrarte.'
+      unconfirmed: 'You have to confirm your account before continuing.'
+      locked: 'Tu cuenta esta bloqueada.'
+      invalid: 'Nombre de usuario o contrasena incorrectos.'
+      invalid_token: 'Token de autenticacion invalido.'
+      timeout: 'Tu sesion ha expirado, ingresa nuevamente.'
+      inactive: 'Your account was not activated yet.'
+    sessions:
+      signed_in: 'Inicio de sesion correcto.'
+      signed_out: 'Has cerrado sesion.'
+    passwords:
+      send_instructions: 'Recibiras un email en los proximos minutos con instrucciones para reiniciar tu contrasena.'
+      updated: 'Tu contrasena ha sido cambiada satisfactoriamente. Has iniciado sesion!'
+    confirmations:
+      send_instructions: 'Recibiras un email en los proximos minutos con instrucciones para confirmar tu cuenta.'
+      confirmed: 'Your account was successfully confirmed. You are now signed in.'
+    registrations:
+      signed_up: 'Bienvenido!'
+      inactive_signed_up: 'You have signed up successfully. However, we could not sign you in because your account is %{reason}.'
+      updated: 'Tu cuenta ha sido actualizada.'
+      destroyed: 'Hasta pronto! Tu cuenta ha sido cancelada. Esperamos verte de nuevo.'
+    unlocks:
+      send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
+      unlocked: 'Your account was successfully unlocked. You are now signed in.'
+    omniauth_callbacks:
+      success: 'Successfully authorized from %{kind} account.'
+      failure: 'Could not authorize you from %{kind} because "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Instrucciones de confirmacion'
+      reset_password_instructions:
+        subject: 'Instrucciones para reiniciar tu contrasena'
+      unlock_instructions:
+        subject: 'Unlock Instructions'

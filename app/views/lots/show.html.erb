@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Arrival date:</b>
+  <%= @lot.arrival_date %>
+</p>
+
+<p>
+  <b>Freight:</b>
+  <%= @lot.freight %>
+</p>
+
+<p>
+  <b>Carrier:</b>
+  <%= @lot.carrier %>
+</p>
+
+<p>
+  <b>Origin:</b>
+  <%= @lot.origin %>
+</p>
+
+<p>
+  <b>Weight:</b>
+  <%= @lot.weight %>
+</p>
+
+<p>
+  <b>Total cost:</b>
+  <%= @lot.total_cost %>
+</p>
+
+
+<%= link_to 'Edit', edit_lot_path(@lot) %> |
+<%= link_to 'Back', lots_path %>

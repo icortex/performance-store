@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  arrival_date: 2011-05-26
+  freight: 1
+  carrier: MyString
+  origin: MyString
+  weight: 1
+  total_cost: 1
+
+two:
+  arrival_date: 2011-05-26
+  freight: 1
+  carrier: MyString
+  origin: MyString
+  weight: 1
+  total_cost: 1

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  product: 
+  quantity: 1
+  price: 1
+  headquarter: 
+
+two:
+  product: 
+  quantity: 1
+  price: 1
+  headquarter: 

@@ -1,0 +1,21 @@
+<%= form_for(@cloth_type) do |f| %>
+  <% if @cloth_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cloth_type.errors.count, "error") %> prohibited this cloth_type from being saved:</h2>
+
+      <ul>
+      <% @cloth_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cloth_type %><br />
+    <%= f.text_field :cloth_type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WJSport</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :all %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+<script type="text/javascript">
+  var jq=jQuery.noConflict();
+</script>
+<div class="container">
+  <div class='header'>
+    <table>
+      <tr>
+        <td>
+          <h1>WJSport</h1>
+        </td>
+        <td id="session_name">
+          <% if user_signed_in? %>
+              Hola <%= link_to current_user.username, edit_user_registration_path %>!
+              <%= link_to "Cerrar Sesion", destroy_user_session_path %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <% if user_signed_in? %>
+      <div class='principal-menu'>
+        <ul>
+          <li><%= link_to 'Articulos', products_path %></li>
+          <li><%= link_to 'Ventas', '#' %></li>
+          <li><%= link_to 'Clientes', people_path %></li>
+          <li><%= link_to 'Reportes', '#' %></li>
+          <li><%= link_to 'Buscar', '#' %></li>
+        </ul>
+      </div>
+      <div class='secondary-menu'></div>
+  <% end %>
+  <div id='errors'>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  </div>
+  <div class='content'>
+    <%= yield %>
+  </div>
+  <div class='footer'>
+    © 2011 CodeScrum
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<div class="left">
+  <%= image_tag @product.image.url :medium %>
+</div>
+
+<table class="product">
+  <tr>
+    <td>
+      <b>Marca:</b>
+    </td>
+    <td>
+      <%= @product.brand.brand %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Tipo:</b>
+    </td>
+    <td>
+      <%= @product.cloth_type.cloth_type %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Referencia:</b>
+    </td>
+    <td>
+      <%= @product.reference %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Modelo:</b>
+    </td>
+    <td>
+      <%= @product.model %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Codigo de barras:</b>
+    </td>
+    <td>
+      <%= @product.barcode %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Genero:</b>
+    </td>
+    <td>
+      <%= @product.gender %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Talla:</b>
+    </td>
+    <td>
+      <%= @product.size.size %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Color:</b>
+    </td>
+    <td>
+      <%= @product.color.color %>
+    </td>
+  </tr>
+</table>
+
+<%= link_to 'Editar', edit_product_path(@product) %> |
+<%= link_to 'Volver', products_path %>

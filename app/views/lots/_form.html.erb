@@ -1,0 +1,41 @@
+<%= form_for(@lot) do |f| %>
+  <% if @lot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lot.errors.count, "error") %> prohibited this lot from being saved:</h2>
+
+      <ul>
+      <% @lot.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :arrival_date %><br />
+    <%= f.date_select :arrival_date %>
+  </div>
+  <div class="field">
+    <%= f.label :freight %><br />
+    <%= f.text_field :freight %>
+  </div>
+  <div class="field">
+    <%= f.label :carrier %><br />
+    <%= f.text_field :carrier %>
+  </div>
+  <div class="field">
+    <%= f.label :origin %><br />
+    <%= f.text_field :origin %>
+  </div>
+  <div class="field">
+    <%= f.label :weight %><br />
+    <%= f.text_field :weight %>
+  </div>
+  <div class="field">
+    <%= f.label :total_cost %><br />
+    <%= f.text_field :total_cost %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

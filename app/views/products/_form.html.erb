@@ -1,0 +1,99 @@
+<%= form_for(@product, :html => {:multipart => true}) do |f| %>
+    <% if @product.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@product.errors.count, "error") %> No se pudo guardar este articulo:</h2>
+          <ul>
+            <% @product.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="left">
+      <%= image_tag @product.image.url :medium %>
+      <br/>
+      <%= f.file_field :image %>
+    </div>
+
+    <table class="product">
+      <tr>
+        <td>
+           <%= f.label 'Marca' %>
+        </td>
+        <td>
+          <%= f.select :brand, Brand.all.collect { |brand| [brand.brand, brand.id] } %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Tipo' %>
+        </td>
+        <td>
+          <%= f.select :cloth_type, ClothType.all.collect { |element| [element.cloth_type, element.id] } %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Referencia' %>
+        </td>
+        <td>
+          <%= f.text_field :reference %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Modelo' %>
+        </td>
+        <td>
+          <%= f.text_field :model %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Codigo de barras' %>
+        </td>
+        <td>
+          <%= f.text_field :barcode %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Genero' %>
+        </td>
+        <td>
+           <%= f.radio_button :gender, 'Hombre', :checked => true%>Hombre
+        <%= f.radio_button :gender, 'Mujer' %>Mujer
+        </td>
+      </tr>
+      <tr>
+        <td>
+           <%= f.label 'Talla' %>
+        </td>
+        <td>
+          <%= f.select :size, Size.all.collect { |element| [element.size, element.id] } %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+           <%= f.label 'Color' %>
+        </td>
+        <td>
+          <%= f.select :color, Color.all.collect { |element| [element.color, element.rgb] }, :name=>'color' %>
+        </td>
+      </tr>
+    </table>
+    
+    <script type="text/javascript">
+      jq(document).ready(function() {
+            jq('select[name="product[color]"]').colourPicker({
+                ico:    '/images/jquery.colourPicker.gif',
+                title:    false
+            });
+        });
+    </script>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

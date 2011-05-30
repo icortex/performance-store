@@ -1,0 +1,17 @@
+<h2>Inicio de Sesion</h2>
+
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <p><%= f.label 'Nombre de usuario' %><br />
+  <%= f.text_field :username %></p>
+
+  <p><%= f.label 'Contraseña' %><br />
+  <%= f.password_field :password %></p>
+
+  <% if devise_mapping.rememberable? -%>
+    <p><%= f.check_box :remember_me %> <%= f.label 'Recuerdame' %></p>
+  <% end -%>
+
+  <p><%= f.submit "Ingresar" %></p>
+<% end %>
+
+<%= render :partial => "devise/shared/links" %>

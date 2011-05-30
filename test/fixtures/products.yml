@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  brand: 
+  cloth_type: 
+  reference: MyString
+  model: MyString
+  barcode: MyString
+  gender: MyString
+  image: 
+  size: 
+  color: 
+
+two:
+  brand: 
+  cloth_type: 
+  reference: MyString
+  model: MyString
+  barcode: MyString
+  gender: MyString
+  image: 
+  size: 
+  color: 
