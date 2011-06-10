@@ -2,14 +2,14 @@ class PeopleController < ApplicationController
 
   load_and_authorize_resource
   check_authorization
-  
+
   # GET /people
   # GET /people.xml
   def index
     @people = Person.all
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @people }
+      format.xml { render :xml => @people }
     end
   end
 
@@ -20,7 +20,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @person }
+      format.xml { render :xml => @person }
     end
   end
 
@@ -28,10 +28,10 @@ class PeopleController < ApplicationController
   # GET /people/new.xml
   def new
     @person = Person.new
-
+    
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @person }
+      format.xml { render :xml => @person }
     end
   end
 
@@ -47,11 +47,11 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
-        format.html { redirect_to(@person, :notice => 'Person was successfully created.') }
-        format.xml  { render :xml => @person, :status => :created, :location => @person }
+        format.html { redirect_to(people_path, :notice => 'Cliente agregado exitosamente!') }
+        format.xml { render :xml => @person, :status => :created, :location => @person }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @person.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -63,11 +63,11 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.update_attributes(params[:person])
-        format.html { redirect_to(@person, :notice => 'Person was successfully updated.') }
-        format.xml  { head :ok }
+        format.html { redirect_to(people_path, :notice => 'Cliente actualizado exitosamente!') }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @person.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -79,8 +79,8 @@ class PeopleController < ApplicationController
     @person.destroy
 
     respond_to do |format|
-      format.html { redirect_to(people_url) }
-      format.xml  { head :ok }
+      format.html { redirect_to(people_url , :notice => 'Cliente borrado exitosamente!') }
+      format.xml { head :ok }
     end
   end
 end

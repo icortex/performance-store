@@ -1,35 +1,53 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Arrival date:</b>
-  <%= @lot.arrival_date %>
-</p>
-
-<p>
-  <b>Freight:</b>
-  <%= @lot.freight %>
-</p>
-
-<p>
-  <b>Carrier:</b>
-  <%= @lot.carrier %>
-</p>
-
-<p>
-  <b>Origin:</b>
-  <%= @lot.origin %>
-</p>
-
-<p>
-  <b>Weight:</b>
-  <%= @lot.weight %>
-</p>
-
-<p>
-  <b>Total cost:</b>
-  <%= @lot.total_cost %>
-</p>
-
-
-<%= link_to 'Edit', edit_lot_path(@lot) %> |
-<%= link_to 'Back', lots_path %>
+<table>
+      <tr>
+        <td>
+          <b>  Fecha de llegada </b>
+        </td>
+        <td>
+          <%= @lot.arrival_date %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>  Origen </b>
+        </td>
+        <td>
+          <%= @lot.origin %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>  Peso </b>
+        </td>
+        <td>
+          <%= @lot.weight %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>  Transportador </b>
+        </td>
+        <td>
+         <%= @lot.carrier %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>  Flete </b>
+        </td>
+        <td>
+           <%= @lot.freight %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>  Costo total </b>
+        </td>
+        <td>
+          <%= @lot.total_cost %>
+        </td>
+      </tr>
+    </table>
+<br>
+<%= link_to 'Modificar', edit_lot_path(@lot) %>
+<%= link_to 'Volver', lots_path %>

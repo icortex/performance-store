@@ -9,17 +9,17 @@
     <th></th>
   </tr>
 
-<% @faulties.each do |faulty| %>
-  <tr>
-    <td><%= faulty.product %></td>
-    <td><%= faulty.description %></td>
-    <td><%= link_to 'Show', faulty %></td>
-    <td><%= link_to 'Edit', edit_faulty_path(faulty) %></td>
-    <td><%= link_to 'Destroy', faulty, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  <% @faulties.each do |faulty| %>
+      <tr>
+        <td><%= faulty.product %></td>
+        <td><%= faulty.description %></td>
+        <td><%= link_to 'Show', faulty %></td>
+        <td><%= link_to 'Edit', edit_faulty_path(faulty) %></td>
+        <td><%= link_to 'Destroy', faulty, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+  <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Faulty', new_faulty_path %>

@@ -1,33 +1,33 @@
-<h1>Listing lots</h1>
+<%= link_to 'Nuevo Lote', new_lot_path, :class => 'menu_link' %>
+<h1>Lista de lotes</h1>
 
-<table>
+<table class="dataTablesId">
+  <thead>
   <tr>
-    <th>Arrival date</th>
-    <th>Freight</th>
-    <th>Carrier</th>
-    <th>Origin</th>
-    <th>Weight</th>
-    <th>Total cost</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Fecha de llegada</th>
+    <th>Origen</th>
+    <th>Peso</th>
+    <th>Transportador</th>
+    <th>Flete</th>
+    <th>Costo total</th>
+    <th>Opciones</th>
   </tr>
+  </thead>
+  <tbody>
+  <% @lots.each do |lot| %>
+      <tr>
+        <td><%= lot.arrival_date %></td>
+        <td><%= lot.origin %></td>
+        <td><%= lot.weight %></td>
+        <td><%= lot.carrier %></td>
+        <td><%= lot.freight %></td>
+        <td><%= lot.total_cost %></td>
+        <td width="110px">
+          <%= link_to image_tag('/images/edit.png', :title => 'Modificar lote'), edit_lot_path(lot) %>
+          <%= link_to image_tag('/images/delete.png', :title => 'Borrar lote'), lot, :confirm => 'El lote sera borrado. Deseas continuar?', :method => :delete %>
+        </td>
 
-<% @lots.each do |lot| %>
-  <tr>
-    <td><%= lot.arrival_date %></td>
-    <td><%= lot.freight %></td>
-    <td><%= lot.carrier %></td>
-    <td><%= lot.origin %></td>
-    <td><%= lot.weight %></td>
-    <td><%= lot.total_cost %></td>
-    <td><%= link_to 'Show', lot %></td>
-    <td><%= link_to 'Edit', edit_lot_path(lot) %></td>
-    <td><%= link_to 'Destroy', lot, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
-
-<br />
-
-<%= link_to 'New Lot', new_lot_path %>

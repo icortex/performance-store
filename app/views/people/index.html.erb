@@ -1,33 +1,36 @@
-<h1>Listing people</h1>
+<%= link_to 'Nuevo Cliente', new_person_path, :class => 'menu_link' %>
 
-<table>
+<h1>Lista de clientes</h1>
+
+<table class="dataTablesId">
+  <thead>
   <tr>
-    <th>Name</th>
-    <th>Birthday</th>
-    <th>Document</th>
-    <th>Gender</th>
-    <th>Phone</th>
-    <th>Mobile</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Nombre</th>
+    <th>Fecha de nacimiento</th>
+    <th>Cedula</th>
+    <th>Genero</th>
+    <th>Telefono</th>
+    <th>Celular</th>
+    <th>Email</th>
+    <th>Opciones</th>
   </tr>
+  </thead>
+  <tbody>
 
-<% @people.each do |person| %>
-  <tr>
-    <td><%= person.name %></td>
-    <td><%= person.birthday %></td>
-    <td><%= person.document_id %></td>
-    <td><%= person.gender %></td>
-    <td><%= person.phone %></td>
-    <td><%= person.mobile %></td>
-    <td><%= link_to 'Show', person %></td>
-    <td><%= link_to 'Edit', edit_person_path(person) %></td>
-    <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Person', new_person_path %>
+  <% @people.each do |person| %>
+      <tr>
+        <td><%= person.name %></td>
+        <td><%= person.birthday %></td>
+        <td><%= person.document_id %></td>
+        <td><%= person.gender %></td>
+        <td><%= person.phone %></td>
+        <td><%= person.mobile %></td>
+        <td><%= person.email %></td>
+        <td width="110px">
+          <%= link_to image_tag('/images/edit.png', :title => 'Modificar informacion'), edit_person_path(person) %>
+          <%= link_to image_tag('/images/delete.png', :title => 'Borrar informacion'), person, :confirm => 'El cliente sera borrado. Deseas continuar?', :method => :delete %>
+        </td>
+      </tr>
+      </tbody>
+  <% end %>
+  </table>

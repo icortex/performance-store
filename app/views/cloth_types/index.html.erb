@@ -8,16 +8,16 @@
     <th></th>
   </tr>
 
-<% @cloth_types.each do |cloth_type| %>
-  <tr>
-    <td><%= cloth_type.cloth_type %></td>
-    <td><%= link_to 'Show', cloth_type %></td>
-    <td><%= link_to 'Edit', edit_cloth_type_path(cloth_type) %></td>
-    <td><%= link_to 'Destroy', cloth_type, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  <% @cloth_types.each do |cloth_type| %>
+      <tr>
+        <td><%= cloth_type.cloth_type %></td>
+        <td><%= link_to 'Show', cloth_type %></td>
+        <td><%= link_to 'Edit', edit_cloth_type_path(cloth_type) %></td>
+        <td><%= link_to 'Destroy', cloth_type, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+  <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Cloth type', new_cloth_type_path %>

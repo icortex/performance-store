@@ -11,19 +11,19 @@
     <th></th>
   </tr>
 
-<% @headquarters.each do |headquarter| %>
-  <tr>
-    <td><%= headquarter.name %></td>
-    <td><%= headquarter.address %></td>
-    <td><%= headquarter.phone %></td>
-    <td><%= headquarter.description %></td>
-    <td><%= link_to 'Show', headquarter %></td>
-    <td><%= link_to 'Edit', edit_headquarter_path(headquarter) %></td>
-    <td><%= link_to 'Destroy', headquarter, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  <% @headquarters.each do |headquarter| %>
+      <tr>
+        <td><%= headquarter.name %></td>
+        <td><%= headquarter.address %></td>
+        <td><%= headquarter.phone %></td>
+        <td><%= headquarter.description %></td>
+        <td><%= link_to 'Show', headquarter %></td>
+        <td><%= link_to 'Edit', edit_headquarter_path(headquarter) %></td>
+        <td><%= link_to 'Destroy', headquarter, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+  <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Headquarter', new_headquarter_path %>

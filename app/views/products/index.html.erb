@@ -1,6 +1,12 @@
-<h1>Lista de Articulos</h1>
+<%= link_to 'Nuevo Articulo', new_product_path, :class => 'menu_link' %>
+<% @headquarters.each do |hq| unless hq.name== 'No asignada' %>
+<span>&emsp;</span><%= link_to hq.name, "#{stocks_path}/#{hq.name}", :class => 'menu_link' %>
+<% end end%>
+<div><h1>Lista de Articulos</h1>
+</div>
+<table class="dataTablesId">
+  <thead>
 
-<table id="articulos">
   <tr>
     <th>Imagen</th>
     <th>Marca</th>
@@ -11,37 +17,42 @@
     <th>Genero</th>
     <th>Talla</th>
     <th>Color</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Opciones</th>
   </tr>
+  </thead>
+  <tbody>
 
-  <% @products.each do |product| %>
+  <% @stocks.each do |stock| %>
       <tr>
-        <td><%= image_tag product.image.url :thumb %></td>
-        <td><%= product.brand.brand %></td>
-        <td><%= product.cloth_type.cloth_type %></td>
-        <td><%= product.reference %></td>
-        <td><%= product.model %></td>
-        <td><%= product.barcode %></td>
-        <td><%= product.gender %></td>
-        <td><%= product.size.size %></td>
-        <td><%= product.color.color %></td>
+        <td><%= image_tag stock.product.image.url :thumb %></td>
+        <td><%= stock.product.brand.brand %></td>
+        <td><%= stock.product.cloth_type.cloth_type %></td>
+        <td><%= stock.product.reference %></td>
+        <td><%= stock.product.model %></td>
+        <td><%= stock.product.barcode %></td>
+        <td><%= stock.product.gender %></td>
+        <td><%= stock.product.size.size %></td>
+        <td><%= stock.product.color.color %></td>
 
+        <td width="140px">
+          <%= link_to image_tag('/images/update_stock.png', :id=>"update_stock_img_#{stock.product.id}", :title => 'Actualizar inventario'), '#' %>
+          <script type="text/javascript">jq('#<%="update_stock_img_#{stock.product.id}"%>').click(function() {
+              jq('#stock_popup').load('<%= "/inventario/#{stock.id}/editar"%>');
+              jq('#stock_popup').dialog({
+                  height: 180,
+                  width: 240 ,
+                  title: 'Actualizar inventario',
+                  modal: true
+              });
+          });</script>
 
-        <td><%= link_to 'Mostrar', product %></td>
-        <td><%= link_to 'Editar', edit_product_path(product) %></td>
-        <td><%= link_to 'Borrar', product, :confirm => 'Estas seguro?', :method => :delete %></td>
+          <%= link_to image_tag('/images/view.png', :title => 'Ver articulo'), stock.product %>
+          <%= link_to image_tag('/images/edit.png', :title => 'Modificar articulo'), edit_product_path(stock.product) %>
+          <%= link_to image_tag('/images/delete.png', :title => 'Borrar de inventario'), stock, :confirm => 'El articulo sera borrado. Deseas continuar?', :method => :delete %>
+        </td>
       </tr>
   <% end %>
+  </tbody>
 </table>
 
-<br/>
-
-<%= link_to 'Nuevo Articulo', new_product_path %>
-
-<script type="text/javascript">
-  jq(document).ready(function() {
-        jq('table[id="articulos"]').dataTable();
-    });
-</script>
+<div id="stock_popup"></div>

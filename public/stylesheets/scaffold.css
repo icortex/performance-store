@@ -21,24 +21,27 @@ div.field, div.actions {
 .notice {
   color: green;
     padding-left:1em;
+    position:relative;
+    left:40%;
 }
 
 .alert {
   color: red;
     padding-left:1em;
+    position:relative;
+     left:40%;
 }
 
 .field_with_errors {
-  padding: 2px;
-  background-color: red;
+  padding: 0;
+  background-color: #FF0000;
   display: table;
 }
 
 #error_explanation {
   width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
+  border: 1px solid #084B8A;
+  padding: 5px;
   margin-bottom: 20px;
   background-color: #f0f0f0;
 }
@@ -50,8 +53,8 @@ div.field, div.actions {
   font-size: 12px;
   margin: -7px;
   margin-bottom: 0px;
-  background-color: #c00;
-  color: #fff;
+  background-color: #084B8A;
+  color: white;
 }
 
 #error_explanation ul li {

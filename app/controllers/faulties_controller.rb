@@ -6,7 +6,7 @@ class FaultiesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @faulties }
+      format.xml { render :xml => @faulties }
     end
   end
 
@@ -17,7 +17,7 @@ class FaultiesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @faulty }
+      format.xml { render :xml => @faulty }
     end
   end
 
@@ -28,7 +28,7 @@ class FaultiesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @faulty }
+      format.xml { render :xml => @faulty }
     end
   end
 
@@ -45,10 +45,10 @@ class FaultiesController < ApplicationController
     respond_to do |format|
       if @faulty.save
         format.html { redirect_to(@faulty, :notice => 'Faulty was successfully created.') }
-        format.xml  { render :xml => @faulty, :status => :created, :location => @faulty }
+        format.xml { render :xml => @faulty, :status => :created, :location => @faulty }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @faulty.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @faulty.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -61,10 +61,10 @@ class FaultiesController < ApplicationController
     respond_to do |format|
       if @faulty.update_attributes(params[:faulty])
         format.html { redirect_to(@faulty, :notice => 'Faulty was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @faulty.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @faulty.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -77,7 +77,7 @@ class FaultiesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(faulties_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end

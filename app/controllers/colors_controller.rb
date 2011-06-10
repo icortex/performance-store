@@ -6,7 +6,7 @@ class ColorsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @colors }
+      format.xml { render :xml => @colors }
     end
   end
 
@@ -17,7 +17,7 @@ class ColorsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @color }
+      format.xml { render :xml => @color }
     end
   end
 
@@ -28,7 +28,7 @@ class ColorsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @color }
+      format.xml { render :xml => @color }
     end
   end
 
@@ -45,10 +45,10 @@ class ColorsController < ApplicationController
     respond_to do |format|
       if @color.save
         format.html { redirect_to(@color, :notice => 'Color was successfully created.') }
-        format.xml  { render :xml => @color, :status => :created, :location => @color }
+        format.xml { render :xml => @color, :status => :created, :location => @color }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @color.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @color.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -61,10 +61,10 @@ class ColorsController < ApplicationController
     respond_to do |format|
       if @color.update_attributes(params[:color])
         format.html { redirect_to(@color, :notice => 'Color was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @color.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @color.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -77,7 +77,7 @@ class ColorsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(colors_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end

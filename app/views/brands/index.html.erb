@@ -8,16 +8,16 @@
     <th></th>
   </tr>
 
-<% @brands.each do |brand| %>
-  <tr>
-    <td><%= brand.brand %></td>
-    <td><%= link_to 'Show', brand %></td>
-    <td><%= link_to 'Edit', edit_brand_path(brand) %></td>
-    <td><%= link_to 'Destroy', brand, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  <% @brands.each do |brand| %>
+      <tr>
+        <td><%= brand.brand %></td>
+        <td><%= link_to 'Show', brand %></td>
+        <td><%= link_to 'Edit', edit_brand_path(brand) %></td>
+        <td><%= link_to 'Destroy', brand, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+  <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Brand', new_brand_path %>

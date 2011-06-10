@@ -12,7 +12,9 @@ class CreateProducts < ActiveRecord::Migration
       t.references :color
 
       t.timestamps
+
     end
+    
   end
 
   def self.down

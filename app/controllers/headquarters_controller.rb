@@ -6,7 +6,7 @@ class HeadquartersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @headquarters }
+      format.xml { render :xml => @headquarters }
     end
   end
 
@@ -17,7 +17,7 @@ class HeadquartersController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @headquarter }
+      format.xml { render :xml => @headquarter }
     end
   end
 
@@ -28,7 +28,7 @@ class HeadquartersController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @headquarter }
+      format.xml { render :xml => @headquarter }
     end
   end
 
@@ -45,10 +45,10 @@ class HeadquartersController < ApplicationController
     respond_to do |format|
       if @headquarter.save
         format.html { redirect_to(@headquarter, :notice => 'Headquarter was successfully created.') }
-        format.xml  { render :xml => @headquarter, :status => :created, :location => @headquarter }
+        format.xml { render :xml => @headquarter, :status => :created, :location => @headquarter }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @headquarter.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @headquarter.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -61,10 +61,10 @@ class HeadquartersController < ApplicationController
     respond_to do |format|
       if @headquarter.update_attributes(params[:headquarter])
         format.html { redirect_to(@headquarter, :notice => 'Headquarter was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @headquarter.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @headquarter.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -77,7 +77,7 @@ class HeadquartersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(headquarters_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end

@@ -6,7 +6,7 @@ class LotsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @lots }
+      format.xml { render :xml => @lots }
     end
   end
 
@@ -17,7 +17,7 @@ class LotsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @lot }
+      format.xml { render :xml => @lot }
     end
   end
 
@@ -28,7 +28,7 @@ class LotsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @lot }
+      format.xml { render :xml => @lot }
     end
   end
 
@@ -44,11 +44,11 @@ class LotsController < ApplicationController
 
     respond_to do |format|
       if @lot.save
-        format.html { redirect_to(@lot, :notice => 'Lot was successfully created.') }
-        format.xml  { render :xml => @lot, :status => :created, :location => @lot }
+        format.html { redirect_to(lots_path, :notice => 'Lote creado exitosamente!') }
+        format.xml { render :xml => @lot, :status => :created, :location => @lot }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @lot.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @lot.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -60,11 +60,11 @@ class LotsController < ApplicationController
 
     respond_to do |format|
       if @lot.update_attributes(params[:lot])
-        format.html { redirect_to(@lot, :notice => 'Lot was successfully updated.') }
-        format.xml  { head :ok }
+        format.html { redirect_to(lots_path, :notice => 'Lote actualizado exitosamente!') }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @lot.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @lot.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -76,8 +76,8 @@ class LotsController < ApplicationController
     @lot.destroy
 
     respond_to do |format|
-      format.html { redirect_to(lots_url) }
-      format.xml  { head :ok }
+      format.html { redirect_to(lots_url, :notice => 'Lote borrado exitosamente!') }
+      format.xml { head :ok }
     end
   end
 end

@@ -1,25 +1,26 @@
 <h2>Editar <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
+    <%= devise_error_messages! %>
 
-  <p><%= f.label :username %><br />
-  <%= f.text_field :username, :disabled => true  %></p>
+    <p><%= f.label :username %><br/>
+      <%= f.text_field :username, :disabled => true %></p>
 
-  <p><%= f.label :password %> <i>(Dejalo vacio si no deseas cambiar tu contraseña)</i><br />
-  <%= f.password_field :password %></p>
+    <p><%= f.label :password %> <i>(Dejalo vacio si no deseas cambiar tu contraseña)</i><br/>
+      <%= f.password_field :password %></p>
 
-  <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
+    <p><%= f.label :password_confirmation %><br/>
+      <%= f.password_field :password_confirmation %></p>
 
-  <p><%= f.label :current_password %> <i>(Necesitamos tu contraseña actual)</i><br />
-  <%= f.password_field :current_password %></p>
+    <p><%= f.label :current_password %> <i>(Necesitamos tu contraseña actual)</i><br/>
+      <%= f.password_field :current_password %></p>
 
-  <p><%= f.submit "Actualizar" %></p>
+    <p><%= f.submit "Actualizar" %></p>
 <% end %>
 
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= link_to "Cancelar mi cuanta", registration_path(resource_name), :confirm => "Estas seguro?", :method => :delete %>.</p>
+<p>Unhappy? <%= link_to "Cancelar mi cuanta", registration_path(resource_name), :confirm => "Estas seguro?", :method => :delete %>
+  .</p>
 
 <%= link_to "Volver", :back %>

@@ -1,46 +1,103 @@
 <%= form_for(@person) do |f| %>
-  <% if @person.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+    <% if @person.errors.any? %>
+        <div id="error_explanation">
+           <h2><%= pluralize(@person.errors.count, "error") %> no permite guardar este cliente:</h2>
 
-      <ul>
-      <% @person.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @person.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <table class="form_class">
+      <tr>
+        <td>
+          <%= f.label 'Nombre' %>
+        </td>
+        <td>
+          <%= f.text_field :name %>
+        </td>
+
+
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Cedula' %>
+        </td>
+        <td>
+          <%= f.text_field :document_id %>
+        </td>
+
+
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Fecha de nacimiento' %>
+        </td>
+        <td>
+          <%= f.text_field :birthday, :id => 'datepicker' %>
+          <script>
+	jq(function() {
+		jq( "#datepicker" ).datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeYear: true,
+            yearRange: '1950:2000',
+            changeMonth: true
+        });
+	});
+	</script>
+        </td>
+
+
+      </tr>
+
+      <tr>
+        <td>
+          <%= f.label 'Genero' %>
+          <br/>
+        </td>
+        <td>
+          <%= f.radio_button :gender, 'Hombre', :checked => true %> Hombre
+          <%= f.radio_button :gender, 'Mujer' %> Mujer
+        </td>
+
+
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Telefono' %>
+        </td>
+        <td>
+          <%= f.text_field :phone %>
+        </td>
+
+
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Celular' %>
+        </td>
+        <td>
+          <%= f.text_field :mobile %>
+        </td>
+
+
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :email %>
+        </td>
+        <td>
+          <%= f.email_field :email %>
+        </td>
+
+
+      </tr>
+
+    </table><br>
+    <div class="actions">
+      <%= f.submit %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :birthday %><br />
-    <%= f.date_select :birthday %>
-  </div>
-  <div class="field">
-    <%= f.label :document_id %><br />
-    <%= f.text_field :document_id %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br />
-    <%= f.radio_button :gender,'Hombre'  %> Hombre
-    <%= f.radio_button :gender,'Mujer'  %> Mujer
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :mobile %><br />
-    <%= f.text_field :mobile %>
-  </div>
-    <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

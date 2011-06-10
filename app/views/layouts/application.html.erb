@@ -8,47 +8,62 @@
 </head>
 <body>
 <script type="text/javascript">
-  var jq=jQuery.noConflict();
+    var jq = jQuery.noConflict();
 </script>
 <div class="container">
+
   <div class='header'>
-    <table>
+    <table id="header_table">
       <tr>
         <td>
-          <h1>WJSport</h1>
+          <h1>&emsp;WJSport</h1>
         </td>
         <td id="session_name">
           <% if user_signed_in? %>
               Hola <%= link_to current_user.username, edit_user_registration_path %>!
-              <%= link_to "Cerrar Sesion", destroy_user_session_path %>
+              <%= link_to "Cerrar Sesion", destroy_user_session_path %>&emsp;
           <% end %>
         </td>
       </tr>
     </table>
-  </div>
 
-  <% if user_signed_in? %>
-      <div class='principal-menu'>
-        <ul>
-          <li><%= link_to 'Articulos', products_path %></li>
-          <li><%= link_to 'Ventas', '#' %></li>
-          <li><%= link_to 'Clientes', people_path %></li>
-          <li><%= link_to 'Reportes', '#' %></li>
-          <li><%= link_to 'Buscar', '#' %></li>
-        </ul>
-      </div>
-      <div class='secondary-menu'></div>
-  <% end %>
-  <div id='errors'>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+
+    <% if user_signed_in? %>
+        <div class='principal-menu'>
+          <ul>
+            <li id="sell_tab"><%= link_to 'Ventas', '#' %></li>
+            <li id="client_tab"><%= link_to 'Clientes', people_path, :style => is_active?("people")%></li>
+            <li id="stock_tab"><%= link_to 'Inventario', products_path, :style => is_active?('stocks','products')%></li>
+            <li id="lot_tab"><%= link_to 'Lotes', lots_path, :style => is_active?('lots') %></li>
+            <li id="report_tab"><%= link_to 'Reportes', '#' %></li>
+          </ul>
+        </div>
+    <% end %>
+
+    <span class="notice"><%= notice %></span>
+    <span class="alert"><%= alert %></span>
   </div>
   <div class='content'>
     <%= yield %>
+    <script type="text/javascript">
+        jq(document).ready(function() {
+            jq('table[class="dataTablesId"]').dataTable({
+                "bJQueryUI": true,
+                "sPaginationType": "full_numbers",
+                "sScrollY": document.height*0.48+"px",
+                "sDom": '<"H"<"search-table"f>lr>t<"F"<"showing"i><"pagination"p>>S',
+                "aLengthMenu": [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, "Todos"]
+                ]
+            });
+            jq('.notice').fadeOut(10000);
+        });
+    </script>
   </div>
-  <div class='footer'>
-    © 2011 CodeScrum
-  </div>
+    <div class='footer'>
+    &emsp;© 2011 CodeScrum
+    </div>
 </div>
 </body>
 </html>

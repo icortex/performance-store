@@ -1,7 +1,7 @@
 <%= form_for(@product, :html => {:multipart => true}) do |f| %>
     <% if @product.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@product.errors.count, "error") %> No se pudo guardar este articulo:</h2>
+          <h2><%= pluralize(@product.errors.count, "error") %> no permite guardar este articulo:</h2>
           <ul>
             <% @product.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
@@ -16,10 +16,10 @@
       <%= f.file_field :image %>
     </div>
 
-    <table class="product">
+    <table class="form_class">
       <tr>
         <td>
-           <%= f.label 'Marca' %>
+          <%= f.label 'Marca' %>
         </td>
         <td>
           <%= f.select :brand, Brand.all.collect { |brand| [brand.brand, brand.id] } %>
@@ -62,34 +62,39 @@
           <%= f.label 'Genero' %>
         </td>
         <td>
-           <%= f.radio_button :gender, 'Hombre', :checked => true%>Hombre
-        <%= f.radio_button :gender, 'Mujer' %>Mujer
+          <%= f.radio_button :gender, 'Hombre', :checked => true %>Hombre
+          <%= f.radio_button :gender, 'Mujer' %>Mujer
         </td>
       </tr>
       <tr>
         <td>
-           <%= f.label 'Talla' %>
+          <%= f.label 'Talla' %>
         </td>
         <td>
-          <%= f.select :size, Size.all.collect { |element| [element.size, element.id] } %>
+          <% Size.all.each do |size| %>
+              <%= check_box_tag "product[size][#{size.size}]", size.id %><%= f.label size.size %>
+          <% end %>
         </td>
       </tr>
       <tr>
         <td>
-           <%= f.label 'Color' %>
+          <%= f.label 'Color' %>
         </td>
         <td>
-          <%= f.select :color, Color.all.collect { |element| [element.color, element.rgb] }, :name=>'color' %>
+          <% Color.all.each do |color| %>
+              <%= check_box_tag "product[color][#{color.color}]", color.id %><%= f.label 'wj',:style=>"background:##{color.rgb};color:##{color.rgb};", :class=>'color_selector' %>
+          <% end %>
         </td>
       </tr>
     </table>
-    
+
     <script type="text/javascript">
-      jq(document).ready(function() {
+        jq(document).ready(function() {
             jq('select[name="product[color]"]').colourPicker({
                 ico:    '/images/jquery.colourPicker.gif',
                 title:    false
             });
+            jq('.notice').fadeOut(6000);
         });
     </script>
 

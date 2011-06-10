@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @contacts }
+      format.xml { render :xml => @contacts }
     end
   end
 
@@ -21,7 +21,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @contact }
+      format.xml { render :xml => @contact }
     end
   end
 
@@ -32,7 +32,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @contact }
+      format.xml { render :xml => @contact }
     end
   end
 
@@ -49,10 +49,10 @@ class ContactsController < ApplicationController
     respond_to do |format|
       if @contact.save
         format.html { redirect_to(@contact, :notice => 'Contact was successfully created.') }
-        format.xml  { render :xml => @contact, :status => :created, :location => @contact }
+        format.xml { render :xml => @contact, :status => :created, :location => @contact }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @contact.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @contact.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -65,10 +65,10 @@ class ContactsController < ApplicationController
     respond_to do |format|
       if @contact.update_attributes(params[:contact])
         format.html { redirect_to(@contact, :notice => 'Contact was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @contact.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @contact.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -81,7 +81,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(contacts_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end

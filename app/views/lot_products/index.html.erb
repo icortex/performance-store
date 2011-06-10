@@ -11,19 +11,19 @@
     <th></th>
   </tr>
 
-<% @lot_products.each do |lot_product| %>
-  <tr>
-    <td><%= lot_product.product %></td>
-    <td><%= lot_product.lot %></td>
-    <td><%= lot_product.quantity %></td>
-    <td><%= lot_product.unit_cost %></td>
-    <td><%= link_to 'Show', lot_product %></td>
-    <td><%= link_to 'Edit', edit_lot_product_path(lot_product) %></td>
-    <td><%= link_to 'Destroy', lot_product, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  <% @lot_products.each do |lot_product| %>
+      <tr>
+        <td><%= lot_product.product %></td>
+        <td><%= lot_product.lot %></td>
+        <td><%= lot_product.quantity %></td>
+        <td><%= lot_product.unit_cost %></td>
+        <td><%= link_to 'Show', lot_product %></td>
+        <td><%= link_to 'Edit', edit_lot_product_path(lot_product) %></td>
+        <td><%= link_to 'Destroy', lot_product, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+  <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Lot product', new_lot_product_path %>

@@ -1,33 +1,43 @@
 <%= form_for(@stock) do |f| %>
-  <% if @stock.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@stock.errors.count, "error") %> prohibited this stock from being saved:</h2>
+    <% if @stock.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@stock.errors.count, "error") %> prohibited this stock from being saved:</h2>
 
-      <ul>
-      <% @stock.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @stock.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <table style="margin:auto">
+      <tr>
+        <td>
+          <%= f.label :quantity %>
+        </td>
+        <td>
+          <%= f.text_field :quantity, :size => 10 %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :price %>
+        </td>
+        <td>
+          <%= f.text_field :price, :size => 10 %>
+        </td>
+      </tr>
+      <tr id="headquarter_row">
+        <td>
+          <%= f.label :headquarter %>
+        </td>
+        <td>
+          <%= f.select :headquarter, Headquarter.all.collect { |element| [element.name, element.id] }, :selected => @stock.headquarter.id %>
+        </td>
+      </tr>
+    </table>
+    <br/>
+    <div align="center">
+      <%= f.submit 'Actualizar' %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :product %><br />
-    <%= f.text_field :product %>
-  </div>
-  <div class="field">
-    <%= f.label :quantity %><br />
-    <%= f.text_field :quantity %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br />
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :headquarter %><br />
-    <%= f.text_field :headquarter %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
