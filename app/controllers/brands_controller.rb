@@ -1,4 +1,10 @@
 class BrandsController < ApplicationController
+
+  layout 'application', :except=>'new'
+
+  load_and_authorize_resource
+  check_authorization
+
   # GET /brands
   # GET /brands.xml
   def index
@@ -44,7 +50,7 @@ class BrandsController < ApplicationController
 
     respond_to do |format|
       if @brand.save
-        format.html { redirect_to(@brand, :notice => 'Brand was successfully created.') }
+        format.html { redirect_to(new_product_path, :notice => 'Marca creada exitosamente.') }
         format.xml { render :xml => @brand, :status => :created, :location => @brand }
       else
         format.html { render :action => "new" }

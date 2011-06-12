@@ -1,4 +1,7 @@
 class ColorsController < ApplicationController
+
+  layout 'application', :except=>'new'
+
   # GET /colors
   # GET /colors.xml
   def index
@@ -44,7 +47,7 @@ class ColorsController < ApplicationController
 
     respond_to do |format|
       if @color.save
-        format.html { redirect_to(@color, :notice => 'Color was successfully created.') }
+        format.html { redirect_to(new_product_path, :notice => 'Color creado exitosamente.') }
         format.xml { render :xml => @color, :status => :created, :location => @color }
       else
         format.html { render :action => "new" }

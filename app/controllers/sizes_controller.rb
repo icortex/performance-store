@@ -1,4 +1,7 @@
 class SizesController < ApplicationController
+
+  layout 'application', :except=>'new'
+  
   # GET /sizes
   # GET /sizes.xml
   def index
@@ -44,7 +47,7 @@ class SizesController < ApplicationController
 
     respond_to do |format|
       if @size.save
-        format.html { redirect_to(@size, :notice => 'Size was successfully created.') }
+        format.html { redirect_to(new_product_path, :notice => 'Talla creada exitosamente.') }
         format.xml { render :xml => @size, :status => :created, :location => @size }
       else
         format.html { render :action => "new" }

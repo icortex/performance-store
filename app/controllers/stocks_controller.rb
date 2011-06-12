@@ -1,5 +1,5 @@
 class StocksController < ApplicationController
-  layout 'application', :except=>'edit'
+  layout 'application', :except=>'new'
 
   # GET /stocks
   # GET /stocks.xml
@@ -28,7 +28,9 @@ class StocksController < ApplicationController
   # GET /stocks/new
   # GET /stocks/new.xml
   def new
-    @stock = Stock.new
+
+    @stock = Stock.new :product_id => params[:product_id]
+    p @stock.product_id
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,18 +40,19 @@ class StocksController < ApplicationController
 
   # GET /stocks/1/edit
   def edit
-
     @stock = Stock.find(params[:id])
   end
 
   # POST /stocks
   # POST /stocks.xml
   def create
+    params[:stock][:product]= Product.find params[:stock][:product_id]
+    params[:stock][:headquarter] = Headquarter.find(params[:stock][:headquarter])
     @stock = Stock.new(params[:stock])
 
     respond_to do |format|
       if @stock.save
-        format.html { redirect_to(@stock, :notice => 'Stock was successfully created.') }
+        format.html { redirect_to(products_path, :notice => 'El producto fue agregado al inventario exitosamente.') }
         format.xml { render :xml => @stock, :status => :created, :location => @stock }
       else
         format.html { render :action => "new" }
@@ -66,7 +69,7 @@ class StocksController < ApplicationController
 
     respond_to do |format|
       if @stock.update_attributes(params[:stock])
-        format.html { redirect_to(stocks_path, :notice => 'Inventario actualizado exitosamente!') }
+        format.html { redirect_to(:back, :notice => 'Inventario actualizado exitosamente!') }
         format.xml { head :ok }
       else
         format.html { render :action => "edit" }
@@ -83,8 +86,9 @@ class StocksController < ApplicationController
     @stock.destroy
 
     respond_to do |format|
-      format.html { redirect_to(stocks_url, :notice => 'Articulo borrado exitosamente!') }
+      format.html { redirect_to(:back, :notice => 'Articulo borrado exitosamente!') }
       format.xml { head :ok }
     end
   end
+
 end

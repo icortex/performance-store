@@ -1,4 +1,7 @@
 class ClothTypesController < ApplicationController
+
+  layout 'application', :except=>'new'
+
   # GET /cloth_types
   # GET /cloth_types.xml
   def index
@@ -44,7 +47,7 @@ class ClothTypesController < ApplicationController
 
     respond_to do |format|
       if @cloth_type.save
-        format.html { redirect_to(@cloth_type, :notice => 'Cloth type was successfully created.') }
+        format.html { redirect_to(new_product_path, :notice => 'Tipo de prenda creado exitosamente.') }
         format.xml { render :xml => @cloth_type, :status => :created, :location => @cloth_type }
       else
         format.html { render :action => "new" }

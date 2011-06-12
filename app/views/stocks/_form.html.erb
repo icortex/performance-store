@@ -11,9 +11,17 @@
         </div>
     <% end %>
     <table style="margin:auto">
+      <tr style="<%= @stock.product_id ? 'display:none' : '' %>">
+        <td>
+          <%= f.label 'Producto' %>
+        </td>
+        <td>
+          <%= f.text_field :product_id, :size => 10%>
+        </td>
+      </tr>
       <tr>
         <td>
-          <%= f.label :quantity %>
+          <%= f.label 'Cantidad' %>
         </td>
         <td>
           <%= f.text_field :quantity, :size => 10 %>
@@ -21,7 +29,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :price %>
+          <%= f.label 'Precio' %>
         </td>
         <td>
           <%= f.text_field :price, :size => 10 %>
@@ -29,10 +37,10 @@
       </tr>
       <tr id="headquarter_row">
         <td>
-          <%= f.label :headquarter %>
+          <%= f.label 'Sede' %>
         </td>
         <td>
-          <%= f.select :headquarter, Headquarter.all.collect { |element| [element.name, element.id] }, :selected => @stock.headquarter.id %>
+          <%= f.select :headquarter, Headquarter.all.collect { |element| [element.name, element.id] } %>
         </td>
       </tr>
     </table>

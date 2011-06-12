@@ -1,8 +1,11 @@
 class ProductsController < ApplicationController
+
+  
+
   # GET /products
   # GET /products.xml
   def index
-    @stocks = Stock.all
+    @products = Product.all
     @headquarters = Headquarter.all
 
     respond_to do |format|
@@ -42,31 +45,26 @@ class ProductsController < ApplicationController
   # POST /products.xml
   def create
     success=true
+    p "******"
     params[:product][:brand] = Brand.find(params[:product][:brand])
     params[:product][:cloth_type] = ClothType.find(params[:product][:cloth_type])
 
-    if  !params[:product][:size]
-      params[:product][:size]=[[Size.find(1).size, "1"]]
-    end
-    if  !params[:product][:color]
-      params[:product][:color]=[[Color.find(1).color, "1"]]
-    end
+    set_default_color_size
 
-    sizes = params[:product][:size]
-    colors = params[:product][:color]
-    
-    colors.each do |ck,color|
+    colors=params[:product][:color]
+    sizes=params[:product][:size]
+
+    colors.each do |ck, color|
       params[:product][:color]=Color.find(color)
       sizes.each do |sk, size|
         params[:product][:size]=Size.find(size)
         @product = Product.new(params[:product])
-        if @product.save
-          Stock.create(:product => @product, :headquarter=>Headquarter.find(1))
-        else
+        if !@product.save
           success=false
         end
       end
     end
+    
     respond_to do |format|
       if success
         format.html { redirect_to(new_product_path, :notice => 'Articulo creado exitosamente!') }
@@ -83,8 +81,9 @@ class ProductsController < ApplicationController
   def update
     params[:product][:brand] = Brand.find(params[:product][:brand])
     params[:product][:cloth_type] = ClothType.find(params[:product][:cloth_type])
-    params[:product][:size] = Size.find(params[:product][:size])
-    params[:product][:color] = Color.find_by_rgb(params[:product][:color])
+
+    #set_default_color_size
+
     @product = Product.find(params[:id])
 
     respond_to do |format|
@@ -109,4 +108,14 @@ class ProductsController < ApplicationController
       format.xml { head :ok }
     end
   end
+
+  def set_default_color_size
+    if  !params[:product][:size]
+      params[:product][:size]=[[Size.find(1).size, "1"]]
+    end
+    if  !params[:product][:color]
+      params[:product][:color]=[[Color.find(1).color, "1"]]
+    end
+  end
+
 end

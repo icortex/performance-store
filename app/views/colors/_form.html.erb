@@ -1,3 +1,5 @@
+<%= javascript_include_tag :all %>
+
 <%= form_for(@color) do |f| %>
     <% if @color.errors.any? %>
         <div id="error_explanation">
@@ -11,12 +13,42 @@
         </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :color %>
-      <br/>
-      <%= f.text_field :color %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
+    <table style="margin:auto">
+      <tr>
+        <td>
+          <%= f.label 'Color' %>
+        </td>
+        <td>
+          <%= f.text_field :color, :size => 15 %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'RGB' %>
+        </td>
+        <td>
+          <%= f.text_field :rgb, :size => 15 %>
+        </td>
+      </tr>
+
+
+    </table>
+    <div align="center">
+      <%= f.submit 'Agregar' %>
     </div>
 <% end %>
+
+ <script type="text/javascript">
+jQuery('#color_rgb').ColorPicker({
+	onSubmit: function(hsb, hex, rgb, el) {
+		jQuery(el).val(hex);
+		jQuery(el).ColorPickerHide();
+	},
+	onBeforeShow: function () {
+		jQuery(this).ColorPickerSetColor(this.value);
+	}
+})
+.bind('keyup', function(){
+	jQuery(this).ColorPickerSetColor(this.value);
+});
+          </script>

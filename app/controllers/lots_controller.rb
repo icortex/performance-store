@@ -1,4 +1,8 @@
 class LotsController < ApplicationController
+
+  load_and_authorize_resource
+  check_authorization
+
   # GET /lots
   # GET /lots.xml
   def index

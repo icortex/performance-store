@@ -23,6 +23,15 @@
         </td>
         <td>
           <%= f.select :brand, Brand.all.collect { |brand| [brand.brand, brand.id] } %>
+          <%= link_to image_tag('/images/add.png', :id=>"brand", :title => 'Agregar nueva marca'), '#' %>
+          <script type="text/javascript">
+              jq('#brand').click(function() {
+                  jq('#add_popup').load('<%= "/brands/nuevo" %>', null);
+                  jq('#add_popup').dialog({
+                      title: 'Nueva Marca',
+                      modal: true
+                  });
+              });</script>
         </td>
       </tr>
       <tr>
@@ -31,6 +40,15 @@
         </td>
         <td>
           <%= f.select :cloth_type, ClothType.all.collect { |element| [element.cloth_type, element.id] } %>
+                    <%= link_to image_tag('/images/add.png', :id=>"cloth_type", :title => 'Agregar nuevo tipo de prenda'), '#' %>
+          <script type="text/javascript">
+              jq('#cloth_type').click(function() {
+                  jq('#add_popup').load('<%= "/cloth_types/nuevo" %>', null);
+                  jq('#add_popup').dialog({
+                      title: 'Nuevo tipo de prenda',
+                      modal: true
+                  });
+              });</script>
         </td>
       </tr>
       <tr>
@@ -64,41 +82,57 @@
         <td>
           <%= f.radio_button :gender, 'Hombre', :checked => true %>Hombre
           <%= f.radio_button :gender, 'Mujer' %>Mujer
+          <%= f.radio_button :gender, 'Unisex' %>Unisex
         </td>
       </tr>
       <tr>
         <td>
           <%= f.label 'Talla' %>
         </td>
-        <td>
+        <td width="100px">
+
           <% Size.all.each do |size| %>
-              <%= check_box_tag "product[size][#{size.size}]", size.id %><%= f.label size.size %>
+              <div style="display:inline-block;">
+              <%= check_box_tag "product[size][#{size.size}]", size.id %><%= size.size %>
+              </div>
           <% end %>
+                              <%= link_to image_tag('/images/add.png', :id=>"size", :title => 'Agregar nueva talla'), '#' %>
+          <script type="text/javascript">
+              jq('#size').click(function() {
+                  jq('#add_popup').load('<%= "/sizes/nuevo" %>', null);
+                  jq('#add_popup').dialog({
+                      title: 'Nueva talla',
+                      modal: true
+                  });
+              });</script>
         </td>
       </tr>
       <tr>
         <td>
           <%= f.label 'Color' %>
         </td>
-        <td>
+        <td width="100px">
           <% Color.all.each do |color| %>
-              <%= check_box_tag "product[color][#{color.color}]", color.id %><%= f.label 'wj',:style=>"background:##{color.rgb};color:##{color.rgb};", :class=>'color_selector' %>
+              <div style="display:inline-block;">
+              <%= check_box_tag "product[color][#{color.color}]", color.id %><%= f.label 'wj', :style=>"background:##{color.rgb};color:##{color.rgb};", :class=>'color_selector' %>
+              </div>
           <% end %>
+                                        <%= link_to image_tag('/images/add.png', :id=>"color", :title => 'Agregar nuevo color'), '#' %>
+          <script type="text/javascript">
+              jq('#color').click(function() {
+                  jq('#add_popup').load('<%= "/colors/nuevo" %>', null);
+                  jq('#add_popup').dialog({
+                      title: 'Nuevo color',
+                      modal: true
+                  });
+              });</script>
         </td>
       </tr>
     </table>
 
-    <script type="text/javascript">
-        jq(document).ready(function() {
-            jq('select[name="product[color]"]').colourPicker({
-                ico:    '/images/jquery.colourPicker.gif',
-                title:    false
-            });
-            jq('.notice').fadeOut(6000);
-        });
-    </script>
-
     <div class="actions">
       <%= f.submit %>
     </div>
+
+    <div id="add_popup"></div>
 <% end %>
