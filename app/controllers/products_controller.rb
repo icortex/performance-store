@@ -1,13 +1,11 @@
 class ProductsController < ApplicationController
 
-  
 
   # GET /products
   # GET /products.xml
   def index
     @products = Product.all
-    @headquarters = Headquarter.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @products }
@@ -82,7 +80,7 @@ class ProductsController < ApplicationController
     params[:product][:brand] = Brand.find(params[:product][:brand])
     params[:product][:cloth_type] = ClothType.find(params[:product][:cloth_type])
 
-    #set_default_color_size
+    set_default_color_size
 
     @product = Product.find(params[:id])
 
@@ -101,7 +99,10 @@ class ProductsController < ApplicationController
   # DELETE /products/1.xml
   def destroy
     @product = Product.find(params[:id])
+    @stocks =  Stock.find_all_by_product_id params[:id]
+    @stocks.each do |stock| stock.destroy end
     @product.destroy
+
 
     respond_to do |format|
       format.html { redirect_to(products_url, :notice => 'Articulo borrado exitosamente!') }

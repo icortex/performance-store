@@ -1,7 +1,4 @@
-<%= link_to 'Nuevo Articulo', new_product_path, :class => 'menu_link' %>
-<% @headquarters.each do |hq| unless hq.name== 'No asignada' %>
-<span>&emsp;</span><%= link_to hq.name, "#{stocks_path}/sede/#{hq.name}", :class => 'menu_link' %>
-<% end end%>
+<%= render 'links' %>
 
 <div><h1>Articulos en Inventario en <%= @headquarter%></h1>
 </div>
@@ -43,8 +40,8 @@
           <%= link_to image_tag('/images/update_stock.png', :id=>"update_stock_img_#{stock.product.id}", :title => 'Actualizar inventario'), '#' %>
           <script type="text/javascript">
               jq('#<%="update_stock_img_#{stock.product.id}"%>').click(function() {
-              jq('#stock_popup').load('<%= "/inventario/#{stock.id}/editar"%>',null,function(a,b,c){
-                  jq('#headquarter_row select').attr('disabled',true);
+              jq('#stock_popup').load('<%= "#{edit_stock_path stock.id}"%>',null,function(data,status,request){
+                  
               });
               jq('#stock_popup').dialog({
                   height: 180,
@@ -56,7 +53,7 @@
 
           <%= link_to image_tag('/images/view.png', :title => 'Ver articulo'), stock.product %>
           <%= link_to image_tag('/images/edit.png', :title => 'Modificar articulo'), edit_product_path(stock.product) %>
-          <%= link_to image_tag('/images/delete.png', :title => 'Borrar de inventario'), stock, :confirm => 'El articulo sera borrado. Deseas continuar?', :method => :delete %>
+          <%= link_to image_tag('/images/delete.png', :title => 'Borrar de inventario'), stock, :confirm => 'El articulo sera borrado del inventario. Deseas continuar?', :method => :delete %>
         </td>
       </tr>
   <% end %>

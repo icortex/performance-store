@@ -7,16 +7,19 @@ div.container {
 }
 
 div.header, div.footer {
-        color: white;position:fixed;width:99.5%
+    color: white;
+    position:fixed;
+    width:99.5%
 }
 div.header{
-    top:0;left:0;
+    top:0;
+    left:0;
     margin:2px 0.25% 0 0.25%;
 }
 div.footer{
     bottom:0;left:0;
     margin:0 0.25% 2px 0.25%;
-    background-color: #3787B0;
+    background-color: #25578B;
 }
 div.content {
     padding: 0 1% 1% 1%;
@@ -30,7 +33,7 @@ div.content {
 
 #header_table{
     width: 100%;
-    background-color: #3787B0;
+    background: url("../images/header.png") repeat-x;
 }
 
 table.product td {

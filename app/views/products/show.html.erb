@@ -1,3 +1,9 @@
+<div>
+  <%= render 'stocks/links' %>
+</div>
+
+<h1>Viendo articulo</h1>
+
 <div class="left">
   <%= image_tag @product.image.url :medium %>
 </div>
@@ -69,4 +75,4 @@
   </tr>
 </table>
 
-<%= link_to 'Editar', edit_product_path(@product) %> |
+<%= link_to 'Editar', edit_product_path(@product) %>

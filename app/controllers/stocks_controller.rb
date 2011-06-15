@@ -1,11 +1,11 @@
 class StocksController < ApplicationController
-  layout 'application', :except=>'new'
+  layout 'application', :except=>['new','edit']
+
 
   # GET /stocks
   # GET /stocks.xml
   def index
     @stocks = Stock.find_all_by_headquarter_id (Headquarter.find_by_name params[:headquarter]).id
-    @headquarters = Headquarter.all
     @headquarter = params[:headquarter]
 
     respond_to do |format|
@@ -82,7 +82,6 @@ class StocksController < ApplicationController
   # DELETE /stocks/1.xml
   def destroy
     @stock = Stock.find(params[:id])
-    @stock.product.destroy
     @stock.destroy
 
     respond_to do |format|
