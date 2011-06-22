@@ -4,8 +4,10 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.xml
   def index
-    @products = Product.all
-    
+
+    @products= Product.all
+
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @products }
@@ -37,20 +39,24 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
     @product = Product.find(params[:id])
+
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.xml { render :xml => @products }
+    end
   end
 
   # POST /products
   # POST /products.xml
   def create
     success=true
-    p "******"
     params[:product][:brand] = Brand.find(params[:product][:brand])
     params[:product][:cloth_type] = ClothType.find(params[:product][:cloth_type])
 
     set_default_color_size
 
-    colors=params[:product][:color]
-    sizes=params[:product][:size]
+    colors = params[:product][:color]
+    sizes = params[:product][:size]
 
     colors.each do |ck, color|
       params[:product][:color]=Color.find(color)
@@ -62,7 +68,7 @@ class ProductsController < ApplicationController
         end
       end
     end
-    
+
     respond_to do |format|
       if success
         format.html { redirect_to(new_product_path, :notice => 'Articulo creado exitosamente!') }
@@ -99,8 +105,12 @@ class ProductsController < ApplicationController
   # DELETE /products/1.xml
   def destroy
     @product = Product.find(params[:id])
-    @stocks =  Stock.find_all_by_product_id params[:id]
-    @stocks.each do |stock| stock.destroy end
+    @stocks = Stock.find_all_by_product_id params[:id]
+    @stocks.each do |stock|
+      stock.destroy
+      p '3333333333333333333333333333'
+      p stock
+    end
     @product.destroy
 
 

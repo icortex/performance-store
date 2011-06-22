@@ -114,6 +114,7 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] bcrypt-ruby (v2.1.4, /home/cortex/.rvm/gems/ruby-1.9.2-p180@test/gems/bcrypt-ruby-2.1.4)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] orm_adapter (v0.0.5, /home/cortex/.rvm/gems/ruby-1.9.2-p180@test/gems/orm_adapter-0.0.5)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] paperclip (v2.3.11, /home/cortex/.rvm/gems/ruby-1.9.2-p180@test/gems/paperclip-2.3.11)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] bundler (v1.0.15, /home/cortex/.rvm/gems/ruby-1.9.2-p180@test/gems/bundler-1.0.15)" level="application" />
   </component>
 </module>
 

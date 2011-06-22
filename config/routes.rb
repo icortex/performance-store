@@ -1,5 +1,9 @@
 WJSport::Application.routes.draw do
 
+  resources :sale_products
+
+  resources :sales
+
   scope(:path_names => {:new => 'nuevo', :edit => 'editar'}) do
     devise_for :users, :path => 'usuarios', :path_names => {:sign_up => 'registrar', :sign_in => 'iniciar_sesion'}
 
