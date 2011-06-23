@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110622161149) do
+ActiveRecord::Schema.define(:version => 20110623170741) do
 
   create_table "brands", :force => true do |t|
     t.string   "brand"
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20110622161149) do
     t.integer  "total"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "headquarter_id"
   end
 
   create_table "sizes", :force => true do |t|
@@ -155,6 +156,7 @@ ActiveRecord::Schema.define(:version => 20110622161149) do
     t.string   "username"
     t.integer  "person_id"
     t.string   "type"
+    t.integer  "headquarter_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

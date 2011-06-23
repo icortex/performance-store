@@ -30,25 +30,24 @@
           <%= f.text_field :rgb, :size => 15 %>
         </td>
       </tr>
-
-
     </table>
+    
     <div align="center">
-      <%= f.submit 'Agregar' %>
+      <%= f.submit 'Aceptar' %>
     </div>
 <% end %>
 
- <script type="text/javascript">
-jQuery('#color_rgb').ColorPicker({
-	onSubmit: function(hsb, hex, rgb, el) {
-		jQuery(el).val(hex);
-		jQuery(el).ColorPickerHide();
-	},
-	onBeforeShow: function () {
-		jQuery(this).ColorPickerSetColor(this.value);
-	}
-})
-.bind('keyup', function(){
-	jQuery(this).ColorPickerSetColor(this.value);
-});
-          </script>
+<script type="text/javascript">
+    jQuery('#color_rgb').ColorPicker({
+        onSubmit: function(hsb, hex, rgb, el) {
+            jQuery(el).val(hex);
+            jQuery(el).ColorPickerHide();
+        },
+        onBeforeShow: function () {
+            jQuery(this).ColorPickerSetColor(this.value);
+        }
+    })
+            .bind('keyup', function() {
+        jQuery(this).ColorPickerSetColor(this.value);
+    });
+</script>

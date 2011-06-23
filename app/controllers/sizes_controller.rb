@@ -1,6 +1,6 @@
 class SizesController < ApplicationController
 
-  layout 'application', :except=>'new'
+  layout 'application', :except=>['new','edit']
   
   # GET /sizes
   # GET /sizes.xml
@@ -47,7 +47,7 @@ class SizesController < ApplicationController
 
     respond_to do |format|
       if @size.save
-        format.html { redirect_to(new_product_path, :notice => 'Talla creada exitosamente.') }
+        format.html { redirect_to(:back, :notice => 'Talla creada exitosamente.') }
         format.xml { render :xml => @size, :status => :created, :location => @size }
       else
         format.html { render :action => "new" }
@@ -63,7 +63,7 @@ class SizesController < ApplicationController
 
     respond_to do |format|
       if @size.update_attributes(params[:size])
-        format.html { redirect_to(@size, :notice => 'Size was successfully updated.') }
+        format.html { redirect_to(admin_index_path, :notice => 'Talla actualizada exitosamente!.') }
         format.xml { head :ok }
       else
         format.html { render :action => "edit" }
@@ -79,7 +79,7 @@ class SizesController < ApplicationController
     @size.destroy
 
     respond_to do |format|
-      format.html { redirect_to(sizes_url) }
+      format.html { redirect_to(admin_index_path) }
       format.xml { head :ok }
     end
   end

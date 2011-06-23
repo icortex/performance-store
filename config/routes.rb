@@ -1,8 +1,6 @@
 WJSport::Application.routes.draw do
 
-  resources :sale_products
 
-  resources :sales
 
   scope(:path_names => {:new => 'nuevo', :edit => 'editar'}) do
     devise_for :users, :path => 'usuarios', :path_names => {:sign_up => 'registrar', :sign_in => 'iniciar_sesion'}
@@ -21,8 +19,12 @@ WJSport::Application.routes.draw do
     resources :cloth_types
     resources :sizes
     resources :contacts
+    resources :sale_products
+    resources :sales, :path => 'ventas'
+    resources :admin
     
     get "inventario/sede/:headquarter"=>'stocks#index'
+    get "ventas/sede/:headquarter"=>'sales#index'
 
   end
 

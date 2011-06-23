@@ -1,0 +1,29 @@
+<h1>Tipos de prenda</h1>
+
+<table>
+  <% @cloth_types.each do |cloth_type| %>
+      <tr>
+        <td><%= cloth_type.cloth_type %></td>
+        <td><%= link_to image_tag('/images/edit.png', :title => 'Modificar tipo de prenda'), '#', :id=>'cloth_type_'+cloth_type.id.to_s %>
+          <script type="text/javascript">
+              jq('#cloth_type_<%= cloth_type.id%>').click(function() {
+                  jq('#edit_popup').load('<%= edit_cloth_type_path(cloth_type) %>', null, function(data, status, request) {
+
+                  });
+                  jq('#edit_popup').dialog({
+                      height: 130,
+                      width: 300 ,
+                      title: 'Modificar tipo de prenda',
+                      modal: true
+                  });
+              });
+          </script>
+        <%= link_to image_tag('/images/delete.png', :title => 'Borrar tipo de prenda'), cloth_type, :confirm => 'El tipo de prenda sera borrado. Deseas continuar?', :method => :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br/>
+
+
+<%= link_to 'Nuevo tipo', '#', :id =>'cloth_type' %>

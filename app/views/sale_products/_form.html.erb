@@ -1,0 +1,48 @@
+<%= form_for(@sale_product) do |f| %>
+  <% if @sale_product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sale_product.errors.count, "error") %> prohibited this sale_product from being saved:</h2>
+
+      <ul>
+      <% @sale_product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+        <tr style="<%= @sale_product.sale_id ? 'display:none' : '' %>">
+        <td>
+          <%= f.label 'Venta' %>
+        </td>
+        <td>
+          <%= f.text_field :sale_id, :size => 10%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Producto' %>
+        </td>
+        <td>
+          <%= f.text_field :product %>
+        </td>
+     </tr>
+               <tr>
+        <td>
+          <%= f.label 'Cantidad' %>
+        </td>
+        <td>
+          <%= f.text_field :quantity %>
+        </td>
+     </tr>
+               <tr>
+        <td>
+          <%= f.label 'Precio' %>
+        </td>
+        <td>
+           <%= f.text_field :price %>
+        </td>
+     </tr>
+
+
+<% end %>

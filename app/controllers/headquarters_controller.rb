@@ -1,4 +1,7 @@
 class HeadquartersController < ApplicationController
+
+  layout 'application', :except=>['new','edit']
+
   # GET /headquarters
   # GET /headquarters.xml
   def index
@@ -44,7 +47,7 @@ class HeadquartersController < ApplicationController
 
     respond_to do |format|
       if @headquarter.save
-        format.html { redirect_to(@headquarter, :notice => 'Headquarter was successfully created.') }
+        format.html { redirect_to(:back, :notice => 'Headquarter was successfully created.') }
         format.xml { render :xml => @headquarter, :status => :created, :location => @headquarter }
       else
         format.html { render :action => "new" }
@@ -60,7 +63,7 @@ class HeadquartersController < ApplicationController
 
     respond_to do |format|
       if @headquarter.update_attributes(params[:headquarter])
-        format.html { redirect_to(@headquarter, :notice => 'Headquarter was successfully updated.') }
+        format.html { redirect_to(admin_index_path, :notice => 'Sede actualizada exitosamente!.') }
         format.xml { head :ok }
       else
         format.html { render :action => "edit" }
@@ -76,7 +79,7 @@ class HeadquartersController < ApplicationController
     @headquarter.destroy
 
     respond_to do |format|
-      format.html { redirect_to(headquarters_url) }
+      format.html { redirect_to(admin_index_path) }
       format.xml { head :ok }
     end
   end

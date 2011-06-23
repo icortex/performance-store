@@ -1,0 +1,82 @@
+<%= form_for(@sale) do |f| %>
+    <% if @sale.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
+
+          <ul>
+            <% @sale.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <table class="form_class">
+      <% if !current_user.headquarter_id %>
+      <tr>
+        <td>
+          <%= f.label 'Sede' %>
+        </td>
+        <td>
+          <%= f.select :headquarter, Headquarter.all.collect {|element| [element.name,element.id] } %>
+        </td>
+      </tr>
+      <% else 'x = current_user.headquarter_id' %>
+      <%end %>
+      <tr>
+        <td>
+          <%= f.label 'Cliente' %>
+        </td>
+        <td>
+          <%= f.text_field :person %>
+        </td>
+      </tr>
+
+        <%= render 'sale_products/form'%>
+
+      <tr>
+        <td>
+          <%= f.label 'Descuento' %>
+        </td>
+        <td>
+          <%= f.text_field :discount %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Razon del descuento' %>
+        </td>
+        <td>
+          <%= f.text_field :discount_reason %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Fecha' %>
+        </td>
+        <td>
+          <%= f.datetime_select :date %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Iva' %>
+        </td>
+        <td>
+          <%= f.text_field :iva %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Total' %>
+        </td>
+        <td>
+          <%= f.text_field :total %>
+        </td>
+      </tr>
+    </table>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

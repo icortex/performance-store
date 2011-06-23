@@ -1,0 +1,28 @@
+<h1>Marcas</h1>
+
+<table>
+  <% @brands.each do |brand| %>
+      <tr>
+        <td><%= brand.brand %></td>
+        <td><%= link_to image_tag('/images/edit.png', :title => 'Modificar marca'),'#', :id=>'brand_'+brand.id.to_s %>
+          <script type="text/javascript">
+              jq('#brand_<%= brand.id%>').click(function() {
+                  jq('#edit_popup').load('<%= edit_brand_path(brand) %>', null, function(data, status, request) {
+
+                  });
+                  jq('#edit_popup').dialog({
+                      height: 130,
+                      width: 300 ,
+                      title: 'Modificar marca',
+                      modal: true
+                  });
+              });
+          </script>
+        <%= link_to image_tag('/images/delete.png', :title => 'Borrar marca'), brand, :confirm => 'La marca sera borrada. Deseas continuar?', :method => :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br/>
+
+<%= link_to 'Nueva marca', '#', :id => 'brand' %>

@@ -1,6 +1,6 @@
 class BrandsController < ApplicationController
 
-  layout 'application', :except=>'new'
+  layout 'application', :except=>['new','edit']
 
   load_and_authorize_resource
   check_authorization
@@ -50,7 +50,7 @@ class BrandsController < ApplicationController
 
     respond_to do |format|
       if @brand.save
-        format.html { redirect_to(new_product_path, :notice => 'Marca creada exitosamente.') }
+        format.html { redirect_to(:back, :notice => 'Marca creada exitosamente.') }
         format.xml { render :xml => @brand, :status => :created, :location => @brand }
       else
         format.html { render :action => "new" }
@@ -66,7 +66,7 @@ class BrandsController < ApplicationController
 
     respond_to do |format|
       if @brand.update_attributes(params[:brand])
-        format.html { redirect_to(@brand, :notice => 'Brand was successfully updated.') }
+        format.html { redirect_to(admin_index_path, :notice => 'Marca actualizada exitosamente!.') }
         format.xml { head :ok }
       else
         format.html { render :action => "edit" }
@@ -82,7 +82,7 @@ class BrandsController < ApplicationController
     @brand.destroy
 
     respond_to do |format|
-      format.html { redirect_to(brands_url) }
+      format.html { redirect_to(admin_index_path) }
       format.xml { head :ok }
     end
   end

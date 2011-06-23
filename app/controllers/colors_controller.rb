@@ -1,6 +1,6 @@
 class ColorsController < ApplicationController
 
-  layout 'application', :except=>'new'
+  layout 'application', :except=>['new','edit']
 
   # GET /colors
   # GET /colors.xml
@@ -47,7 +47,7 @@ class ColorsController < ApplicationController
 
     respond_to do |format|
       if @color.save
-        format.html { redirect_to(new_product_path, :notice => 'Color creado exitosamente.') }
+        format.html { redirect_to(:back, :notice => 'Color creado exitosamente.') }
         format.xml { render :xml => @color, :status => :created, :location => @color }
       else
         format.html { render :action => "new" }
@@ -63,7 +63,7 @@ class ColorsController < ApplicationController
 
     respond_to do |format|
       if @color.update_attributes(params[:color])
-        format.html { redirect_to(@color, :notice => 'Color was successfully updated.') }
+        format.html { redirect_to(admin_index_path, :notice => 'Color actualizado exitosamente!.') }
         format.xml { head :ok }
       else
         format.html { render :action => "edit" }
@@ -79,7 +79,7 @@ class ColorsController < ApplicationController
     @color.destroy
 
     respond_to do |format|
-      format.html { redirect_to(colors_url) }
+      format.html { redirect_to(admin_index_path) }
       format.xml { head :ok }
     end
   end

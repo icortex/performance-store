@@ -1,0 +1,30 @@
+<h1>Colores</h1>
+
+<table>
+
+  <% @colors.each do |color| %>
+      <tr>
+        <td><%= color.color %></td>
+        <td><%= link_to image_tag('/images/edit.png', :title => 'Modificar color'), '#', :id=>'color_'+color.id.to_s %>
+          <script type="text/javascript">
+              jq('#color_<%= color.id%>').click(function() {
+                  jq('#edit_popup').load('<%= edit_color_path(color) %>', null, function(data, status, request) {
+
+                  });
+                  jq('#edit_popup').dialog({
+                      height: 180,
+                      width: 300 ,
+                      title: 'Modificar color',
+                      modal: true
+                  });
+              });
+          </script>
+          <%= link_to image_tag('/images/delete.png', :title => 'Borrar color'), color, :confirm => 'El color sera borrado. Deseas continuar?', :method => :delete %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+
+<br/>
+
+<%= link_to 'Nuevo color', '#', :id => 'color' %>

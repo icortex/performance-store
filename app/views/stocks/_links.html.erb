@@ -1,4 +1,4 @@
-<%= link_to 'Nuevo Articulo', new_product_path, :class => 'menu_link' %>
+<%= link_to 'Nuevo articulo', new_product_path, :class => 'menu_link' %>
 <span>&emsp;</span><%= link_to 'Articulos', products_path, :class => 'menu_link' %>
 <% Headquarter.all.each do |hq| %>
 <span>&emsp;</span><%= link_to hq.name, "#{stocks_path}/sede/#{hq.name}", :class => 'menu_link' %>

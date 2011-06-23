@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  client: 
+  discount: 1
+  discount_reason: MyString
+  date: 2011-06-22 11:11:12
+  iva: 1
+  total: 1
+
+two:
+  client: 
+  discount: 1
+  discount_reason: MyString
+  date: 2011-06-22 11:11:12
+  iva: 1
+  total: 1

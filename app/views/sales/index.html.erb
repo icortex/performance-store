@@ -1,0 +1,36 @@
+<%= render 'links' %>
+
+
+<div><h1>Lista de ventas</h1>
+</div>
+<table class="dataTablesId">
+  <thead>
+
+  <tr>
+<th>Cliente</th>
+    <th>Fecha</th>
+    <th>Descuento</th>
+    <th>Iva</th>
+    <th>Total</th>
+    <th>Opciones</th>
+  </tr>
+  </thead>
+  <tbody>
+
+
+<% @sales.each do |sale| %>
+  <tr>
+    <td><%= sale.client %></td>
+    <td><%= sale.date %></td>
+    <td><%= sale.discount %></td>
+    <td><%= sale.iva %></td>
+    <td><%= sale.total %></td>
+    <td width="100px">
+                <%= link_to image_tag('/images/view.png', :title => 'Ver venta'), sale_product_path(sale.sale_products.id) %>
+          <%= link_to image_tag('/images/edit.png', :title => 'Modificar venta'), edit_sale_path(sale) %>
+          <%= link_to image_tag('/images/delete.png', :title => 'Borrar venta'), sale, :confirm => 'La venta sera borrada. Deseas continuar?', :method => :delete %>
+    </td>
+  </tr>
+<% end %>
+</tbody>
+</table>

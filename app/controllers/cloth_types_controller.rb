@@ -1,6 +1,6 @@
 class ClothTypesController < ApplicationController
 
-  layout 'application', :except=>'new'
+  layout 'application', :except=>['new','edit']
 
   # GET /cloth_types
   # GET /cloth_types.xml
@@ -47,7 +47,7 @@ class ClothTypesController < ApplicationController
 
     respond_to do |format|
       if @cloth_type.save
-        format.html { redirect_to(new_product_path, :notice => 'Tipo de prenda creado exitosamente.') }
+        format.html { redirect_to(:back, :notice => 'Tipo de prenda creado exitosamente.') }
         format.xml { render :xml => @cloth_type, :status => :created, :location => @cloth_type }
       else
         format.html { render :action => "new" }
@@ -63,7 +63,7 @@ class ClothTypesController < ApplicationController
 
     respond_to do |format|
       if @cloth_type.update_attributes(params[:cloth_type])
-        format.html { redirect_to(@cloth_type, :notice => 'Cloth type was successfully updated.') }
+        format.html { redirect_to(admin_index_path, :notice => 'Tipo de prenda actualizada exitosamente!.') }
         format.xml { head :ok }
       else
         format.html { render :action => "edit" }
@@ -79,7 +79,7 @@ class ClothTypesController < ApplicationController
     @cloth_type.destroy
 
     respond_to do |format|
-      format.html { redirect_to(cloth_types_url) }
+      format.html { redirect_to(admin_index_path) }
       format.xml { head :ok }
     end
   end

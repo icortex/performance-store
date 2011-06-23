@@ -1,0 +1,43 @@
+<h1>Sedes</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Direccion</th>
+    <th>Telefono</th>
+    <th>Descripcion</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @headquarters.each do |headquarter| %>
+      <tr>
+        <td><%= headquarter.name %></td>
+        <td><%= headquarter.address %></td>
+        <td><%= headquarter.phone %></td>
+        <td><%= headquarter.description %></td>
+        <td>
+          <%= link_to image_tag('/images/edit.png', :title => 'Modificar sede'), '#', :id=>'hq_'+headquarter.id.to_s %>
+          <script type="text/javascript">
+              jq('#hq_<%= headquarter.id%>').click(function() {
+                  jq('#edit_popup').load('<%= edit_headquarter_path(headquarter) %>', null, function(data, status, request) {
+
+                  });
+                  jq('#edit_popup').dialog({
+                      height: 300,
+                      width: 300 ,
+                      title: 'Modificar sede',
+                      modal: true
+                  });
+              });
+          </script>
+          <%= link_to image_tag('/images/delete.png', :title => 'Borrar sede'), headquarter, :confirm => 'La sede sera borrada. Deseas continuar?', :method => :delete %>
+
+
+        </td>
+      </tr>
+  <% end %>
+</table>
+
+<br/>
+<%= link_to 'Nueva sede', '#', :id => 'headquarter' %>
