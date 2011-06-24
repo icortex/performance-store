@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(:version => 20110623170741) do
   end
 
   create_table "sales", :force => true do |t|
-    t.integer  "client_id"
+    t.integer  "person_id"
     t.integer  "discount"
     t.string   "discount_reason"
     t.datetime "date"

@@ -3,7 +3,7 @@ WJSport::Application.routes.draw do
 
 
   scope(:path_names => {:new => 'nuevo', :edit => 'editar'}) do
-    devise_for :users, :path => 'usuarios', :path_names => {:sign_up => 'registrar', :sign_in => 'iniciar_sesion'}
+    devise_for :users, :controllers => {:sessions => "sessions"}, :path => 'usuarios', :path_names => {:sign_up => 'registrar', :sign_in => 'iniciar_sesion'}
 
 
 

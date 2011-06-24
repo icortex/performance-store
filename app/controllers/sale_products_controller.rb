@@ -40,6 +40,7 @@ class SaleProductsController < ApplicationController
   # POST /sale_products
   # POST /sale_products.xml
   def create
+    params[:sale_product][:sale_id] = params[:sale_product][:sale_id] ? params[:sale_product][:sale_id] : @sale.id
     @sale_product = SaleProduct.new(params[:sale_product])
 
     respond_to do |format|

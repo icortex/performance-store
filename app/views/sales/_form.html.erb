@@ -21,7 +21,6 @@
           <%= f.select :headquarter, Headquarter.all.collect {|element| [element.name,element.id] } %>
         </td>
       </tr>
-      <% else 'x = current_user.headquarter_id' %>
       <%end %>
       <tr>
         <td>

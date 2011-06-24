@@ -1,7 +1,7 @@
 class CreateSales < ActiveRecord::Migration
   def self.up
     create_table :sales do |t|
-      t.references :client
+      t.references :person
       t.integer :discount
       t.string :discount_reason
       t.datetime :date

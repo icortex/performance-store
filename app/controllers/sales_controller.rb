@@ -46,10 +46,9 @@ class SalesController < ApplicationController
   # POST /sales
   # POST /sales.xml
   def create
-    p "********************"
-        p params[:sale][:headquarter]
-        p "********************"
-
+    params[:sale][:headquarter] = params[:sale][:headquarter] ?  Headquarter.find(params[:sale][:headquarter]) :
+        Headquarter.find(current_user.headquarter_id)
+    params[:sale][:person] = Person.find params[:sale][:person]
     @sale = Sale.new(params[:sale])
 
     respond_to do |format|
