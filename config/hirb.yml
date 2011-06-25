@@ -6,6 +6,7 @@
       - username
       - email
       - type
+      - encrypted_password
   Seller:
     :options:
       :fields:
