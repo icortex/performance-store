@@ -5,6 +5,17 @@
   <%= @sale.person_id %>
 </p>
 
+<b>Articulos:</b>
+<% for sale_product in @sale.sale_products%>
+<p>
+
+  ref <%= sale_product.product.reference %>
+  q <%= sale_product.quantity %>
+  p <%= sale_product.price %>
+</p>
+<% end %>
+
+
 <p>
   <b>Discount:</b>
   <%= @sale.discount %>

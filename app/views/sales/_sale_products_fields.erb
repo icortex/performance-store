@@ -1,0 +1,13 @@
+<td>
+  <%= f.label 'Articulo' %>
+  <%= f.collection_select :product_id, Product.all, :id, :reference %>
+</td>
+<td>
+  <%= f.label 'Cantidad' %>
+  <%= f.text_field :quantity %>
+</td>
+<td>
+  <%= f.label 'Precio unitario' %>
+  <%= f.text_field :price %>
+</td>
+

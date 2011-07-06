@@ -31,7 +31,14 @@
         </td>
       </tr>
 
-        <%= render 'sale_products/form'%>
+
+
+        <% f.fields_for :sale_products do |b| %>
+          <tr>
+          <%= render 'sale_products_fields', :f => b  %>
+          </tr>
+        <% end %>
+
 
       <tr>
         <td>
@@ -47,14 +54,6 @@
         </td>
         <td>
           <%= f.text_field :discount_reason %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Fecha' %>
-        </td>
-        <td>
-          <%= f.datetime_select :date %>
         </td>
       </tr>
       <tr>

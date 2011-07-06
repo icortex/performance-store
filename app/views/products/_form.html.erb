@@ -1,15 +1,6 @@
 
 <%= form_for(@product, :html => {:multipart => true}) do |f| %>
-    <% if @product.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@product.errors.count, "error") %> no permite guardar este articulo:</h2>
-          <ul>
-            <% @product.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render 'error_messages', :p => @product%>
 
     <div class="left">
       <%= image_tag @product.image.url :medium %>

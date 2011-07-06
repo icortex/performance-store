@@ -2,11 +2,11 @@ class SalesController < ApplicationController
   # GET /sales
   # GET /sales.xml
   def index
-    @sales = params[:headquarter] ? Sale.find_all_by_headquarter_id((Headquarter.find params[:headquarter]).id) : Sale.all
-    
-    p "********************"
-    p current_user.headquarter_id
-    p "********************"
+    if params[:headquarter]
+      @sales = Sale.find_all_by_headquarter_id((Headquarter.find_by_name params[:headquarter]).id)
+    else
+      @sales = Sale.find_all_by_headquarter_id current_user.headquarter_id
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,8 +29,9 @@ class SalesController < ApplicationController
   # GET /sales/new.xml
   def new
     @sale = Sale.new
-    @sale_product=SaleProduct.new
-
+    3.times do
+      @sale.sale_products.build
+    end
 
     respond_to do |format|
       format.html # new.html.erb
