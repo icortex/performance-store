@@ -1,12 +1,17 @@
 class SalesController < ApplicationController
+
+  autocomplete :person, :name, :full => true
+
   # GET /sales
   # GET /sales.xml
-  def index
+  def index    
     if params[:headquarter]
-      @sales = Sale.find_all_by_headquarter_id((Headquarter.find_by_name params[:headquarter]).id)
+      hq=Headquarter.find_by_name params[:headquarter]
     else
-      @sales = Sale.find_all_by_headquarter_id current_user.headquarter_id
+      hq=Headquarter.find current_user.headquarter_id
+      params[:headquarter] =hq.name
     end
+    @sales = Sale.find_all_by_headquarter_id hq.id
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,10 +34,8 @@ class SalesController < ApplicationController
   # GET /sales/new.xml
   def new
     @sale = Sale.new
-    3.times do
-      @sale.sale_products.build
-    end
-
+    @sale.sale_products.build
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sale }
@@ -49,7 +52,6 @@ class SalesController < ApplicationController
   def create
     params[:sale][:headquarter] = params[:sale][:headquarter] ?  Headquarter.find(params[:sale][:headquarter]) :
         Headquarter.find(current_user.headquarter_id)
-    params[:sale][:person] = Person.find params[:sale][:person]
     @sale = Sale.new(params[:sale])
 
     respond_to do |format|
@@ -86,7 +88,7 @@ class SalesController < ApplicationController
     @sale.destroy
 
     respond_to do |format|
-      format.html { redirect_to(sales_url) }
+      format.html { redirect_to(:back) }
       format.xml  { head :ok }
     end
   end
