@@ -1,6 +1,7 @@
 class SalesController < ApplicationController
 
-  autocomplete :person, :name, :full => true
+  autocomplete :person, :document_id, :full => true
+
 
   # GET /sales
   # GET /sales.xml
@@ -13,6 +14,7 @@ class SalesController < ApplicationController
     end
     @sales = Sale.find_all_by_headquarter_id hq.id
 
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @sales }
@@ -23,6 +25,11 @@ class SalesController < ApplicationController
   # GET /sales/1.xml
   def show
     @sale = Sale.find(params[:id])
+    if @sale.person
+      @client = "#{@sale.person.name}, #{@sale.person.document_id}"
+    else
+      @client = ''
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -45,6 +52,12 @@ class SalesController < ApplicationController
   # GET /sales/1/edit
   def edit
     @sale = Sale.find(params[:id])
+    if @sale.person
+      @client = "#{@sale.person.name}, #{@sale.person.document_id}"
+    else
+      @client = ''
+    end
+
   end
 
   # POST /sales
@@ -52,6 +65,11 @@ class SalesController < ApplicationController
   def create
     params[:sale][:headquarter] = params[:sale][:headquarter] ?  Headquarter.find(params[:sale][:headquarter]) :
         Headquarter.find(current_user.headquarter_id)
+    params[:sale][:person] = Person.find_by_document_id params[:sale][:person_id]
+    if !params[:sale][:person]
+      params[:sale][:person]=Person.create :document_id => params[:sale][:person_id]
+    end
+
     @sale = Sale.new(params[:sale])
 
     respond_to do |format|
@@ -68,6 +86,13 @@ class SalesController < ApplicationController
   # PUT /sales/1
   # PUT /sales/1.xml
   def update
+    params[:sale][:headquarter] = params[:sale][:headquarter] ?  Headquarter.find(params[:sale][:headquarter]) :
+        Headquarter.find(current_user.headquarter_id)
+    params[:sale][:person] = Person.find_by_document_id params[:sale][:person_id]
+    if !params[:sale][:person]
+      params[:sale][:person]=Person.create :document_id => params[:sale][:person_id]
+    end
+
     @sale = Sale.find(params[:id])
 
     respond_to do |format|
@@ -92,4 +117,5 @@ class SalesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
 end

@@ -21,7 +21,7 @@ WJSport::Application.routes.draw do
     resources :contacts
     resources :sale_products
     resources :sales, :path => 'ventas' do
-      get :autocomplete_person_name, :on => :collection
+      get :autocomplete_person_document_id, :on => :collection
     end
     resources :admin
     

@@ -24,10 +24,10 @@
       <%end %>
       <tr>
         <td>
-          <%= f.label 'Cliente' %>
+          <%= f.label 'Cedula' %>
         </td>
         <td>
-          <%= f.autocomplete_field :person_id, autocomplete_person_name_sales_path%>
+          <%= f.autocomplete_field :person_id, autocomplete_person_document_id_sales_path, :value => @client %>
         </td>
       </tr>
 
