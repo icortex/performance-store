@@ -1,13 +1,12 @@
 <%= render 'links' %>
 
-
 <div><h1>Lista de ventas en <%= params[:headquarter] %></h1>
 </div>
 <table class="dataTablesId">
   <thead>
 
   <tr>
-<th>Cliente</th>
+    <th>Cliente</th>
     <th>Fecha</th>
     <th>Descuento</th>
     <th>Iva</th>
@@ -20,7 +19,7 @@
 
 <% @sales.each do |sale| %>
   <tr>
-    <td><%= sale.person.document_id %></td>
+    <td><%= "#{sale.person.name}, #{sale.person.document_id}" unless !sale.person %></td>
     <td><%= sale.created_at %></td>
     <td><%= sale.discount %></td>
     <td><%= sale.iva %></td>

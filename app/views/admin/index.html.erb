@@ -3,19 +3,22 @@
 <%= render '/cloth_types/index' %>
 <%= render '/sizes/index' %>
 <%= render '/colors/index' %>
+<%= render '/variables/index' %>
 
 <script type="text/javascript">
     <% hash={'headquarter'=>['Nueva sede',new_headquarter_path],
     'brand'=>['Nueva marca',new_brand_path],
     'cloth_type'=>['Nuevo tipo de prenda',new_cloth_type_path],
     'size'=>['Nueva talla',new_size_path],
-    'color'=>['Nuevo color',new_color_path],} %>
+    'color'=>['Nuevo color',new_color_path],
+    } %>
     <% hash.each do |id, values| %>
     jq('#<%= id %>').click(function() {
         jq('#add_popup').load('<%= values[1] %>', null);
         jq('#add_popup').dialog({
             title: '<%= values[0] %>',
-            modal: true
+            modal: true,
+            resizable: false
         });
     });
     <% end %>

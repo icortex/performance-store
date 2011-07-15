@@ -5,12 +5,11 @@ class ProductsController < ApplicationController
   # GET /products.xml
   def index
 
-    @products= Product.all
-
+    @products= Product.where('reference like ?', "%#{params[:q]}%")
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml { render :xml => @products }
+      format.json { render :json => product_features(@products) }
     end
   end
 
@@ -105,12 +104,6 @@ class ProductsController < ApplicationController
   # DELETE /products/1.xml
   def destroy
     @product = Product.find(params[:id])
-    @stocks = Stock.find_all_by_product_id params[:id]
-    @stocks.each do |stock|
-      stock.destroy
-      p '3333333333333333333333333333'
-      p stock
-    end
     @product.destroy
 
 
@@ -129,4 +122,47 @@ class ProductsController < ApplicationController
     end
   end
 
+ #[{:reference => 'perro', :brand => 'Adidas',  :features => {'s' =>{'am'=>[1,20], 'm'=> {'ne'=>[21,2]}}}}, {}]
+
+  def product_features products
+    products_modified=[]
+
+    products.each do |p|
+      stocks_by_hq = p.stocks.find_by_headquarter_id(current_user.headquarter_id)
+      qty = stocks_by_hq.quantity rescue 0
+      price = stocks_by_hq.price rescue 0
+
+      appended=false
+
+      pm_temp = {}
+      products_modified.each do |pm|
+        if (p.reference == pm[:reference])
+          pm[:features].each do |size, color|
+            if size == p.size.size
+              pm_temp[:features]= pm[:features]
+              pm_temp[:features][size] = color
+            else
+              #pm[:features]['L'] = color
+            end
+          end
+          appended=true
+          break
+        end
+        pm[:features]=pm_temp[:features]
+      end
+
+      if !appended
+        product_temp = {}
+        product_temp[:id] = p.id
+        product_temp[:brand] = p.brand.brand
+        product_temp[:reference] = p.reference
+        feature_to_insert ={}
+        feature_to_insert[p.size.size] = {}
+        feature_to_insert[p.size.size][p.color.color] = [qty, price]
+        product_temp[:features] = feature_to_insert
+        products_modified << product_temp
+      end
+    end
+    products_modified
+  end
 end

@@ -6,10 +6,29 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.xml
   def index
-    @people = Person.all
+    @people = Person.where('document_id like ?', "%#{params[:q]}%")
+    case request.path
+      when '/clientes'
+        @title = 'Lista de clientes'
+      when '/clientes/cumpleanos'
+        from = Date.today.yday
+        to = from + 7
+        @people = []
+        @emails = ''
+        Person.all.each do |p|
+          if(p.birthday.yday >= from && p.birthday.yday <= to)
+            @people << p
+            @emails += p.email + ', '
+          end
+        end
+        @emails.chop!.chop!
+        @title = 'Lista de cumpleaneros'
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @people }
+      format.json { render :json => @people.map(&:attributes)}
     end
   end
 
@@ -83,4 +102,9 @@ class PeopleController < ApplicationController
       format.xml { head :ok }
     end
   end
+
+  def cumpleanos
+
+  end
+
 end

@@ -7,5 +7,6 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :type, :headquarter_id
   belongs_to :person
+  belongs_to :headquarter
   validates :username, :uniqueness => true
 end

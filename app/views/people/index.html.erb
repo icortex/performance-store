@@ -1,7 +1,16 @@
-<%= link_to 'Nuevo Cliente', new_person_path, :class => 'menu_link' %>
+<%= link_to 'Nuevo Cliente', new_person_path, :class => 'menu_link' %> <span>&emsp;</span>
+<%= link_to 'Listar Cumpleaños', birthday_people_path, :class => 'menu_link' %>
 
-<h1>Lista de clientes</h1>
-
+<h1><%= @title %></h1>
+<% if @emails %>
+    <button id='copy-button' style="float:right;">Copiar emails</button>
+    <script type="text/javascript">
+        jq("#copy-button").zclip({
+            path: "/javascripts/ZeroClipboard.swf",
+            copy: "<%= @emails %>"
+        });
+    </script>
+<% end %>
 <table class="dataTablesId">
   <thead>
   <tr>

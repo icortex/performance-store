@@ -5,6 +5,7 @@ def index
   @colors = Color.all
   @sizes = Size.all
   @cloth_types = ClothType.all
+  @variables = Variable.all
 
 
 

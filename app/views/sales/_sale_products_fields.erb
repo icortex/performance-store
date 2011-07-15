@@ -1,15 +1,22 @@
 <td>
-  <%= f.label 'Articulo' %>
-  <%= f.collection_select :product_id, Product.all, :id, :reference %>
+  <%= f.text_field :product_id %>
+  <%= javascript_tag "autocomplete_product('#sale_sale_products_attributes_'+#{@i});" %>
 </td>
 <td>
-  <%= f.label 'Cantidad' %>
-  <%= f.text_field :quantity %>
+  <%= f.collection_select :size, [Size.new], :size, :size %>
 </td>
 <td>
-  <%= f.label 'Precio unitario' %>
+  <%= f.collection_select :color, [Color.new], :color, :color %>
+</td>
+<td>
   <%= f.text_field :price %>
 </td>
 <td>
-  <%= link_to_remove_fields image_tag('delete.png',:title => 'Quitar articulo'),f %>
+  <%= f.text_field :quantity %>
+</td>
+<td>
+  <%#= f.text_field 'd' %>
+</td>
+<td>
+  <%= link_to_remove_fields image_tag('remove.png',:title => 'Quitar articulo'),f %>
 </td>

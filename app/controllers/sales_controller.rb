@@ -1,11 +1,11 @@
 class SalesController < ApplicationController
 
-  autocomplete :person, :document_id, :full => true
+  autocomplete :person, :document_id, :display_value => :name_and_doc
 
 
   # GET /sales
   # GET /sales.xml
-  def index    
+  def index
     if params[:headquarter]
       hq=Headquarter.find_by_name params[:headquarter]
     else
@@ -42,7 +42,7 @@ class SalesController < ApplicationController
   def new
     @sale = Sale.new
     @sale.sale_products.build
-    
+    @i = 0
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sale }
@@ -52,24 +52,14 @@ class SalesController < ApplicationController
   # GET /sales/1/edit
   def edit
     @sale = Sale.find(params[:id])
-    if @sale.person
-      @client = "#{@sale.person.name}, #{@sale.person.document_id}"
-    else
-      @client = ''
-    end
+    @i = 0
 
   end
 
   # POST /sales
   # POST /sales.xml
   def create
-    params[:sale][:headquarter] = params[:sale][:headquarter] ?  Headquarter.find(params[:sale][:headquarter]) :
-        Headquarter.find(current_user.headquarter_id)
-    params[:sale][:person] = Person.find_by_document_id params[:sale][:person_id]
-    if !params[:sale][:person]
-      params[:sale][:person]=Person.create :document_id => params[:sale][:person_id]
-    end
-
+    params[:sale][:headquarter_id]=current_user.headquarter.id
     @sale = Sale.new(params[:sale])
 
     respond_to do |format|
@@ -86,13 +76,7 @@ class SalesController < ApplicationController
   # PUT /sales/1
   # PUT /sales/1.xml
   def update
-    params[:sale][:headquarter] = params[:sale][:headquarter] ?  Headquarter.find(params[:sale][:headquarter]) :
-        Headquarter.find(current_user.headquarter_id)
-    params[:sale][:person] = Person.find_by_document_id params[:sale][:person_id]
-    if !params[:sale][:person]
-      params[:sale][:person]=Person.create :document_id => params[:sale][:person_id]
-    end
-
+    params[:sale][:headquarter_id]=current_user.headquarter.id
     @sale = Sale.find(params[:id])
 
     respond_to do |format|

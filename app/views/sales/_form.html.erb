@@ -1,3 +1,6 @@
+<%= stylesheet_link_tag "token-input-facebook" %>
+<%= javascript_include_tag "jquery.tokeninput", "autocomplete" %>
+
 <%= form_for(@sale) do |f| %>
     <% if @sale.errors.any? %>
         <div id="error_explanation">
@@ -12,39 +15,15 @@
     <% end %>
 
     <table class="form_class">
-      <% if !current_user.headquarter_id %>
-      <tr>
-        <td>
-          <%= f.label 'Sede' %>
-        </td>
-        <td>
-          <%= f.select :headquarter, Headquarter.all.collect {|element| [element.name,element.id] } %>
-        </td>
-      </tr>
-      <%end %>
       <tr>
         <td>
           <%= f.label 'Cedula' %>
         </td>
         <td>
-          <%= f.autocomplete_field :person_id, autocomplete_person_document_id_sales_path, :value => @client %>
+          <%= f.text_field :person_id %>
+          <%= javascript_tag 'autocomplete_client();' %>
         </td>
       </tr>
-
-
-
-        <% f.fields_for :sale_products do |b| %>
-          <tr class="fields">
-          <%= render 'sale_products_fields', :f => b  %>
-          </tr>
-        <% end %>
-      <tr>
-        <td>
-        <%= link_to_add_fields image_tag('add.png',:title => 'Agregar articulo'), f, :sale_products %>
-        </td>
-      </tr>
-
-
       <tr>
         <td>
           <%= f.label 'Descuento' %>
@@ -79,7 +58,31 @@
       </tr>
     </table>
 
+    <table>
+      <th>Articulo</th>
+      <th>Talla</th>
+      <th>Color</th>
+      <th>Precio unitario</th>
+      <th>Cantidad</th>
+      <th>Subtotal</th>
+      <th></th>
+      <%# i=0 %>
+      <% f.fields_for :sale_products do |b| %>
+          <tr class="fields">
+            <%= render :partial => 'sale_products_fields', :locals => {:f => b } %>
+          </tr>
+          <% @i = @i + 1 %>
+      <% end %>
+
+      <tr id='add_product'>
+        <td>
+          <%= link_to_add_fields image_tag('add.png', :title => 'Agregar articulo'), f, :sale_products %>
+        </td>
+      </tr>
+    </table>
+
     <div class="actions">
       <%= f.submit %>
     </div>
 <% end %>
+

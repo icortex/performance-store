@@ -1,13 +1,13 @@
 WJSport::Application.routes.draw do
 
-
+  resources :variables
 
   scope(:path_names => {:new => 'nuevo', :edit => 'editar'}) do
     devise_for :users, :controllers => {:sessions => "sessions"}, :path => 'usuarios', :path_names => {:sign_up => 'registrar', :sign_in => 'iniciar_sesion'}
 
-
-
-    resources :people, :path => 'clientes'
+    resources :people, :path => 'clientes' do
+      get 'cumpleanos' => 'people#index', :on => :collection, :as => :birthday
+    end
     resources :lot_products
     resources :stocks, :path => 'inventario'
     resources :faulties
@@ -20,9 +20,12 @@ WJSport::Application.routes.draw do
     resources :sizes
     resources :contacts
     resources :sale_products
+
     resources :sales, :path => 'ventas' do
       get :autocomplete_person_document_id, :on => :collection
+      get :autocomplete_product_reference, :on => :collection
     end
+
     resources :admin
     
     get "inventario/sede/:headquarter"=>'stocks#index'

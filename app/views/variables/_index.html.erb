@@ -1,0 +1,32 @@
+<h1>Variables</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Valor</th>
+    <th></th>
+  </tr>
+
+<% @variables.each do |variable| %>
+  <tr>
+    <td><%= variable.key %></td>
+    <td><%= variable.value %></td>
+    <td><%= link_to image_tag('/images/edit.png', :title => 'Modificar variable'), '#', :id=>'variable_'+variable.id.to_s %>
+          <script type="text/javascript">
+              jq('#variable_<%= variable.id%>').click(function() {
+                  jq('#edit_popup').load('<%= edit_variable_path(variable) %>', null, function(data, status, request) {
+
+                  });
+                  jq('#edit_popup').dialog({
+                      height: 180,
+                      width: 300 ,
+                      title: 'Modificar variable',
+                      modal: true,
+                      resizable: false
+                  });
+              });
+          </script>
+    </td>
+  </tr>
+<% end %>
+</table>
