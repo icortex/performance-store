@@ -64,9 +64,9 @@
       <th>Color</th>
       <th>Precio unitario</th>
       <th>Cantidad</th>
+      <th>En stock</th>
       <th>Subtotal</th>
       <th></th>
-      <%# i=0 %>
       <% f.fields_for :sale_products do |b| %>
           <tr class="fields">
             <%= render :partial => 'sale_products_fields', :locals => {:f => b } %>

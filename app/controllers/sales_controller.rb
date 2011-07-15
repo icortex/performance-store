@@ -60,8 +60,8 @@ class SalesController < ApplicationController
   # POST /sales.xml
   def create
     params[:sale][:headquarter_id]=current_user.headquarter.id
+    set_ids params[:sale][:sale_products_attributes]
     @sale = Sale.new(params[:sale])
-
     respond_to do |format|
       if @sale.save
         format.html { redirect_to(@sale, :notice => 'Sale was successfully created.') }
@@ -70,6 +70,15 @@ class SalesController < ApplicationController
         format.html { render :action => "new" }
         format.xml  { render :xml => @sale.errors, :status => :unprocessable_entity }
       end
+    end
+  end
+
+  def set_ids sale_products
+    sale_products.each do |k,sp|
+      size= Size.find_by_size sp[:size]
+      color = Color.find_by_color sp[:color]
+      p= Product.where("reference = ? and size_id = ? and color_id = ?",sp[:reference],size.id, color.id )[0]
+      sp[:product_id] = p.id
     end
   end
 

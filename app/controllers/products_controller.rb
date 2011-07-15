@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => product_features(@products) }
+      format.json { render :json => organize(@products) }
     end
   end
 
@@ -122,47 +122,56 @@ class ProductsController < ApplicationController
     end
   end
 
- #[{:reference => 'perro', :brand => 'Adidas',  :features => {'s' =>{'am'=>[1,20], 'm'=> {'ne'=>[21,2]}}}}, {}]
+  #[{:reference => 'perro', :brand => 'Adidas',  :sizes => {'s' =>{'am'=>[1,20]}, 'm'=> {'ne'=>[21,2]}}}, {}]
 
-  def product_features products
-    products_modified=[]
+  def organize(options)
+    pm = []
+    options.each do |p|
 
-    products.each do |p|
       stocks_by_hq = p.stocks.find_by_headquarter_id(current_user.headquarter_id)
       qty = stocks_by_hq.quantity rescue 0
       price = stocks_by_hq.price rescue 0
 
-      appended=false
-
-      pm_temp = {}
-      products_modified.each do |pm|
-        if (p.reference == pm[:reference])
-          pm[:features].each do |size, color|
-            if size == p.size.size
-              pm_temp[:features]= pm[:features]
-              pm_temp[:features][size] = color
-            else
-              #pm[:features]['L'] = color
-            end
-          end
-          appended=true
-          break
+      pm_i = search_ref pm, p.reference
+      if pm_i
+        s = search_size pm_i, p.size.size
+        if s
+          pm_i[:sizes][s][p.color.color] = [qty, price]
+        else
+          pm_i[:sizes][p.size.size] = {p.color.color=>[qty, price]}
         end
-        pm[:features]=pm_temp[:features]
-      end
-
-      if !appended
+      else
         product_temp = {}
-        product_temp[:id] = p.id
+        product_temp[:id] = p.reference
         product_temp[:brand] = p.brand.brand
         product_temp[:reference] = p.reference
-        feature_to_insert ={}
+        feature_to_insert = {}
         feature_to_insert[p.size.size] = {}
         feature_to_insert[p.size.size][p.color.color] = [qty, price]
-        product_temp[:features] = feature_to_insert
-        products_modified << product_temp
+        product_temp[:sizes] = feature_to_insert
+        pm << product_temp
       end
     end
-    products_modified
+    pm
+  end
+
+
+#  [{:reference => 'perro', :features =>{'s'=>{'am'=>[1,2]}}},{}]
+  def search_ref products_modified, reference
+    products_modified.each do |pm|
+      if pm[:reference]==reference
+        return pm
+      end
+    end
+    false
+  end
+
+  def search_size product_modified, size
+    product_modified[:sizes].each do |sz, v|
+      if sz==size
+        return sz
+      end
+    end
+    false
   end
 end

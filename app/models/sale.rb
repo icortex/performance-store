@@ -7,4 +7,5 @@ class Sale < ActiveRecord::Base
   has_many :products, :through => :sale_products
   accepts_nested_attributes_for :sale_products, :reject_if => lambda { |sp| sp[:product_id].blank? }, :allow_destroy => true
 
+  
 end
