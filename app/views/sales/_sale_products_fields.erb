@@ -1,6 +1,5 @@
 <td>
   <%= f.text_field :reference %>
-  <%= javascript_tag "autocomplete_product('#sale_sale_products_attributes_'+#{@i});" %>
 </td>
 <td>
   <%= f.collection_select :size, [Size.new], :size, :size %>
@@ -9,21 +8,18 @@
   <%= f.collection_select :color, [Color.new], :color, :color %>
 </td>
 <td>
-  <%= f.text_field :price, :autocomplete => 'off' %>
+  <%= f.text_field :price, :autocomplete => 'off', :size => '15' %>
 </td>
 <td>
-  <%= f.text_field :quantity, :autocomplete => 'off' %>
+  <%= f.text_field :quantity, :autocomplete => 'off',  :size => '15' %>
 </td>
 <td>
   <%= f.label :in_stock %>
-  <!--<label for="stock" id='sale_sale_products_attributes_0_in_stock'></label>-->
-  <%#= f.text_field :stock %>
 </td>
 <td>
   <%= f.label :subtotal %>
-
-  <%#= f.text_field :subtotal %>
 </td>
 <td>
   <%= link_to_remove_fields image_tag('remove.png',:title => 'Quitar articulo'),f %>
 </td>
+

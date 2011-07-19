@@ -21,11 +21,7 @@ WJSport::Application.routes.draw do
     resources :contacts
     resources :sale_products
 
-    resources :sales, :path => 'ventas' do
-      get :autocomplete_person_document_id, :on => :collection
-      get :autocomplete_product_reference, :on => :collection
-    end
-
+    resources :sales, :path => 'ventas'
     resources :admin
     
     get "inventario/sede/:headquarter"=>'stocks#index'

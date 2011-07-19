@@ -14,7 +14,7 @@
 <% @sale_products.each do |sale_product| %>
   <tr>
     <td><%= sale_product.sale.id %></td>
-    <td><%= sale_product.product.reference %></td>
+    <td><%= sale_product.product.reference rescue 'NA' %></td>
     <td><%= sale_product.quantity %></td>
     <td><%= sale_product.price %></td>
     <td><%= link_to 'Show', sale_product %></td>

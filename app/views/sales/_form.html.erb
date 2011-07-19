@@ -1,6 +1,6 @@
-<%= stylesheet_link_tag "token-input-facebook" %>
-<%= javascript_include_tag "jquery.tokeninput", "autocomplete" %>
-
+<%= javascript_include_tag "jquery.tokeninput" %>
+<!-- TODO *************   Edit id   *********** -->
+<%= render 'autocomplete', :iva => Variable.find(6).value %>
 <%= form_for(@sale) do |f| %>
     <% if @sale.errors.any? %>
         <div id="error_explanation">
@@ -14,14 +14,46 @@
         </div>
     <% end %>
 
+    <%= f.label 'Cliente' %>
+    <div style="width:400px">
+      <%= f.text_field :person_id %>
+      <%= javascript_tag 'autocomplete_client();' %>
+    </div>
+    <br/>
+    <table id='productsTable'>
+      <th>Articulo</th>
+      <th>Talla</th>
+      <th>Color</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>En stock</th>
+      <th>Subtotal</th>
+      <th>Quitar</th>
+      <% f.fields_for :sale_products do |b| %>
+          <tr class="fields">
+            <%= render :partial => 'sale_products_fields', :locals => {:f => b} %>
+          </tr>
+      <% end %>
+      <tr id='add_product'>
+        <td>
+          <% index=0 %>
+          <% for sp in @sale.sale_products do%>
+              <%= javascript_tag "autocomplete_product('#sale_sale_products_attributes_#{index}', '#{sp.product.brand.brand rescue ''}', '#{sp.product.reference rescue ''}');" %>
+          <% index+=1 %>
+          <% end %>
+          <%= link_to_add_fields image_tag('add.png', :title => 'Agregar articulo'), f, :sale_products %>
+        </td>
+      </tr>
+    </table>
+
     <table class="form_class">
+
       <tr>
         <td>
-          <%= f.label 'Cedula' %>
+          <%= f.label 'Descuento (%)' %>
         </td>
         <td>
-          <%= f.text_field :person_id %>
-          <%= javascript_tag 'autocomplete_client();' %>
+          <input type="text" size="30px" id='discount_percentage'>
         </td>
       </tr>
       <tr>
@@ -42,7 +74,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.label 'Iva' %>
+          <%= f.label 'IVA' %>
         </td>
         <td>
           <%= f.text_field :iva %>
@@ -57,32 +89,10 @@
         </td>
       </tr>
     </table>
-
-    <table>
-      <th>Articulo</th>
-      <th>Talla</th>
-      <th>Color</th>
-      <th>Precio unitario</th>
-      <th>Cantidad</th>
-      <th>En stock</th>
-      <th>Subtotal</th>
-      <th></th>
-      <% f.fields_for :sale_products do |b| %>
-          <tr class="fields">
-            <%= render :partial => 'sale_products_fields', :locals => {:f => b } %>
-          </tr>
-          <% @i = @i + 1 %>
-      <% end %>
-
-      <tr id='add_product'>
-        <td>
-          <%= link_to_add_fields image_tag('add.png', :title => 'Agregar articulo'), f, :sale_products %>
-        </td>
-      </tr>
-    </table>
-
+    <br/>
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit 'Aceptar' %>
     </div>
 <% end %>
 
+<%= javascript_tag 'calculator_handlers();' %>

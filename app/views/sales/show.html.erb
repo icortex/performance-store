@@ -1,50 +1,57 @@
 <p>
-  <b>Sede:</b>
-  <%= @sale.headquarter.name %>
-</p>
-<p>
-  <b>Client:</b>
-  <%= @client %>
-</p>
-
-<b>Articulos:</b>
-<% for sale_product in @sale.sale_products%>
-<p>
-
-  ref <%= sale_product.product.reference %>
-  size <%= sale_product.product.size.size %>
-  color <%= sale_product.product.color.color %>
-  q <%= sale_product.quantity %>
-  p <%= sale_product.price %>
-</p>
-<% end %>
-
-
-<p>
-  <b>Discount:</b>
-  <%= @sale.discount %>
-</p>
-
-<p>
-  <b>Discount reason:</b>
-  <%= @sale.discount_reason %>
-</p>
-
-<p>
-  <b>Date:</b>
+  <b>Fecha:</b>
   <%= @sale.created_at %>
 </p>
 
 <p>
-  <b>Iva:</b>
-  <%= @sale.iva %>
+  <b>Sede:</b>
+  <%= @sale.headquarter.name %>
 </p>
-
 <p>
-  <b>Total:</b>
-  <%= @sale.total %>
+  <b>Cliente:</b>
+  <%= @client %>
 </p>
+<p>
+<table id='productsTable'>
+  <thead>
+  <th>Marca</th>
+  <th>Referencia</th>
+  <th>Modelo</th>
+  <th>Talla</th>
+  <th>Color</th>
+  <th>Cantidad</th>
+  <th>Precio</th>
+  </thead>
+  <tbody>
+  <% for sale_product in @sale.sale_products %>
+      <tr>
+        <td><%= sale_product.product.brand.brand %></td>
+        <td><%= sale_product.product.reference %></td>
+        <td><%= sale_product.product.model %></td>
+        <td><%= sale_product.product.size.size %></td>
+        <td><%= sale_product.product.color.color %></td>
+        <td><%= sale_product.quantity %></td>
+        <td><%= sale_product.price %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+  <p>
+    <b>Descuento:</b>
+    <%= @sale.discount %>
+  </p>
 
+  <p>
+    <b>Razon del descuento</b>
+    <%= @sale.discount_reason %>
+  </p>
 
-<%= link_to 'Edit', edit_sale_path(@sale) %> |
-<%= link_to 'Back', sales_path %>
+  <p>
+    <b>IVA:</b>
+    <%= @sale.iva %>
+  </p>
+
+  <p>
+    <b>Total:</b>
+    <%= @sale.total %>
+  </p>

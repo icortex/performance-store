@@ -21,7 +21,8 @@ class PeopleController < ApplicationController
             @emails += p.email + ', '
           end
         end
-        @emails.chop!.chop!
+           @emails.chop!.chop! if !@emails.chop!.nil?
+
         @title = 'Lista de cumpleaneros'
     end
 

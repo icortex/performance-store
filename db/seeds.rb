@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+Variable.create(:key => 'IVA', :value => '16')
+Variable.create(:key => 'Dolar', :value => '1800')
+Variable.create(:key => 'Utilidad', :value => '20')

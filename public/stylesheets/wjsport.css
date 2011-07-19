@@ -15,6 +15,8 @@ div.header{
     top:0;
     left:0;
     margin:2px 0.25% 0 0.25%;
+    /*z-index:10;*/
+    /*background:white;*/
 }
 div.footer{
     bottom:0;left:0;
@@ -22,7 +24,7 @@ div.footer{
     background-color: #25578B;
 }
 div.content {
-    padding: 0 1% 1% 1%;
+    padding: 1% 1% 1% 1%;
     position:fixed;
     top:18%;
     left:0;
@@ -42,6 +44,7 @@ table.product td {
 
 #session_name {
     text-align: right;
+    font-size:large;
 }
 
 .principal-menu{
@@ -62,10 +65,13 @@ table.product td {
     text-decoration: none;
     color: white;
     background-color: #2A8AC2;
-    padding: 0.2em 0.6em;
-    border-right: 1px solid white;
+    padding: 0.5em 0.6em;
     text-align: center;
     font-size:large;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-box-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    margin-right:4px;
 }
 
 .principal-menu a:hover {
@@ -106,3 +112,42 @@ div.left {
     padding: 0 3px 0 3px;
 }
 
+/* Sales table */
+
+#productsTable {
+width:99%;
+border-top:1px solid #CCC;
+border-left:1px solid #CCC;
+}
+
+#productsTable th {
+background: url(/images/report_table_header_back.jpg);
+color:#FFF;
+font-size:10px;
+text-transform:uppercase;
+height:25px;
+padding: 0 2px 0 2px;
+border-right:1px solid #FFF;
+}
+
+#productsTable td {
+border-right: 1px solid #CCC;
+border-bottom: 1px solid #CCC;
+padding: 5px;
+color:#222;
+text-align:center;
+max-width:30px;
+}
+
+#productsTable td input{
+text-align:center;
+}
+
+#productsTable tr.over td, #productsTable tr:hover td {
+border-right: 1px solid #CCC;
+border-bottom: 1px solid #CCC;
+padding: 5px;
+color:#222;
+text-align:center;
+background: #bcd4ec;
+}

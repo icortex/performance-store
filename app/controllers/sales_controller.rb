@@ -17,7 +17,7 @@ class SalesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @sales }
+      format.xml { render :xml => @sales }
     end
   end
 
@@ -33,7 +33,7 @@ class SalesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @sale }
+      format.xml { render :xml => @sale }
     end
   end
 
@@ -42,18 +42,15 @@ class SalesController < ApplicationController
   def new
     @sale = Sale.new
     @sale.sale_products.build
-    @i = 0
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @sale }
+      format.xml { render :xml => @sale }
     end
   end
 
   # GET /sales/1/edit
   def edit
     @sale = Sale.find(params[:id])
-    @i = 0
-
   end
 
   # POST /sales
@@ -64,21 +61,23 @@ class SalesController < ApplicationController
     @sale = Sale.new(params[:sale])
     respond_to do |format|
       if @sale.save
-        format.html { redirect_to(@sale, :notice => 'Sale was successfully created.') }
-        format.xml  { render :xml => @sale, :status => :created, :location => @sale }
+        format.html { redirect_to(@sale, :notice => 'Venta creada exitosamente!') }
+        format.xml { render :xml => @sale, :status => :created, :location => @sale }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @sale.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @sale.errors, :status => :unprocessable_entity }
       end
     end
   end
 
   def set_ids sale_products
-    sale_products.each do |k,sp|
+    sale_products.each do |k, sp|
       size= Size.find_by_size sp[:size]
       color = Color.find_by_color sp[:color]
-      p= Product.where("reference = ? and size_id = ? and color_id = ?",sp[:reference],size.id, color.id )[0]
-      sp[:product_id] = p.id
+      if !size.nil?
+        p= Product.where("reference = ? and size_id = ? and color_id = ?", sp[:reference], size.id, color.id)[0]
+        sp[:product_id] = p.id
+      end
     end
   end
 
@@ -86,15 +85,16 @@ class SalesController < ApplicationController
   # PUT /sales/1.xml
   def update
     params[:sale][:headquarter_id]=current_user.headquarter.id
+    set_ids params[:sale][:sale_products_attributes]
     @sale = Sale.find(params[:id])
 
     respond_to do |format|
       if @sale.update_attributes(params[:sale])
         format.html { redirect_to(@sale, :notice => 'Sale was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @sale.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @sale.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -107,7 +107,7 @@ class SalesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(:back) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 
