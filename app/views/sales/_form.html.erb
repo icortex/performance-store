@@ -1,6 +1,8 @@
 <%= javascript_include_tag "jquery.tokeninput" %>
+
 <!-- TODO *************   Edit id   *********** -->
 <%= render 'sales_form_js', :iva => Variable.find(1).value %>
+
 <%= javascript_include_tag "nested_fields" %>
 
 <%= form_for(@sale) do |f| %>
