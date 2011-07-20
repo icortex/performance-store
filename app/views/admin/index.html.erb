@@ -1,9 +1,18 @@
-<%= render '/headquarters/index' %>
-<%= render '/brands/index' %>
-<%= render '/cloth_types/index' %>
-<%= render '/sizes/index' %>
-<%= render '/colors/index' %>
-<%= render '/variables/index' %>
+<div class="admin_panel">
+  <%= render '/headquarters/index' %>
+  <br/><br/>
+  <%= render '/brands/index' %>
+</div>
+<div class="admin_panel">
+  <%= render '/cloth_types/index' %>
+  <br/><br/>
+  <%= render '/sizes/index' %>
+  </div>
+<div class="admin_panel">
+    <%= render '/colors/index' %>
+  <br/><br/>
+  <%= render '/variables/index' %>
+</div>
 
 <script type="text/javascript">
     <% hash={'headquarter'=>['Nueva sede',new_headquarter_path],

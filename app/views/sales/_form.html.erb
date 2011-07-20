@@ -1,6 +1,5 @@
 <%= javascript_include_tag "jquery.tokeninput" %>
 
-<!-- TODO *************   Edit id   *********** -->
 <%= render 'sales_form_js', :iva => Variable.find(1).value %>
 
 <%= javascript_include_tag "nested_fields" %>
@@ -40,16 +39,7 @@
       <% end %>
       <tr id='add_product'>
         <td>
-          <% index=0 %>
-          <% for sp in @sale.sale_products do %>
-              <%= javascript_tag "autocomplete_product(\"#sale_sale_products_attributes_#{index}\","+
-                                                      "\"#{sp.product.brand.brand rescue ''}\","+
-                                                      "\"#{sp.product.reference rescue ''}\","+
-                                                      "\"#{sp.product.size.size rescue ''}\","+
-                                                      "\"#{sp.product.color.color rescue ''}\","+
-                                                      "products[#{index}]);" %>
-              <% index+=1 %>
-          <% end %>
+
           <%= link_to_add_fields image_tag('add.png', :title => 'Agregar articulo'), f, :sale_products %>
         </td>
       </tr>
@@ -103,5 +93,3 @@
       <%= f.submit 'Aceptar' %>
     </div>
 <% end %>
-
-<%= javascript_tag 'calculator_handlers();' %>

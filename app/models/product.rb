@@ -13,5 +13,5 @@ class Product < ActiveRecord::Base
 
   validates_uniqueness_of :brand_id, :scope => [:reference, :cloth_type_id, :model,
                                                 :barcode, :gender, :size_id, :color_id],
-                                     :message => 'El articulo ya existe'
+                          :message => 'El articulo ya existe'
 end

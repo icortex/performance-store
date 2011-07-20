@@ -1,6 +1,5 @@
-
 <%= form_for(@product, :html => {:multipart => true}) do |f| %>
-    <%= render 'error_messages', :p => @product%>
+    <%= render 'error_messages', :p => @product %>
 
     <div class="left">
       <%= image_tag @product.image.url :medium %>
@@ -32,7 +31,7 @@
         </td>
         <td>
           <%= f.select :cloth_type, ClothType.all.collect { |element| [element.cloth_type, element.id] } %>
-                    <%= link_to image_tag('/images/add.png', :id=>"cloth_type", :title => 'Agregar nuevo tipo de prenda'), '#' %>
+          <%= link_to image_tag('/images/add.png', :id=>"cloth_type", :title => 'Agregar nuevo tipo de prenda'), '#' %>
           <script type="text/javascript">
               jq('#cloth_type').click(function() {
                   jq('#add_popup').load('<%= "/cloth_types/nuevo" %>', null);
@@ -85,10 +84,10 @@
 
           <% Size.all.each do |size| %>
               <div style="display:inline-block;">
-              <%= check_box_tag "product[size][#{size.size}]", size.id %><%= size.size %>
+                <%= check_box_tag "product[size][#{size.size}]", size.id %><%= size.size %>
               </div>
           <% end %>
-                              <%= link_to image_tag('/images/add.png', :id=>"size", :title => 'Agregar nueva talla'), '#' %>
+          <%= link_to image_tag('/images/add.png', :id=>"size", :title => 'Agregar nueva talla'), '#' %>
           <script type="text/javascript">
               jq('#size').click(function() {
                   jq('#add_popup').load('<%= "/sizes/nuevo" %>', null);
@@ -106,10 +105,10 @@
         <td width="100px">
           <% Color.all.each do |color| %>
               <div style="display:inline-block;">
-              <%= check_box_tag "product[color][#{color.color}]", color.id %><%= f.label 'wj', :style=>"background:##{color.rgb};color:##{color.rgb};", :class=>'color_selector' %>
+                <%= check_box_tag "product[color][#{color.color}]", color.id %><%= f.label 'wj', :style=>"background:##{color.rgb};color:##{color.rgb};", :class=>'color_selector' %>
               </div>
           <% end %>
-                                        <%= link_to image_tag('/images/add.png', :id=>"color", :title => 'Agregar nuevo color'), '#' %>
+          <%= link_to image_tag('/images/add.png', :id=>"color", :title => 'Agregar nuevo color'), '#' %>
           <script type="text/javascript">
               jq('#color').click(function() {
                   jq('#add_popup').load('<%= "/colors/nuevo" %>', null);

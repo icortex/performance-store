@@ -11,19 +11,19 @@
     <th></th>
   </tr>
 
-<% @sale_products.each do |sale_product| %>
-  <tr>
-    <td><%= sale_product.sale.id %></td>
-    <td><%= sale_product.product.reference rescue 'NA' %></td>
-    <td><%= sale_product.quantity %></td>
-    <td><%= sale_product.price %></td>
-    <td><%= link_to 'Show', sale_product %></td>
-    <td><%= link_to 'Edit', edit_sale_product_path(sale_product) %></td>
-    <td><%= link_to 'Destroy', sale_product, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  <% @sale_products.each do |sale_product| %>
+      <tr>
+        <td><%= sale_product.sale.id %></td>
+        <td><%= sale_product.product.reference rescue 'NA' %></td>
+        <td><%= sale_product.quantity %></td>
+        <td><%= sale_product.price %></td>
+        <td><%= link_to 'Show', sale_product %></td>
+        <td><%= link_to 'Edit', edit_sale_product_path(sale_product) %></td>
+        <td><%= link_to 'Destroy', sale_product, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+  <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Sale product', new_sale_product_path %>

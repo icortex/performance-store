@@ -1,6 +1,6 @@
 class BrandsController < ApplicationController
 
-  layout 'application', :except=>['new','edit']
+  layout 'application', :except=>['new', 'edit']
 
   load_and_authorize_resource
   check_authorization

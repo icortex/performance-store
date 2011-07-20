@@ -7,11 +7,11 @@
     <th></th>
   </tr>
 
-<% @variables.each do |variable| %>
-  <tr>
-    <td><%= variable.key %></td>
-    <td><%= variable.value %></td>
-    <td><%= link_to image_tag('/images/edit.png', :title => 'Modificar variable'), '#', :id=>'variable_'+variable.id.to_s %>
+  <% @variables.each do |variable| %>
+      <tr>
+        <td><%= variable.key %></td>
+        <td><%= variable.value %></td>
+        <td><%= link_to image_tag('/images/edit.png', :title => 'Modificar variable'), '#', :id=>'variable_'+variable.id.to_s %>
           <script type="text/javascript">
               jq('#variable_<%= variable.id%>').click(function() {
                   jq('#edit_popup').load('<%= edit_variable_path(variable) %>', null, function(data, status, request) {
@@ -26,7 +26,7 @@
                   });
               });
           </script>
-    </td>
-  </tr>
-<% end %>
+        </td>
+      </tr>
+  <% end %>
 </table>

@@ -1,6 +1,6 @@
 module ProductsHelper
 
-   def set_default_color_size
+  def set_default_color_size
     if  !params[:product][:size]
       params[:product][:size]=[[Size.find(1).size, "1"]]
     end
@@ -43,7 +43,7 @@ module ProductsHelper
   end
 
 
-   #  [{:reference => 'perro', :features =>{'s'=>{'am'=>[1,2]}}},{}]
+  #  [{:reference => 'perro', :features =>{'s'=>{'am'=>[1,2]}}},{}]
   def search_ref products_modified, reference
     products_modified.each do |pm|
       if pm[:reference]==reference

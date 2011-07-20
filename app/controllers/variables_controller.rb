@@ -1,7 +1,7 @@
 class VariablesController < ApplicationController
 
   layout false
-  
+
   # GET /variables
   # GET /variables.xml
   def index
@@ -9,7 +9,7 @@ class VariablesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @variables }
+      format.xml { render :xml => @variables }
     end
   end
 
@@ -26,10 +26,10 @@ class VariablesController < ApplicationController
     respond_to do |format|
       if @variable.update_attributes(params[:variable])
         format.html { redirect_to(@variable, :notice => 'Variable was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @variable.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @variable.errors, :status => :unprocessable_entity }
       end
     end
   end

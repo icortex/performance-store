@@ -1,6 +1,6 @@
 class ClothTypesController < ApplicationController
 
-  layout 'application', :except=>['new','edit']
+  layout 'application', :except=>['new', 'edit']
 
   # GET /cloth_types
   # GET /cloth_types.xml

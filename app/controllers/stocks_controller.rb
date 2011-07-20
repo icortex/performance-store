@@ -1,5 +1,5 @@
 class StocksController < ApplicationController
-  layout 'application', :except=>['new','edit']
+  layout 'application', :except=>['new', 'edit']
 
 
   # GET /stocks

@@ -1,7 +1,7 @@
 class SizesController < ApplicationController
 
-  layout 'application', :except=>['new','edit']
-  
+  layout 'application', :except=>['new', 'edit']
+
   # GET /sizes
   # GET /sizes.xml
   def index

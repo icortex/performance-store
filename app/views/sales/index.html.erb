@@ -17,19 +17,19 @@
   <tbody>
 
 
-<% @sales.each do |sale| %>
-  <tr>
-    <td><%= "#{sale.person.name}, #{sale.person.document_id}" unless !sale.person %></td>
-    <td><%= sale.created_at %></td>
-    <td><%= sale.discount %></td>
-    <td><%= sale.iva %></td>
-    <td><%= sale.total %></td>
-    <td width="100px">
-                <%= link_to image_tag('/images/view.png', :title => 'Ver venta'), sale_path(sale.id) %>
+  <% @sales.each do |sale| %>
+      <tr>
+        <td><%= "#{sale.person.name}, #{sale.person.document_id}" unless !sale.person %></td>
+        <td><%= sale.created_at %></td>
+        <td><%= sale.discount %></td>
+        <td><%= sale.iva %></td>
+        <td><%= sale.total %></td>
+        <td width="100px">
+          <%= link_to image_tag('/images/view.png', :title => 'Ver venta'), sale_path(sale.id) %>
           <%= link_to image_tag('/images/edit.png', :title => 'Modificar venta'), edit_sale_path(sale) %>
           <%= link_to image_tag('/images/delete.png', :title => 'Borrar venta'), sale, :confirm => 'La venta sera borrada. Deseas continuar?', :method => :delete %>
-    </td>
-  </tr>
-<% end %>
-</tbody>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>

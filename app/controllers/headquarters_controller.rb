@@ -1,6 +1,6 @@
 class HeadquartersController < ApplicationController
 
-  layout 'application', :except=>['new','edit']
+  layout 'application', :except=>['new', 'edit']
 
   # GET /headquarters
   # GET /headquarters.xml

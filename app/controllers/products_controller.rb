@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
- include ProductsHelper
+  include ProductsHelper
   # GET /products
   # GET /products.xml
   def index

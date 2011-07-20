@@ -6,7 +6,7 @@ class SaleProductsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @sale_products }
+      format.xml { render :xml => @sale_products }
     end
   end
 
@@ -17,7 +17,7 @@ class SaleProductsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @sale_product }
+      format.xml { render :xml => @sale_product }
     end
   end
 
@@ -28,7 +28,7 @@ class SaleProductsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @sale_product }
+      format.xml { render :xml => @sale_product }
     end
   end
 
@@ -46,10 +46,10 @@ class SaleProductsController < ApplicationController
     respond_to do |format|
       if @sale_product.save
         format.html { redirect_to(@sale_product, :notice => 'Sale product was successfully created.') }
-        format.xml  { render :xml => @sale_product, :status => :created, :location => @sale_product }
+        format.xml { render :xml => @sale_product, :status => :created, :location => @sale_product }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @sale_product.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @sale_product.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -62,10 +62,10 @@ class SaleProductsController < ApplicationController
     respond_to do |format|
       if @sale_product.update_attributes(params[:sale_product])
         format.html { redirect_to(@sale_product, :notice => 'Sale product was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @sale_product.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @sale_product.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -78,7 +78,7 @@ class SaleProductsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(sale_products_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end

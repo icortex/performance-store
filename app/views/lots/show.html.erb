@@ -1,53 +1,53 @@
 <table>
-      <tr>
-        <td>
-          <b>  Fecha de llegada </b>
-        </td>
-        <td>
-          <%= @lot.arrival_date %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>  Origen </b>
-        </td>
-        <td>
-          <%= @lot.origin %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>  Peso </b>
-        </td>
-        <td>
-          <%= @lot.weight %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>  Transportador </b>
-        </td>
-        <td>
-         <%= @lot.carrier %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>  Flete </b>
-        </td>
-        <td>
-           <%= @lot.freight %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>  Costo total </b>
-        </td>
-        <td>
-          <%= @lot.total_cost %>
-        </td>
-      </tr>
-    </table>
+  <tr>
+    <td>
+      <b> Fecha de llegada </b>
+    </td>
+    <td>
+      <%= @lot.arrival_date %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b> Origen </b>
+    </td>
+    <td>
+      <%= @lot.origin %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b> Peso </b>
+    </td>
+    <td>
+      <%= @lot.weight %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b> Transportador </b>
+    </td>
+    <td>
+      <%= @lot.carrier %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b> Flete </b>
+    </td>
+    <td>
+      <%= @lot.freight %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b> Costo total </b>
+    </td>
+    <td>
+      <%= @lot.total_cost %>
+    </td>
+  </tr>
+</table>
 <br>
 <%= link_to 'Modificar', edit_lot_path(@lot) %>
 <%= link_to 'Volver', lots_path %>

@@ -1,6 +1,6 @@
 class ColorsController < ApplicationController
 
-  layout 'application', :except=>['new','edit']
+  layout 'application', :except=>['new', 'edit']
 
   # GET /colors
   # GET /colors.xml

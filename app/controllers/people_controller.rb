@@ -16,12 +16,12 @@ class PeopleController < ApplicationController
         @people = []
         @emails = ''
         Person.all.each do |p|
-          if(p.birthday.yday >= from && p.birthday.yday <= to)
+          if (p.birthday.yday >= from && p.birthday.yday <= to)
             @people << p
             @emails += p.email + ', '
           end
         end
-           @emails.chop!.chop! if !@emails.chop!.nil?
+        @emails.chop!.chop! if !@emails.chop!.nil?
 
         @title = 'Lista de cumpleaneros'
     end
@@ -29,7 +29,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @people }
-      format.json { render :json => @people.map(&:attributes)}
+      format.json { render :json => @people.map(&:attributes) }
     end
   end
 
@@ -48,7 +48,7 @@ class PeopleController < ApplicationController
   # GET /people/new.xml
   def new
     @person = Person.new
-    
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml { render :xml => @person }
@@ -99,7 +99,7 @@ class PeopleController < ApplicationController
     @person.destroy
 
     respond_to do |format|
-      format.html { redirect_to(people_url , :notice => 'Cliente borrado exitosamente!') }
+      format.html { redirect_to(people_url, :notice => 'Cliente borrado exitosamente!') }
       format.xml { head :ok }
     end
   end

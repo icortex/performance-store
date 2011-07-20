@@ -3,7 +3,7 @@
 <head>
   <title>Performance Store</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag 'jquery','rails','jquery-ui-1.8.14.custom.min','jquery.dataTables.min','colorpicker','jquery.zclip.min' %>
+  <%= javascript_include_tag 'jquery', 'rails', 'jquery-ui-1.8.14.custom.min', 'jquery.dataTables.min', 'colorpicker', 'jquery.zclip.min' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -32,8 +32,8 @@
         <div class='principal-menu'>
           <ul>
             <li id="sell_tab"><%= link_to 'Ventas', sales_path, :style => is_active?("sales") %></li>
-            <li id="client_tab"><%= link_to 'Clientes', people_path, :style => is_active?("people")%></li>
-            <li id="stock_tab"><%= link_to 'Inventario', products_path, :style => is_active?('stocks','products')%></li>
+            <li id="client_tab"><%= link_to 'Clientes', people_path, :style => is_active?("people") %></li>
+            <li id="stock_tab"><%= link_to 'Inventario', products_path, :style => is_active?('stocks', 'products') %></li>
             <li id="lot_tab"><%= link_to 'Lotes', lots_path, :style => is_active?('lots') %></li>
             <li id="report_tab"><%= link_to 'Reportes', '#' %></li>
             <li id="admin_tab"><%= link_to 'Admin', admin_index_path %></li>
@@ -51,7 +51,7 @@
             jq('table[class="dataTablesId"]').dataTable({
                 "bJQueryUI": true,
                 "sPaginationType": "full_numbers",
-                "sScrollY": document.height*0.48+"px",
+                "sScrollY": document.height * 0.48 + "px",
                 "sDom": '<"H"<"search-table"f>lr>t<"F"<"showing"i><"pagination"p>>S',
                 "aLengthMenu": [
                     [5, 10, 25, 50, -1],
@@ -59,12 +59,16 @@
                 ]
             });
             jq('.notice').fadeOut(10000);
+            try {
+                local_ready();
+            } catch(exc) {
+            }
         });
     </script>
   </div>
-    <div class='footer'>
+  <div class='footer'>
     &emsp;© 2011 CodeScrum
-    </div>
+  </div>
 </div>
 </body>
 </html>
