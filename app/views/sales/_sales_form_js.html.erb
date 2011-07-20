@@ -21,12 +21,12 @@
 
         var discount = jq('#sale_discount');
         var total_jq = jq('#sale_total');
-
-        if (discount.val().isNaN()) {
+        if(isNaN(discount.val())) {
             jq('#discount_percentage').val('');
-
         } else {
             jq('#discount_percentage').val(discount.val() / sum_subtotals() * 100);
+
+
         }
     }
 
@@ -108,7 +108,7 @@
             search_parameter: "document_id",
             searchingText: "Buscando...",
             noResultsText: "No hay resultados",
-            hintText: "Ingrese la cedula del cliente...",
+            hintText: "Ingrese el numero de identificacion...",
             //minChars: 3,
             tokenLimit:1,
             onResult: function (results) {

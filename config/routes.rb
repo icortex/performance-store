@@ -1,5 +1,7 @@
 WJSport::Application.routes.draw do
 
+  resources :expenses
+
   resources :variables
 
   scope(:path_names => {:new => 'nuevo', :edit => 'editar'}) do

@@ -1,57 +1,55 @@
-<p>
-  <b>Fecha:</b>
-  <%= @sale.created_at %>
-</p>
+<div id="invoice">
+  <div align="center">
+    <h2>Performance Store</h2>
 
-<p>
-  <b>Sede:</b>
-  <%= @sale.headquarter.name %>
-</p>
-<p>
-  <b>Cliente:</b>
-  <%= @client %>
-</p>
-<p>
-<table id='productsTable'>
-  <thead>
-  <th>Marca</th>
-  <th>Referencia</th>
-  <th>Modelo</th>
-  <th>Talla</th>
-  <th>Color</th>
-  <th>Cantidad</th>
-  <th>Precio</th>
-  </thead>
-  <tbody>
-  <% for sale_product in @sale.sale_products %>
-      <tr>
-        <td><%= sale_product.product.brand.brand %></td>
-        <td><%= sale_product.product.reference %></td>
-        <td><%= sale_product.product.model %></td>
-        <td><%= sale_product.product.size.size %></td>
-        <td><%= sale_product.product.color.color %></td>
-        <td><%= sale_product.quantity %></td>
-        <td><%= sale_product.price %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-<p>
-  <b>Descuento:</b>
-  <%= @sale.discount %>
-</p>
+    <p>
+      Nit. 1651561658151 <br/>
+      Calle 9N # 12 - 56 Barrio. Santa Clara<br/>
+      Telefono: 8362536
+    </p>
+  </div>
+<pre>
+<b>Sede: </b><%= @sale.headquarter.name %>                  <b>Fecha: </b><%= @sale.created_at %>
+<b>Cliente: </b><%= @client.split(',')[0] %>                <b>Identificacion: </b><%= @client.split(',')[1] %>
+</pre>
 
-<p>
-  <b>Razon del descuento</b>
-  <%= @sale.discount_reason %>
-</p>
-
-<p>
-  <b>IVA:</b>
-  <%= @sale.iva %>
-</p>
-
-<p>
-  <b>Total:</b>
-  <%= @sale.total %>
-</p>
+  <table id='productsTable'>
+    <thead>
+    <th>Marca</th>
+    <th>Referencia</th>
+    <th>Modelo</th>
+    <th>Talla</th>
+    <th>Color</th>
+    <th>Cantidad</th>
+    <th>Precio</th>
+    </thead>
+    <tbody>
+    <% for sale_product in @sale.sale_products %>
+        <tr>
+          <td><%= sale_product.product.brand.brand %></td>
+          <td><%= sale_product.product.reference %></td>
+          <td><%= sale_product.product.model %></td>
+          <td><%= sale_product.product.size.size %></td>
+          <td><%= sale_product.product.color.color %></td>
+          <td><%= sale_product.quantity %></td>
+          <td><%= sale_product.price %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <br/>
+  <table>
+    <tr>
+      <td><b>Descuento: </b></td>
+      <td><%= number_to_currency @sale.discount %></td>
+    </tr>
+    <tr>
+      <td><b>IVA: </b></td>
+      <td><%= number_to_currency @sale.iva %></td>
+    </tr>
+    <tr>
+      <td><b>Total: </b></td>
+      <td><%= number_to_currency @sale.total %></td>
+    </tr>
+  </table>
+</div>

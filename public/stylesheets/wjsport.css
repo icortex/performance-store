@@ -156,3 +156,7 @@ background: #bcd4ec;
     float:left;
     margin-right: 10em
 }
+
+pre{
+    font-size:1em;
+}
