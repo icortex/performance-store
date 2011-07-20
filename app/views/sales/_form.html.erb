@@ -1,6 +1,8 @@
 <%= javascript_include_tag "jquery.tokeninput" %>
 <!-- TODO *************   Edit id   *********** -->
-<%= render 'autocomplete', :iva => Variable.find(6).value %>
+<%= render 'sales_form_js', :iva => Variable.find(6).value %>
+<%= javascript_include_tag "nested_fields" %>
+
 <%= form_for(@sale) do |f| %>
     <% if @sale.errors.any? %>
         <div id="error_explanation">
@@ -29,7 +31,7 @@
       <th>En stock</th>
       <th>Subtotal</th>
       <th>Quitar</th>
-      <% f.fields_for :sale_products do |b| %>
+      <%= f.fields_for :sale_products do |b| %>
           <tr class="fields">
             <%= render :partial => 'sale_products_fields', :locals => {:f => b} %>
           </tr>
@@ -37,9 +39,14 @@
       <tr id='add_product'>
         <td>
           <% index=0 %>
-          <% for sp in @sale.sale_products do%>
-              <%= javascript_tag "autocomplete_product('#sale_sale_products_attributes_#{index}', '#{sp.product.brand.brand rescue ''}', '#{sp.product.reference rescue ''}');" %>
-          <% index+=1 %>
+          <% for sp in @sale.sale_products do %>
+              <%= javascript_tag "autocomplete_product(\"#sale_sale_products_attributes_#{index}\","+
+                                                      "\"#{sp.product.brand.brand rescue ''}\","+
+                                                      "\"#{sp.product.reference rescue ''}\","+
+                                                      "\"#{sp.product.size.size rescue ''}\","+
+                                                      "\"#{sp.product.color.color rescue ''}\","+
+                                                      "products[#{index}]);" %>
+              <% index+=1 %>
           <% end %>
           <%= link_to_add_fields image_tag('add.png', :title => 'Agregar articulo'), f, :sale_products %>
         </td>

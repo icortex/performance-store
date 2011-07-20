@@ -1,7 +1,7 @@
 class SalesController < ApplicationController
 
   autocomplete :person, :document_id, :display_value => :name_and_doc
-
+  include SalesHelper
 
   # GET /sales
   # GET /sales.xml
@@ -42,6 +42,7 @@ class SalesController < ApplicationController
   def new
     @sale = Sale.new
     @sale.sale_products.build
+    @products='[]'
     respond_to do |format|
       format.html # new.html.erb
       format.xml { render :xml => @sale }
@@ -51,6 +52,10 @@ class SalesController < ApplicationController
   # GET /sales/1/edit
   def edit
     @sale = Sale.find(params[:id])
+    products = @sale.products.collect do |p|
+      organize(Product.where("reference = ? ", p.reference))[0]
+    end
+    @products=products.to_json
   end
 
   # POST /sales
@@ -59,6 +64,7 @@ class SalesController < ApplicationController
     params[:sale][:headquarter_id]=current_user.headquarter.id
     set_ids params[:sale][:sale_products_attributes]
     @sale = Sale.new(params[:sale])
+
     respond_to do |format|
       if @sale.save
         format.html { redirect_to(@sale, :notice => 'Venta creada exitosamente!') }
@@ -70,16 +76,6 @@ class SalesController < ApplicationController
     end
   end
 
-  def set_ids sale_products
-    sale_products.each do |k, sp|
-      size= Size.find_by_size sp[:size]
-      color = Color.find_by_color sp[:color]
-      if !size.nil?
-        p= Product.where("reference = ? and size_id = ? and color_id = ?", sp[:reference], size.id, color.id)[0]
-        sp[:product_id] = p.id
-      end
-    end
-  end
 
   # PUT /sales/1
   # PUT /sales/1.xml
@@ -111,4 +107,15 @@ class SalesController < ApplicationController
     end
   end
 
+  def set_ids sale_products
+    sale_products.each do |k, sp|
+      size= Size.find_by_size sp[:size]
+      color = Color.find_by_color sp[:color]
+      if !size.nil?
+        p= Product.where("reference = ? and size_id = ? and color_id = ?", sp[:reference], size.id, color.id)[0]
+        sp[:product_id] = p.id
+      end
+    end
+  end
 end
+
