@@ -44,7 +44,7 @@ class ExpensesController < ApplicationController
 
     respond_to do |format|
       if @expense.save
-        format.html { redirect_to(@expense, :notice => 'Expense was successfully created.') }
+        format.html { redirect_to(expenses_path, :notice => 'Gasto creado exitosamente!') }
         format.xml  { render :xml => @expense, :status => :created, :location => @expense }
       else
         format.html { render :action => "new" }
@@ -60,7 +60,7 @@ class ExpensesController < ApplicationController
 
     respond_to do |format|
       if @expense.update_attributes(params[:expense])
-        format.html { redirect_to(@expense, :notice => 'Expense was successfully updated.') }
+        format.html { redirect_to(expenses_path, :notice => 'Gasto actualizado exitosamente!') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

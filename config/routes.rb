@@ -1,7 +1,5 @@
 WJSport::Application.routes.draw do
 
-  resources :expenses
-
   resources :variables
 
   scope(:path_names => {:new => 'nuevo', :edit => 'editar'}) do
@@ -25,7 +23,10 @@ WJSport::Application.routes.draw do
 
     resources :sales, :path => 'ventas'
     resources :admin
-    
+    resources :expenses, :path => 'gastos'
+
+    match 'reportes' => 'reports#index', :as => :reports
+    post 'reportes' => 'reports#index'
     get "inventario/sede/:headquarter"=>'stocks#index'
     get "ventas/sede/:headquarter"=>'sales#index'
 

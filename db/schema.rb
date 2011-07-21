@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110708160736) do
+ActiveRecord::Schema.define(:version => 20110721163219) do
 
   create_table "brands", :force => true do |t|
     t.string   "brand"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(:version => 20110708160736) do
     t.string   "key"
     t.string   "value"
     t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "expenses", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "cost"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -122,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20110708160736) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "headquarter_id"
+    t.integer  "total_cost"
   end
 
   create_table "sizes", :force => true do |t|
@@ -137,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20110708160736) do
     t.integer  "headquarter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "cost"
   end
 
   create_table "users", :force => true do |t|

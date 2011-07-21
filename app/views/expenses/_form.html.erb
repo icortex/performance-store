@@ -11,19 +11,34 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :cost %><br />
-    <%= f.text_field :cost %>
-  </div>
+    <table class="form_class">
+      <tr>
+        <td>
+          <%= f.label 'Nombre' %>
+        </td>
+        <td>
+          <%= f.text_field :name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Descripcion' %>
+        </td>
+        <td>
+          <%= f.text_field :description %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label 'Costo' %>
+        </td>
+        <td>
+          <%= f.text_field :cost %>
+        </td>
+      </tr>
+    </table><br>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Aceptar' %>
   </div>
 <% end %>

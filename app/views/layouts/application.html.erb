@@ -35,7 +35,8 @@
             <li id="client_tab"><%= link_to 'Clientes', people_path, :style => is_active?("people") %></li>
             <li id="stock_tab"><%= link_to 'Inventario', products_path, :style => is_active?('stocks', 'products') %></li>
             <li id="lot_tab"><%= link_to 'Lotes', lots_path, :style => is_active?('lots') %></li>
-            <li id="report_tab"><%= link_to 'Reportes', '#' %></li>
+            <li id="expense_tab"><%= link_to 'Gastos', expenses_path, :style => is_active?('expenses') %></li>
+            <li id="report_tab"><%= link_to 'Reportes', reports_path, :style => is_active?('reports') %></li>
             <li id="admin_tab"><%= link_to 'Admin', admin_index_path %></li>
           </ul>
         </div>

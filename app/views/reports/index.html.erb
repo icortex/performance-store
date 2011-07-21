@@ -1,0 +1,20 @@
+<%= javascript_include_tag 'jsapi' %>
+<%= render 'reports/chart', :chart => @chart %>
+<%= stylesheet_link_tag reports_path+'.css' %>
+<h1>Generar reporte</h1>
+<%= form_tag reports_path do %>
+<p>
+  <%= label_tag 'Fecha inicial' %>
+  <%= text_field_tag :start_date,'', :class=>'date_picker' %>
+</p>
+<p>
+  <%= label_tag 'Fecha final' %>
+  <%= text_field_tag :end_date,'', :class=>'date_picker' %>
+</p>
+<p>
+  <c></c><%= submit_tag 'Generar' %>
+</p>
+<p>
+  <div id="chart_div"></div>
+</p>
+<% end %>

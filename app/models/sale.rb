@@ -9,8 +9,9 @@ class Sale < ActiveRecord::Base
                                 :allow_destroy => true
 
 
-  after_save :update_stock
   before_update :get_saved_qty
+  after_save :update_stock
+  before_save :update_total_cost
 
   attr_accessor :old_quantities
 
@@ -33,5 +34,16 @@ class Sale < ActiveRecord::Base
       stock.update_attributes(:quantity => new_qty)
       index+=1
     end
+  end
+
+  def update_total_cost
+    total_cost = 0
+    index=0
+    self.sale_products.each do |sp|
+      stock = Stock.where('product_id = ? and headquarter_id = ?', sp.product_id, self.headquarter_id)[0]
+      total_cost += stock.cost * sp.quantity
+      index+=1
+    end
+    self.total_cost = total_cost
   end
 end
