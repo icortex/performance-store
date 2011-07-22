@@ -1,4 +1,4 @@
-class ExpensesController < ApplicationController
+class ExpensesController < MyApplicationController
   # GET /expenses
   # GET /expenses.xml
   def index

@@ -1,4 +1,4 @@
-class ColorsController < ApplicationController
+class ColorsController < MyApplicationController
 
   layout 'application', :except=>['new', 'edit']
 

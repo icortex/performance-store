@@ -1,4 +1,4 @@
-class FaultiesController < ApplicationController
+class FaultiesController < MyApplicationController
   # GET /faulties
   # GET /faulties.xml
   def index

@@ -1,4 +1,4 @@
-class PeopleController < ApplicationController
+class PeopleController < MyApplicationController
 
   load_and_authorize_resource
   check_authorization

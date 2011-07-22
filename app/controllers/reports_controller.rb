@@ -5,13 +5,26 @@ class ReportsController < ApplicationController
       format.css
       format.html do
         if request.post? && (params[:start_date] || params[:end_date])
-          first_day = Date.strptime params[:start_date]
-          end_day = (Date.strptime params[:end_date])+1.days
+          first_day = Date.strptime(params[:start_date]) rescue Date.today.prev_month
+          end_day = ((Date.strptime params[:end_date])+1.days) rescue Date.today + 1.days
+
+          first_day, end_day = end_day, first_day if first_day > end_day
           end_day = end_day > Date.today + 1.days ?  Date.today + 1.days : end_day
+
+
+
           first_day_s= first_day.to_s
           end_day_s= end_day.to_s
           sales = get_sales(first_day_s, end_day_s)
           expenses = get_expenses(first_day_s, end_day_s)
+          @sales=zero_if_nil sales.map(&:total).inject{|sum,x| sum + x }
+          @sales_cost=zero_if_nil sales.map(&:total_cost).inject{|sum,x| sum + x }
+          @gross_profit=@sales-@sales_cost
+          @expenses=zero_if_nil expenses.map(&:cost).inject{|sum,x| sum + x }
+          @before_taxes_reserve_profit=@gross_profit-@expenses
+          @taxes=Variable.find(4).value.to_f* zero_if_neg(@before_taxes_reserve_profit)
+          @reserve=Variable.find(5).value.to_f* zero_if_neg(@before_taxes_reserve_profit)
+          @net_profit=@before_taxes_reserve_profit-@taxes-@reserve
           @chart= (first_day...end_day).map do |day|
             sale_aux= search_date(sales,day)
             sale = sale_aux == 0 ? {:total => 0 , :total_cost => 0} : sale_aux
@@ -65,5 +78,13 @@ class ReportsController < ApplicationController
       end
     end
     ret_val
+  end
+
+  def zero_if_nil arg
+    arg.nil? ? 0 : arg
+  end
+
+  def zero_if_neg arg
+    arg < 0 ? 0 : arg
   end
 end

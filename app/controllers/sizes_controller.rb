@@ -1,4 +1,4 @@
-class SizesController < ApplicationController
+class SizesController < MyApplicationController
 
   layout 'application', :except=>['new', 'edit']
 

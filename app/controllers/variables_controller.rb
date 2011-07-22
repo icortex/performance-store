@@ -1,4 +1,4 @@
-class VariablesController < ApplicationController
+class VariablesController < MyApplicationController
 
   layout false
 

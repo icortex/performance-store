@@ -1,4 +1,4 @@
-class SaleProductsController < ApplicationController
+class SaleProductsController < MyApplicationController
   # GET /sale_products
   # GET /sale_products.xml
   def index

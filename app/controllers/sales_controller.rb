@@ -1,4 +1,4 @@
-class SalesController < ApplicationController
+class SalesController < MyApplicationController
 
   autocomplete :person, :document_id, :display_value => :name_and_doc
   include SalesHelper

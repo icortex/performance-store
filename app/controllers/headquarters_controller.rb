@@ -1,4 +1,4 @@
-class HeadquartersController < ApplicationController
+class HeadquartersController < MyApplicationController
 
   layout 'application', :except=>['new', 'edit']
 
@@ -76,6 +76,7 @@ class HeadquartersController < ApplicationController
   # DELETE /headquarters/1.xml
   def destroy
     @headquarter = Headquarter.find(params[:id])
+
     @headquarter.destroy
 
     respond_to do |format|

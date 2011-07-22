@@ -1,4 +1,4 @@
-class StocksController < ApplicationController
+class StocksController < MyApplicationController
   layout 'application', :except=>['new', 'edit']
 
 

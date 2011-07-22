@@ -1,4 +1,4 @@
-class ProductsController < ApplicationController
+class ProductsController < MyApplicationController
 
   include ProductsHelper
   # GET /products

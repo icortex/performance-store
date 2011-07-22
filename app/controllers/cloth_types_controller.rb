@@ -1,4 +1,4 @@
-class ClothTypesController < ApplicationController
+class ClothTypesController < MyApplicationController
 
   layout 'application', :except=>['new', 'edit']
 

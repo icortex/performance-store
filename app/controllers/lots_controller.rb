@@ -1,4 +1,4 @@
-class LotsController < ApplicationController
+class LotsController < MyApplicationController
 
   load_and_authorize_resource
   check_authorization

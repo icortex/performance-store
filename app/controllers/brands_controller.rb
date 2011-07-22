@@ -1,4 +1,4 @@
-class BrandsController < ApplicationController
+class BrandsController < MyApplicationController
 
   layout 'application', :except=>['new', 'edit']
 

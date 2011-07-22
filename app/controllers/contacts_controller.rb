@@ -1,4 +1,4 @@
-class ContactsController < ApplicationController
+class ContactsController < MyApplicationController
 
   load_and_authorize_resource
   check_authorization
