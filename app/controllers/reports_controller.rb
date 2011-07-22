@@ -1,4 +1,4 @@
-class ReportsController < ApplicationController
+class ReportsController < MyApplicationController
 
   def index
     respond_to do |format|

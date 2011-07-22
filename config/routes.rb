@@ -21,6 +21,9 @@ WJSport::Application.routes.draw do
     resources :contacts
     resources :sale_products
 
+    get "admin/validar" => "admin#validate", :as => :validate_users
+    post "admin/validar" => "admin#validation", :as => :validate_users
+    
     resources :sales, :path => 'ventas'
     resources :admin
     resources :expenses, :path => 'gastos'
