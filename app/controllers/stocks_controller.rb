@@ -46,8 +46,6 @@ class StocksController < MyApplicationController
   # POST /stocks
   # POST /stocks.xml
   def create
-    params[:stock][:product]= Product.find params[:stock][:product_id]
-    params[:stock][:headquarter] = Headquarter.find(params[:stock][:headquarter])
     @stock = Stock.new(params[:stock])
 
     respond_to do |format|
@@ -64,7 +62,6 @@ class StocksController < MyApplicationController
   # PUT /stocks/1
   # PUT /stocks/1.xml
   def update
-    params[:stock][:headquarter] = Headquarter.find(params[:stock][:headquarter])
     @stock = Stock.find(params[:id])
 
     respond_to do |format|

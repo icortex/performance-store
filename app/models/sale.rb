@@ -8,12 +8,13 @@ class Sale < ActiveRecord::Base
   accepts_nested_attributes_for :sale_products, :reject_if => lambda { |sp| sp[:reference].blank? },
                                 :allow_destroy => true
 
-
   before_update :get_saved_qty
   after_save :update_stock
   before_save :update_total_cost
 
   attr_accessor :old_quantities
+
+  validates_numericality_of :total, :discount, :iva
 
   def get_saved_qty
     sale=Sale.find self.id

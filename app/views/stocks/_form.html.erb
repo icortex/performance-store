@@ -48,7 +48,7 @@
           <%= f.label 'Sede' %>
         </td>
         <td>
-          <%= f.select :headquarter, Headquarter.all.collect { |element| [element.name, element.id] },
+          <%= f.select :headquarter_id, Headquarter.all.collect { |element| [element.name, element.id] },
                        :selected => @stock.headquarter_id ? @stock.headquarter_id : '' %>
         </td>
       </tr>

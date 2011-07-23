@@ -56,56 +56,48 @@ class ProductsController < MyApplicationController
   end
 
   def update
+    success_aux=true
     success=true
+    reference = Product.find(params[:id]).reference
+    products = Product.find_all_by_reference(reference)
 
     set_default_color_size
 
-    colors = params[:color_ids].values
-    sizes = params[:size_ids].values
+    #update and destroy
+    products.each do |old_product|
+      color_size=search_size_color old_product, params[:size_ids], params[:color_ids]
+      if color_size
+        params[:product][:color_id]=color_size[0]
+        params[:product][:size_id]=color_size[1]
+        success_aux=old_product.update_attributes(params[:product])
+        success=false if !success_aux
+      else
+        success_aux=old_product.destroy
+        success=false if !success_aux
+      end
+    end
 
-    colors.each do |color_id|
-      params[:product][:color_id]=color_id
-      sizes.each do |size_id|
-        params[:product][:size_id]=size_id
-        product=search_size_color @products,size_id,color_id
-        if !product.update_attributes(params[:product])
-          success=false
+    #create new ones
+    product_colors=products.map(&:color_id)
+    product_sizes=products.map(&:size_id)
+    params[:size_ids].values.each do |s|
+      params[:color_ids].values.each do |c|
+        if !product_colors.include?(c) && !product_sizes.include?(s)
+          params[:product][:color_id]=c
+          params[:product][:size_id]=s
+          success_aux=Product.create params[:product]
+          success=false if !success_aux
         end
       end
     end
 
-#    Color.all.map(&:id).each do |color_id|
-#      params[:product][:color_id]=color_id
-#    Size.all.map(&:id).each do |size_id|
-#      params[:product][:size_id]=size_id
-#      product=search_size_color @products,size_id,color_id
-#
-#    end
-#    end
-
     respond_to do |format|
       if success
-        format.html { redirect_to(new_product_path, :notice => 'Articulo creado exitosamente!') }
+        format.html { redirect_to(new_product_path, :notice => 'Articulo actualizado exitosamente!') }
       else
         format.html { render :action => "new" }
       end
     end
-#    params[:product][:brand] = Brand.find(params[:product][:brand])
-#    params[:product][:cloth_type] = ClothType.find(params[:product][:cloth_type])
-#
-#    set_default_color_size
-#
-#    @product = Product.find(params[:id])
-#
-#    respond_to do |format|
-#      if @product.update_attributes(params[:product])
-#        format.html { redirect_to(@product, :notice => 'Articulo actualizado exitosamente!') }
-#        format.xml { head :ok }
-#      else
-#        format.html { render :action => "edit" }
-#        format.xml { render :xml => @product.errors, :status => :unprocessable_entity }
-#      end
-#    end
   end
 
   def destroy
@@ -113,19 +105,36 @@ class ProductsController < MyApplicationController
     @products = Product.find_all_by_reference(@product.reference)
     Product.destroy @products
 
-    respond_to do |format|
-      format.html { redirect_to(products_url, :notice => 'Articulo borrado exitosamente!') }
-      format.xml { head :ok }
-    end
+    redirect_to(products_url, :notice => 'Articulo borrado exitosamente!')
   end
 
-   def search_size_color array,size_id,color_id
+  def search_size_color old_product, size_ids, color_ids
     ret_val=false
-    array.each do |el|
-      if el.size_id==size_id && el.color_id==color_id
-        ret_val=el
+    size_ids.values.each do |size|
+      color_ids.values.each do |color|
+        if old_product.color_id == color.to_i && old_product.size_id == size.to_i
+          ret_val = [color.to_i, size.to_i]
+        end
       end
     end
     ret_val
   end
+
+#  def search_to_create old_products,size_ids,color_ids
+#    ret_val=[]
+#    old_products.each do |op|
+#      size_ids.each do |s|
+#        color_ids.each do |c|
+#          if !size_ids.include? op.size_id && !color_ids.include? op.color_id
+#            op.destroy
+#          end
+#          if old_products_s.include? s && old_products_c.include? c
+#
+#          end
+#        end
+#      end
+#    end
+#
+#    ret_val
+#  end
 end
