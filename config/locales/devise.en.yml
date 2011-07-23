@@ -21,6 +21,7 @@ en:
       invalid_token: 'Token de autenticacion invalido.'
       timeout: 'Tu sesion ha expirado, ingresa nuevamente.'
       inactive: 'Your account was not activated yet.'
+      not_validated: 'Tu cuenta todavia no ha sido activada por el administrador.'
     sessions:
       signed_in: 'Inicio de sesion correcto.'
       signed_out: 'Has cerrado sesion.'

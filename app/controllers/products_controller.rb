@@ -1,8 +1,7 @@
 class ProductsController < MyApplicationController
 
   include ProductsHelper
-  # GET /products
-  # GET /products.xml
+
   def index
 
     @products= Product.where('reference like ?', "%#{params[:q]}%")
@@ -13,49 +12,33 @@ class ProductsController < MyApplicationController
     end
   end
 
-  # GET /products/1
-  # GET /products/1.xml
   def show
     @product = Product.find(params[:id])
   end
 
-  # GET /products/new
-  # GET /products/new.xml
   def new
     @product = Product.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml { render :xml => @product }
-    end
   end
 
-  # GET /products/1/edit
   def edit
     @product = Product.find(params[:id])
-
-    respond_to do |format|
-      format.html # edit.html.erb
-      format.xml { render :xml => @products }
-    end
+    @products = Product.find_all_by_reference(@product.reference)
+    @colors =Color.find(@products.map(&:color_id)).map(&:color).uniq
+    @sizes =Size.find(@products.map(&:size_id)).map(&:size).uniq
   end
 
-  # POST /products
-  # POST /products.xml
   def create
     success=true
-    params[:product][:brand] = Brand.find(params[:product][:brand])
-    params[:product][:cloth_type] = ClothType.find(params[:product][:cloth_type])
 
     set_default_color_size
 
-    colors = params[:product][:color]
-    sizes = params[:product][:size]
+    colors = params[:color_ids].values
+    sizes = params[:size_ids].values
 
-    colors.each do |ck, color|
-      params[:product][:color]=Color.find(color)
-      sizes.each do |sk, size|
-        params[:product][:size]=Size.find(size)
+    colors.each do |color_id|
+      params[:product][:color_id]=color_id
+      sizes.each do |size_id|
+        params[:product][:size_id]=size_id
         @product = Product.new(params[:product])
         if !@product.save
           success=false
@@ -66,41 +49,69 @@ class ProductsController < MyApplicationController
     respond_to do |format|
       if success
         format.html { redirect_to(new_product_path, :notice => 'Articulo creado exitosamente!') }
-        format.xml { render :xml => @product, :status => :created, :location => @product }
       else
         format.html { render :action => "new" }
-        format.xml { render :xml => @product.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # PUT /products/1
-  # PUT /products/1.xml
   def update
-    params[:product][:brand] = Brand.find(params[:product][:brand])
-    params[:product][:cloth_type] = ClothType.find(params[:product][:cloth_type])
+    success=true
 
     set_default_color_size
 
-    @product = Product.find(params[:id])
+    colors = params[:color_ids].values
+    sizes = params[:size_ids].values
 
-    respond_to do |format|
-      if @product.update_attributes(params[:product])
-        format.html { redirect_to(@product, :notice => 'Articulo actualizado exitosamente!') }
-        format.xml { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml { render :xml => @product.errors, :status => :unprocessable_entity }
+    colors.each do |color_id|
+      params[:product][:color_id]=color_id
+      sizes.each do |size_id|
+        params[:product][:size_id]=size_id
+        product=search_size_color @products,size_id,color_id
+        if !product.update_attributes(params[:product])
+          success=false
+        end
       end
     end
+
+#    Color.all.map(&:id).each do |color_id|
+#      params[:product][:color_id]=color_id
+#    Size.all.map(&:id).each do |size_id|
+#      params[:product][:size_id]=size_id
+#      product=search_size_color @products,size_id,color_id
+#
+#    end
+#    end
+
+    respond_to do |format|
+      if success
+        format.html { redirect_to(new_product_path, :notice => 'Articulo creado exitosamente!') }
+      else
+        format.html { render :action => "new" }
+      end
+    end
+#    params[:product][:brand] = Brand.find(params[:product][:brand])
+#    params[:product][:cloth_type] = ClothType.find(params[:product][:cloth_type])
+#
+#    set_default_color_size
+#
+#    @product = Product.find(params[:id])
+#
+#    respond_to do |format|
+#      if @product.update_attributes(params[:product])
+#        format.html { redirect_to(@product, :notice => 'Articulo actualizado exitosamente!') }
+#        format.xml { head :ok }
+#      else
+#        format.html { render :action => "edit" }
+#        format.xml { render :xml => @product.errors, :status => :unprocessable_entity }
+#      end
+#    end
   end
 
-  # DELETE /products/1
-  # DELETE /products/1.xml
   def destroy
     @product = Product.find(params[:id])
-    @product.destroy
-
+    @products = Product.find_all_by_reference(@product.reference)
+    Product.destroy @products
 
     respond_to do |format|
       format.html { redirect_to(products_url, :notice => 'Articulo borrado exitosamente!') }
@@ -108,4 +119,13 @@ class ProductsController < MyApplicationController
     end
   end
 
+   def search_size_color array,size_id,color_id
+    ret_val=false
+    array.each do |el|
+      if el.size_id==size_id && el.color_id==color_id
+        ret_val=el
+      end
+    end
+    ret_val
+  end
 end

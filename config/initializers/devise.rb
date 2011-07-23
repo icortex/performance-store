@@ -3,7 +3,7 @@
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = "no-reply@wjsport.com"
+  config.mailer_sender = "no-reply@performancestore.com"
 
   # Configure the class responsible to send e-mails.
   config.mailer = "Devise::Mailer"
@@ -88,7 +88,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 6..128.
-   config.password_length = 3..30
+   config.password_length = 6..30
 
   # Regex to use to validate the email address
   # config.email_regexp = /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i

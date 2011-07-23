@@ -1,12 +1,8 @@
 module ProductsHelper
 
   def set_default_color_size
-    if  !params[:product][:size]
-      params[:product][:size]=[[Size.find(1).size, "1"]]
-    end
-    if  !params[:product][:color]
-      params[:product][:color]=[[Color.find(1).color, "1"]]
-    end
+    params[:size_ids] = {Size.first.size => Size.first.id} if  !params[:size_ids]
+    params[:color_ids]={Color.first.color => Color.first.id} if  !params[:color_ids]
   end
 
   #[{:reference => 'perro', :brand => 'Adidas',  :sizes => {'s' =>{'am'=>[1,20]}, 'm'=> {'ne'=>[21,2]}}}, {}]
@@ -60,5 +56,9 @@ module ProductsHelper
       end
     end
     false
+  end
+
+  def checked_if_included arg1, arg2
+    arg1.include?(arg2) ? :checked : nil if arg1
   end
 end

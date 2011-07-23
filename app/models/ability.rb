@@ -9,6 +9,8 @@ class Ability
       can :manage, :all
     elsif user.is_a? Seller
       can :manage, :all
+      cannot :manage, [Report, Expense, Admin]
+      cannot [:create, :update, :destroy], [Product, Stock]
     end
     #
     # The first argument to `can` is the action you are giving the user permission to do.

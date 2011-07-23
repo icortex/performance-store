@@ -9,4 +9,16 @@ class User < ActiveRecord::Base
   belongs_to :person
   belongs_to :headquarter
   validates :username, :uniqueness => true
+
+  def active_for_authentication?
+    super && validated?
+end
+
+  def inactive_message
+    if !validated?
+      :not_validated
+    else
+      super # Use whatever other message
+    end
+  end
 end
