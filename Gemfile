@@ -10,7 +10,7 @@ gem 'devise'
 gem "cancan"
 gem "paperclip"
 gem 'rails3-jquery-autocomplete'
-
+gem 'annotate'
 
 group :development do
   gem 'nifty-generators'

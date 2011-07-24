@@ -6,3 +6,15 @@ class ColorTest < ActiveSupport::TestCase
     assert true
   end
 end
+
+# == Schema Information
+#
+# Table name: colors
+#
+#  id         :integer(4)      not null, primary key
+#  color      :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  rgb        :string(255)
+#
+

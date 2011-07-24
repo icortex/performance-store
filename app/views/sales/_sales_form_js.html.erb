@@ -3,7 +3,7 @@
      *  fieldset_selector='#sale_sale_products_attributes_'+#
      *  # stands for a number, for example:1 , 2 , 3
      */
-    <%= "var products = " %><%= @products.html_safe if @products %><%= ';' %>
+    <%= "var products = " %><%= @products ? @products.html_safe : '[]' %><%= ';' %>
 
     function local_ready() {
         jq('label[for*="_in_stock"]').html('');
@@ -22,7 +22,8 @@
         var discount = jq('#sale_discount');
         var total_jq = jq('#sale_total');
         if(discount.val()=='') {
-            jq('#discount_percentage').val('');
+            jq('#discount_percentage').val('0');
+            discount.val('0');
 
         } else {
             jq('#discount_percentage').val(discount.val() / sum_subtotals() * 100);

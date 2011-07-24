@@ -8,3 +8,9 @@ en:
           brand_id: ""
         person:
           document_id: ""
+        sale:
+          discount: "Descuento"
+          sale_products:
+            price: "Precio"
+            quantity: "Cantidad"
+
