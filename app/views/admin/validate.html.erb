@@ -1,58 +1,46 @@
 <%= form_tag validate_users_path do %>
-    <div id='accordion'>
 
       <h3>Usuarios no validados</h3>
       <% if !@unvalidated_users.empty? %>
-      <table>
-        <th>Nombre de usuario</th>
-        <th>Email</th>
-        <th>Tipo</th>
-        <th>Validar</th>
-        <th>Eliminar</th>
-        <% @unvalidated_users.each do |not_user| %>
-            <tr>
-              <td><%= not_user.username %></td>
-              <td><%= not_user.email %></td>
-              <td><%= not_user.type %></td>
-              <td><%= check_box_tag "validation[#{not_user.id}]" %></td>
-              <td><%= check_box_tag "destroy[#{not_user.id}]" %></td>
-            </tr>
-        <% end %>
-      </table>
-          <% else %>
+          <table cellspacing="0" cellpadding="0" class="users">
+            <th>Nombre de usuario</th>
+            <th>Email</th>
+            <th>Tipo</th>
+            <th>Validar</th>
+            <th>Eliminar</th>
+            <% @unvalidated_users.each do |not_user| %>
+                <tr>
+                  <td><%= not_user.username %></td>
+                  <td><%= not_user.email %></td>
+                  <td><%= not_user.type %></td>
+                  <td class='center_td'><%= check_box_tag "validation[#{not_user.id}]" %></td>
+                  <td class='center_td'><%= check_box_tag "destroy[#{not_user.id}]" %></td>
+                </tr>
+            <% end %>
+          </table>
+      <% else %>
           <p>No hay usuarios esperando tu validacion!</p>
       <% end %>
 
       <h3>Usuarios registrados</h3>
       <% if !@validated_users.empty? %>
-      <table>
-        <th>Nombre de usuario</th>
-        <th>Email</th>
-        <th>Tipo</th>
-        <th>Eliminar</th>
-        <% @validated_users.each do |user| %>
-            <tr>
-              <td><%= user.username %></td>
-              <td><%= user.email %></td>
-              <td><%= user.type %></td>
-              <td><%= check_box_tag "destroy[#{user.id}]" %></td>
-            </tr>
-        <% end %>
-      </table>
-          <% else %>
+          <table cellspacing="0" cellpadding="0" class="users">
+            <th>Nombre de usuario</th>
+            <th>Email</th>
+            <th>Tipo</th>
+            <th>Eliminar</th>
+            <% @validated_users.each do |user| %>
+                <tr>
+                  <td><%= user.username %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.type %></td>
+                  <td class='center_td'><%= check_box_tag "destroy[#{user.id}]" %></td>
+                </tr>
+            <% end %>
+          </table>
+      <% else %>
           <p>No hay usuarios registrados en el sistema!</p>
-          <% end %>
-    </div>
-
-    <%= submit_tag 'Aceptar cambios', :id => 'button' %>
-
-    <script type="text/javascript">
-        jq('#accordion').accordion({
-            clearStyle: true,
-            collapsible: true
-        });
-
-        jq('#button').button();
-    </script>
-
+      <% end %>
+    <br>
+    <%= submit_tag 'Aceptar cambios' %>
 <% end %>

@@ -42,6 +42,6 @@ class StocksController < MyApplicationController
     @stock = Stock.find(params[:id])
     @stock.destroy
 
-redirect_to(:back, :notice => 'Inventario borrado exitosamente.')
-    end
+    redirect_to(:back, :notice => 'Inventario borrado exitosamente.')
+  end
 end

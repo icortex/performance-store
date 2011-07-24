@@ -62,7 +62,7 @@ module ProductsHelper
     arg1.include?(arg2) ? :checked : nil if arg1
   end
 
-    def search_size_color old_product, size_ids, color_ids
+  def search_size_color old_product, size_ids, color_ids
     ret_val=false
     size_ids.values.each do |size|
       color_ids.values.each do |color|

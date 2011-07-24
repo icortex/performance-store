@@ -6,7 +6,7 @@ WJSport::Application.routes.draw do
     resources :people, :path => 'clientes' do
       get 'cumpleanos' => 'people#index', :on => :collection, :as => :birthday
     end
-    
+
     resources :stocks, :path => 'inventario'
     resources :products, :path => 'articulos'
     resources :lots, :path => 'lotes'
@@ -27,9 +27,9 @@ WJSport::Application.routes.draw do
   end
 
   match 'reportes' => 'reports#index', :as => :reports
-      post 'reportes' => 'reports#index'
-      get "inventario/sede/:headquarter"=>'stocks#index'
-      get "ventas/sede/:headquarter"=>'sales#index'
+  post 'reportes' => 'reports#index'
+  get "inventario/sede/:headquarter"=>'stocks#index'
+  get "ventas/sede/:headquarter"=>'sales#index'
 
   root :to => "passthrough#index"
 end

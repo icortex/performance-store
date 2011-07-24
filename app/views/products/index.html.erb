@@ -39,18 +39,18 @@
           <%= link_to image_tag('/images/delete.png', :title => 'Borrar de inventario'), product, :confirm => 'El articulo TAMBIEN sera borrado del inventario. Deseas continuar?', :method => :delete if can? :destroy, Product %>
         </td>
       </tr>
-            <script type="text/javascript">
-              jq('#<%="update_stock_img_#{product.id}"%>').click(function() {
-                  jq.get('<%= new_stock_path %>', {'product_id':'<%= product.id %>'}, function(data, status, request) {
-                      jq('#stock_popup').html(data);
-                  });
-                  jq('#stock_popup').dialog({
-                      title: 'Agregar a inventario',
-                      resizable: false,
-                      modal: true
-                  });
+      <script type="text/javascript">
+          jq('#<%="update_stock_img_#{product.id}"%>').click(function() {
+              jq.get('<%= new_stock_path %>', {'product_id':'<%= product.id %>'}, function(data, status, request) {
+                  jq('#stock_popup').html(data);
               });
-          </script>
+              jq('#stock_popup').dialog({
+                  title: 'Agregar a inventario',
+                  resizable: false,
+                  modal: true
+              });
+          });
+      </script>
   <% end %>
   </tbody>
 </table>

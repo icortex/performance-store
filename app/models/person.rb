@@ -1,9 +1,9 @@
 class Person < ActiveRecord::Base
   has_one :user
-  has_many :contacts
   has_many :sales
 
-  validates_uniqueness_of :document_id, :message => "Ya existe un cliente con ese numero de cedula."
+  validates_uniqueness_of :document_id, :message => "Ya existe un cliente con ese numero de identificacion."
+  validates_presence_of :document_id, :message => "Por favor, ingrese el numero de identificacion."
 
   def name_and_doc
     p = Person.find_by_document_id document_id

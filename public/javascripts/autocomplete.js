@@ -7,7 +7,7 @@ function autocomplete_product(fieldset_selector) {
     jq(fieldset_selector + '_reference').tokenInput("/articulos.json", {
         crossDomain: false,
         //prePopulate: jq("#sale_product_tokens").data("pre"),
-   search_parameter: "reference",
+        search_parameter: "reference",
         searchingText: "Buscando...",
         noResultsText: "No hay resultados",
         hintText: "Ingrese la referencia del articulo...",
@@ -62,25 +62,25 @@ function fill_features(item, fieldset_selector) {
     var total = jq('#sale_total');
 
     add_options(size_select['selector'], keys(item.sizes));
-    var colors = update_colors(size_select.val(),item,color_select);
-    update_price_quantity(colors,color_select.val(),price_input,max_quantity_label,subtotal,quantity_input);
+    var colors = update_colors(size_select.val(), item, color_select);
+    update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
 
     size_select.change(function() {
-        colors = update_colors(size_select.val(),item,color_select);
-        update_price_quantity(colors,color_select.val(),price_input,max_quantity_label,subtotal,quantity_input);
+        colors = update_colors(size_select.val(), item, color_select);
+        update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
     });
 
-    color_select.change(function(){
-        update_price_quantity(colors,color_select.val(),price_input,max_quantity_label,subtotal,quantity_input);        
+    color_select.change(function() {
+        update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
     });
 
-    quantity_input.keyup(function(evt){
+    quantity_input.keyup(function(evt) {
         subtotal.html(quantity_input.val() * price_input.val());
         console.log(evt);
         total.val(subtotal.html());
     });
 
-    price_input.keyup(function(){
+    price_input.keyup(function() {
         subtotal.html(quantity_input.val() * price_input.val());
         total.val(subtotal.html());
     });
@@ -111,13 +111,13 @@ function add_options(select_css_selector_str, options_array) {
         select.append(option);
     }
 }
-function update_colors(size_str,item,color_select) {
+function update_colors(size_str, item, color_select) {
     var colors = item.sizes[size_str];
     color_select.html('');
     add_options(color_select['selector'], keys(colors));
     return colors;
 }
-function update_price_quantity(colors,color_str,price_input,max_quantity_label,subtotal,quantity_input) {
+function update_price_quantity(colors, color_str, price_input, max_quantity_label, subtotal, quantity_input) {
     var qty = colors[color_str][0];
     var price = colors[color_str][1];
     price_input.val(price);

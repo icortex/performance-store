@@ -15,11 +15,9 @@ class VariablesController < MyApplicationController
 
     respond_to do |format|
       if @variable.update_attributes(params[:variable])
-        format.html { redirect_to(@variable, :notice => 'Variable actualizada exitosamente.') }
-        format.xml { head :ok }
+        format.html { redirect_to(admin_index_path, :notice => 'Variable actualizada exitosamente.') }
       else
         format.html { render :action => "edit" }
-        format.xml { render :xml => @variable.errors, :status => :unprocessable_entity }
       end
     end
   end

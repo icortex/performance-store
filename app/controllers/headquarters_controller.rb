@@ -19,7 +19,7 @@ class HeadquartersController < MyApplicationController
 
     respond_to do |format|
       if @headquarter.save
-        format.html { redirect_to(:back, :notice => 'Sede creada exitosamente.') }
+        format.html { redirect_to(admin_index_path, :notice => 'Sede creada exitosamente.') }
       else
         format.html { render :action => "new" }
       end

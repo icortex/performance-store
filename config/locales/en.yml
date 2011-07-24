@@ -6,6 +6,7 @@ en:
       attributes:
         product:
           brand_id: ""
+          reference: ""
         person:
           document_id: ""
         sale:
@@ -28,5 +29,8 @@ en:
         expense:
           cost: ""
         lot:
+          arrival_date: ""
           freight: ""
+        variable:
+          value: ""
 

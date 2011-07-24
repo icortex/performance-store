@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   def active_for_authentication?
     super && validated?
-end
+  end
 
   def inactive_message
     if !validated?

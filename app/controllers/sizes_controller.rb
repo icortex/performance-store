@@ -19,7 +19,7 @@ class SizesController < MyApplicationController
 
     respond_to do |format|
       if @size.save
-        format.html { redirect_to(:back, :notice => 'Talla creada exitosamente.') }
+        format.html { redirect_to(admin_index_path, :notice => 'Talla creada exitosamente.') }
       else
         format.html { render :action => "new" }
       end

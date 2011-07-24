@@ -19,7 +19,7 @@ class ClothTypesController < MyApplicationController
 
     respond_to do |format|
       if @cloth_type.save
-        format.html { redirect_to(:back, :notice => 'Tipo de prenda creado exitosamente.') }
+        format.html { redirect_to(admin_index_path, :notice => 'Tipo de prenda creado exitosamente.') }
       else
         format.html { render :action => "new" }
       end

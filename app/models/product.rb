@@ -12,7 +12,9 @@ class Product < ActiveRecord::Base
   has_attached_file :image, :styles => {:medium => "250x250>", :thumb => "60x60>"}
 
   validates_uniqueness_of :brand_id, :scope => [:reference, :size_id, :color_id],
-                          :message => 'El articulo ya existe'
+                          :message => 'El articulo ya existe.'
+
+  validates_presence_of :reference, :message => 'Por favor, ingrese la referencia del articulo.'
 end
 # == Schema Information
 #

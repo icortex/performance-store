@@ -19,7 +19,7 @@ class ColorsController < MyApplicationController
 
     respond_to do |format|
       if @color.save
-        format.html { redirect_to(:back, :notice => 'Color creado exitosamente.') }
+        format.html { redirect_to(admin_index_path, :notice => 'Color creado exitosamente.') }
       else
         format.html { render :action => "new" }
       end

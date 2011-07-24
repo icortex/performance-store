@@ -22,7 +22,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-   config.authentication_keys = [ :username ]
+  config.authentication_keys = [:username]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -34,7 +34,7 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ :email ]
+  config.case_insensitive_keys = [:email]
 
   # Tell if authentication through request.params is enabled. True by default.
   # config.params_authenticatable = true
@@ -88,7 +88,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 6..128.
-   config.password_length = 6..30
+  config.password_length = 6..30
 
   # Regex to use to validate the email address
   # config.email_regexp = /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i

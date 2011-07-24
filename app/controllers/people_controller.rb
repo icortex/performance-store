@@ -14,9 +14,11 @@ class PeopleController < MyApplicationController
         @people = []
         @emails = ''
         Person.all.each do |p|
-          if (p.birthday.yday >= from && p.birthday.yday <= to)
-            @people << p
-            @emails += p.email + ', '
+          if p.birthday
+            if (p.birthday.yday >= from && p.birthday.yday <= to)
+              @people << p
+              @emails += p.email + ', '
+            end
           end
         end
         @emails.chop!.chop! if !@emails.chop!.nil?

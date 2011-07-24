@@ -1,4 +1,5 @@
 class Variable < ActiveRecord::Base
+  validates_numericality_of :value, :message => 'Por favor, ingrese un valor correcto.'
 end
 
 # == Schema Information

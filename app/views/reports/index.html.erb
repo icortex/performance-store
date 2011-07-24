@@ -13,10 +13,16 @@
         <%= submit_tag 'Generar' %>
       </p>
 
+      <% if @chart %>
       <p>
+      <div align="center" class="report_title">
+        <h3><%= 'Reporte desde ' + @chart[0][0] +' hasta ' + @chart.last[0] %></h3>
+      </div>
       <div id="chart_div"></div>
       </p>
+          <% end %>
     </div>
+
     <div class='float_left'>
       <table>
         <tr><h2>Estado de resultados</h2></tr>

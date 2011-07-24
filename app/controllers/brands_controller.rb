@@ -22,7 +22,7 @@ class BrandsController < MyApplicationController
 
     respond_to do |format|
       if @brand.save
-        format.html { redirect_to(:back, :notice => 'Marca creada exitosamente.') }
+        format.html { redirect_to(admin_index_path, :notice => 'Marca creada exitosamente.') }
       else
         format.html { render :action => "new" }
       end
@@ -44,6 +44,6 @@ class BrandsController < MyApplicationController
   def destroy
     @brand = Brand.find(params[:id])
     @brand.destroy
-redirect_to(admin_index_path, :notice => 'Marca borrada exitosamente.')
+    redirect_to(admin_index_path, :notice => 'Marca borrada exitosamente.')
   end
 end
