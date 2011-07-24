@@ -11,8 +11,6 @@ class ReportsController < MyApplicationController
           first_day, end_day = end_day, first_day if first_day > end_day
           end_day = end_day > Date.today + 1.days ?  Date.today + 1.days : end_day
 
-
-
           first_day_s= first_day.to_s
           end_day_s= end_day.to_s
           sales = get_sales(first_day_s, end_day_s)

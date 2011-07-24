@@ -1,6 +1,5 @@
 class SalesController < MyApplicationController
 
-  autocomplete :person, :document_id, :display_value => :name_and_doc
   include SalesHelper
 
   def index
@@ -43,13 +42,12 @@ class SalesController < MyApplicationController
 
     respond_to do |format|
       if @sale.save
-        format.html { redirect_to(@sale, :notice => 'Venta creada exitosamente!') }
+        format.html { redirect_to(@sale, :notice => 'Venta creada exitosamente.') }
       else
         format.html { render :action => "new" }
       end
     end
   end
-
 
   def update
     params[:sale][:headquarter_id]=current_user.headquarter.id
@@ -58,7 +56,7 @@ class SalesController < MyApplicationController
 
     respond_to do |format|
       if @sale.update_attributes(params[:sale])
-        format.html { redirect_to(@sale, :notice => 'Venta actualizada exitosamente!') }
+        format.html { redirect_to(@sale, :notice => 'Venta actualizada exitosamente.') }
       else
         format.html { render :action => "edit" }
       end
@@ -69,18 +67,7 @@ class SalesController < MyApplicationController
     @sale = Sale.find(params[:id])
     @sale.destroy
 
-    redirect_to(:back)
-  end
-
-  def set_ids sale_products
-    sale_products.each do |k, sp|
-      size= Size.find_by_size sp[:size]
-      color = Color.find_by_color sp[:color]
-      if !size.nil?
-        p= Product.where("reference = ? and size_id = ? and color_id = ?", sp[:reference], size.id, color.id)[0]
-        sp[:product_id] = p.id
-      end
-    end
+    redirect_to(:back, :notice => 'Venta borrada exitosamente.')
   end
 end
 

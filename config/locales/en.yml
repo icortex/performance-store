@@ -13,4 +13,20 @@ en:
           sale_products:
             price: "Precio"
             quantity: "Cantidad"
+        stock:
+          product_id: ""
+        brand:
+          brand: ""
+        cloth_type:
+          cloth_type: ""
+        color:
+          rgb: ""
+        headquarter:
+          name: ""
+        size:
+          size: ""
+        expense:
+          cost: ""
+        lot:
+          freight: ""
 

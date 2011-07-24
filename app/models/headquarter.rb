@@ -1,4 +1,6 @@
 class Headquarter < ActiveRecord::Base
+  validates_presence_of :name, :message => 'Ingrese el nombre de la sede.'
+  validates_uniqueness_of :name, :case_sensitive => false, :message => 'La sede ya existe.'
 end
 
 # == Schema Information

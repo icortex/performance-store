@@ -48,7 +48,7 @@ class ProductsController < MyApplicationController
 
     respond_to do |format|
       if success
-        format.html { redirect_to(new_product_path, :notice => 'Articulo creado exitosamente!') }
+        format.html { redirect_to(new_product_path, :notice => 'Articulo creado exitosamente.') }
       else
         format.html { render :action => "new" }
       end
@@ -93,7 +93,7 @@ class ProductsController < MyApplicationController
 
     respond_to do |format|
       if success
-        format.html { redirect_to(new_product_path, :notice => 'Articulo actualizado exitosamente!') }
+        format.html { redirect_to(new_product_path, :notice => 'Articulo actualizado exitosamente.') }
       else
         format.html { render :action => "new" }
       end
@@ -105,36 +105,6 @@ class ProductsController < MyApplicationController
     @products = Product.find_all_by_reference(@product.reference)
     Product.destroy @products
 
-    redirect_to(products_url, :notice => 'Articulo borrado exitosamente!')
+    redirect_to(products_url, :notice => 'Articulo borrado exitosamente.')
   end
-
-  def search_size_color old_product, size_ids, color_ids
-    ret_val=false
-    size_ids.values.each do |size|
-      color_ids.values.each do |color|
-        if old_product.color_id == color.to_i && old_product.size_id == size.to_i
-          ret_val = [color.to_i, size.to_i]
-        end
-      end
-    end
-    ret_val
-  end
-
-#  def search_to_create old_products,size_ids,color_ids
-#    ret_val=[]
-#    old_products.each do |op|
-#      size_ids.each do |s|
-#        color_ids.each do |c|
-#          if !size_ids.include? op.size_id && !color_ids.include? op.color_id
-#            op.destroy
-#          end
-#          if old_products_s.include? s && old_products_c.include? c
-#
-#          end
-#        end
-#      end
-#    end
-#
-#    ret_val
-#  end
 end

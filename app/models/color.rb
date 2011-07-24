@@ -1,7 +1,8 @@
 class Color < ActiveRecord::Base
   belongs_to :product
-  validates_uniqueness_of :color, :scope => :rgb
-  validates :rgb, :presence => true, :length => {:within => 1..6}
+  validates_length_of :rgb, :within => 3..6, :message => "Por favor, verifica el codigo RGB."
+  validates_presence_of :rgb, :message => 'Ingrese el codigo del color.'
+  validates_uniqueness_of :rgb, :case_sensitive => false, :message => 'El color ya existe.'
 end
 
 # == Schema Information

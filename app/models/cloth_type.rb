@@ -1,7 +1,7 @@
 class ClothType < ActiveRecord::Base
   has_one :product
-  validates_presence_of :cloth_type
-  validates_uniqueness_of :cloth_type, :case_sensitive => false
+  validates_presence_of :cloth_type, :message => 'Ingrese el tipo de prenda.'
+  validates_uniqueness_of :cloth_type, :case_sensitive => false, :message => 'El tipo de prenda ya existe.'
 end
 
 # == Schema Information

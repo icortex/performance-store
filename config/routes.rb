@@ -6,9 +6,8 @@ WJSport::Application.routes.draw do
     resources :people, :path => 'clientes' do
       get 'cumpleanos' => 'people#index', :on => :collection, :as => :birthday
     end
-    resources :lot_products
+    
     resources :stocks, :path => 'inventario'
-    resources :faulties
     resources :products, :path => 'articulos'
     resources :lots, :path => 'lotes'
     resources :headquarters

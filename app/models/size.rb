@@ -1,6 +1,7 @@
 class Size < ActiveRecord::Base
   has_many :products
-  validates :size, :uniqueness => true, :presence => true
+  validates_presence_of :size, :message => 'Ingrese la talla.'
+  validates_uniqueness_of :size, :case_sensitive => false, :message => 'La talla ya existe.'
 end
 
 # == Schema Information

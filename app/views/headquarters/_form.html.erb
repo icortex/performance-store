@@ -1,15 +1,5 @@
 <%= form_for(@headquarter) do |f| %>
-    <% if @headquarter.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@headquarter.errors.count, "error") %> prohibited this headquarter from being saved:</h2>
-
-          <ul>
-            <% @headquarter.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render 'layouts/error_messages', :model => @headquarter %>
 
     <div class="field">
       <%= f.label 'Nombre' %>

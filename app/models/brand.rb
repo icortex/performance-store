@@ -1,6 +1,6 @@
 class Brand < ActiveRecord::Base
-  validates_presence_of :brand
-  validates_uniqueness_of :brand, :case_sensitive => false
+  validates_presence_of :brand, :message => 'Ingrese el nombre de la marca.'
+  validates_uniqueness_of :brand, :case_sensitive => false, :message => 'La marca ya existe.'
 end
 
 # == Schema Information

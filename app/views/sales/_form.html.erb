@@ -5,15 +5,7 @@
 <%= javascript_include_tag "nested_fields" %>
 
 <%= form_for(@sale) do |f| %>
-    <% if @sale.errors.any? %>
-        <div id="error_explanation">
-          <ul>
-            <% @sale.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render 'layouts/error_messages', :model => @sale %>
 
     <%= f.label 'Cliente' %>
     <div style="width:400px">

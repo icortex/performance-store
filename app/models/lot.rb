@@ -1,4 +1,5 @@
 class Lot < ActiveRecord::Base
+  validates_numericality_of :freight, :message => 'El flete debe ser un numero.'
 end
 
 # == Schema Information

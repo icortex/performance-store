@@ -1,5 +1,5 @@
 <%= form_for(@product, :html => {:multipart => true}) do |f| %>
-    <%= render 'error_messages', :p => @product %>
+    <%= render 'layouts/error_messages', :model => @product %>
 
     <div class="left">
       <%= image_tag @product.image.url :medium %>
@@ -100,21 +100,24 @@
             jq('#add_popup').load('<%= "/brands/nuevo" %>', null);
             jq('#add_popup').dialog({
                 title: 'Nueva Marca',
-                modal: true
+                modal: true,
+                resizable: false
             });
         });
         jq('#cloth_type').click(function() {
             jq('#add_popup').load('<%= "/cloth_types/nuevo" %>', null);
             jq('#add_popup').dialog({
                 title: 'Nuevo tipo de prenda',
-                modal: true
+                modal: true,
+                resizable: false
             });
         });
         jq('#size').click(function() {
             jq('#add_popup').load('<%= "/sizes/nuevo" %>', null);
             jq('#add_popup').dialog({
                 title: 'Nueva talla',
-                modal: true
+                modal: true,
+                resizable: false
             });
         });
 
@@ -122,7 +125,8 @@
             jq('#add_popup').load('<%= "/colors/nuevo" %>', null);
             jq('#add_popup').dialog({
                 title: 'Nuevo color',
-                modal: true
+                modal: true,
+                resizable: false
             });
         });
     </script>

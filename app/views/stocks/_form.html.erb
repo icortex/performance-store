@@ -1,15 +1,6 @@
 <%= form_for(@stock) do |f| %>
-    <% if @stock.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@stock.errors.count, "error") %> prohibited this stock from being saved:</h2>
+    <%= render 'layouts/error_messages', :model => @stock %>
 
-          <ul>
-            <% @stock.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
     <table style="margin:auto">
       <tr style="<%= @stock.product_id ? 'display:none' : '' %>">
         <td>

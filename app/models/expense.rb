@@ -1,4 +1,5 @@
 class Expense < ActiveRecord::Base
+  validates_numericality_of :cost, :message => 'Por favor, ingrese el costo.'
 end
 
 # == Schema Information
