@@ -1,6 +1,6 @@
-<h2>Inicio de Sesion</h2>
+<h2>Inicio de Sesión</h2>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class=>'form_class' }) do |f| %>
     <p><%= f.label 'Nombre de usuario' %><br/>
       <%= f.text_field :username %></p>
 
@@ -17,5 +17,5 @@
     <p><%= f.submit "Ingresar" %></p>
 
 <% end %>
-
+<br/>
 <%= render :partial => "devise/shared/links" %>

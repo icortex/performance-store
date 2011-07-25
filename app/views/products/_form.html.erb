@@ -7,86 +7,90 @@
       <%= f.file_field :image %>
     </div>
 
-    <table class="form_class">
-      <tr>
-        <td>
-          <%= f.label 'Marca' %>
-        </td>
-        <td>
-          <%= f.select :brand_id, Brand.all.collect { |brand| [brand.brand, brand.id] } %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Tipo' %>
-        </td>
-        <td>
-          <%= f.select :cloth_type_id, ClothType.all.collect { |element| [element.cloth_type, element.id] } %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Referencia' %>
-        </td>
-        <td>
-          <%= f.text_field :reference %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Modelo' %>
-        </td>
-        <td>
-          <%= f.text_field :model %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Codigo de barras' %>
-        </td>
-        <td>
-          <%= f.text_field :barcode %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Genero' %>
-        </td>
-        <td>
-          <%= f.radio_button :gender, 'Hombre', :checked => true %>Hombre
-          <%= f.radio_button :gender, 'Mujer' %>Mujer
-          <%= f.radio_button :gender, 'Unisex' %>Unisex
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Talla' %>
-        </td>
-        <td width="100px">
+    <div class="form_class">
+      <table>
+        <tr>
+          <td>
+            <%= f.label 'Marca' %>
+          </td>
+          <td>
+            <%= f.select :brand_id, Brand.all.collect { |brand| [brand.brand, brand.id] } %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Tipo' %>
+          </td>
+          <td>
+            <%= f.select :cloth_type_id, ClothType.all.collect { |element| [element.cloth_type, element.id] } %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Referencia' %>
+          </td>
+          <td>
+            <%= f.text_field :reference %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Modelo' %>
+          </td>
+          <td>
+            <%= f.text_field :model %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Codigo de barras' %>
+          </td>
+          <td>
+            <%= f.text_field :barcode %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Genero' %>
+          </td>
+          <td>
+            <%= f.radio_button :gender, 'Hombre', :checked => true %>Hombre
+            <%= f.radio_button :gender, 'Mujer' %>Mujer
+            <%= f.radio_button :gender, 'Unisex' %>Unisex
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Talla' %>
+          </td>
+          <td width="100px">
 
-          <% Size.all.each do |size| %>
-              <div style="display:inline-block;">
-                <%= check_box_tag "size_ids[#{size.size}]", size.id, checked_if_included(@sizes, size.size) %><%= size.size %>
-              </div>
-          <% end %>
+            <% Size.all.each do |size| %>
+                <div style="display:inline-block;">
+                  <%= check_box_tag "size_ids[#{size.size}]", size.id, checked_if_included(@sizes, size.size) %><%= size.size %>
+                </div>
+            <% end %>
 
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Color' %>
-        </td>
-        <td width="100px">
-          <% Color.all.each do |color| %>
-              <div style="display:inline-block;">
-                <%= check_box_tag "color_ids[#{color.color}]", color.id, checked_if_included(@colors, color.color) %><%= f.label 'wj', :style=>"background:##{color.rgb};color:##{color.rgb};", :class=>'color_selector' %>
-              </div>
-          <% end %>
-        </td>
-      </tr>
-    </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Color' %>
+          </td>
+          <td width="100px">
+            <% Color.all.each do |color| %>
+                <div style="display:inline-block;">
+                  <%= check_box_tag "color_ids[#{color.color}]", color.id, checked_if_included(@colors, color.color) %><%= f.label 'wj', :style=>"background:##{color.rgb};color:##{color.rgb};", :class=>'color_selector' %>
+                </div>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+      <br/>
 
-    <div class="actions">
-      <%= f.submit 'Aceptar' %>
+      <div class="actions">
+        <%= f.submit 'Aceptar' %>
+      </div>
     </div>
+
 <% end %>

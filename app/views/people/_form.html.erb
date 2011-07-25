@@ -1,93 +1,81 @@
 <%= form_for(@person) do |f| %>
     <%= render 'layouts/error_messages', :model => @person %>
 
-    <table class="form_class">
-      <tr>
-        <td>
-          <%= f.label 'Nombre' %>
-        </td>
-        <td>
-          <%= f.text_field :name %>
-        </td>
+    <div class="form_class">
+      <table>
+        <tr>
+          <td>
+            <%= f.label 'Nombre' %>
+          </td>
+          <td>
+            <%= f.text_field :name %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Identificacion' %>
+          </td>
+          <td>
+            <%= f.text_field :document_id %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Fecha de nacimiento' %>
+          </td>
+          <td>
+            <%= f.text_field :birthday, :id => 'datepicker' %>
+            <script>
+                jq(function() {
+                    jq("#datepicker").datepicker({
+                        dateFormat: 'yy-mm-dd',
+                        changeYear: true,
+                        yearRange: '1950:2000',
+                        changeMonth: true
+                    });
+                });
+            </script>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Genero' %>
+            <br/>
+          </td>
+          <td>
+            <%= f.radio_button :gender, 'Hombre', :checked => true %> Hombre
+            <%= f.radio_button :gender, 'Mujer' %> Mujer
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Telefono' %>
+          </td>
+          <td>
+            <%= f.text_field :phone %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Celular' %>
+          </td>
+          <td>
+            <%= f.text_field :mobile %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label :email %>
+          </td>
+          <td>
+            <%= f.email_field :email, :message=>'fff' %>
+          </td>
+        </tr>
+      </table>
+      <br>
 
-
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Identificacion' %>
-        </td>
-        <td>
-          <%= f.text_field :document_id %>
-        </td>
-
-
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Fecha de nacimiento' %>
-        </td>
-        <td>
-          <%= f.text_field :birthday, :id => 'datepicker' %>
-          <script>
-              jq(function() {
-                  jq("#datepicker").datepicker({
-                      dateFormat: 'yy-mm-dd',
-                      changeYear: true,
-                      yearRange: '1950:2000',
-                      changeMonth: true
-                  });
-              });
-          </script>
-        </td>
-
-
-      </tr>
-
-      <tr>
-        <td>
-          <%= f.label 'Genero' %>
-          <br/>
-        </td>
-        <td>
-          <%= f.radio_button :gender, 'Hombre', :checked => true %> Hombre
-          <%= f.radio_button :gender, 'Mujer' %> Mujer
-        </td>
-
-
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Telefono' %>
-        </td>
-        <td>
-          <%= f.text_field :phone %>
-        </td>
-
-
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Celular' %>
-        </td>
-        <td>
-          <%= f.text_field :mobile %>
-        </td>
-
-
-      </tr>
-      <tr>
-        <td>
-          <%= f.label :email %>
-        </td>
-        <td>
-          <%= f.email_field :email %>
-        </td>
-
-
-      </tr>
-
-    </table><br>
-    <div class="actions">
-      <%= f.submit 'Aceptar' %>
+      <div class="actions">
+        <%= f.submit 'Aceptar' %>
+      </div>
     </div>
 <% end %>

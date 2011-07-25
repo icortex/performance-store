@@ -1,34 +1,36 @@
 <%= form_for(@expense) do |f| %>
     <%= render 'layouts/error_messages', :model => @expense %>
+    <div class="form_class">
+      <table>
+        <tr>
+          <td>
+            <%= f.label 'Nombre' %>
+          </td>
+          <td>
+            <%= f.text_field :name %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Descripcion' %>
+          </td>
+          <td>
+            <%= f.text_field :description %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Costo' %>
+          </td>
+          <td>
+            <%= f.text_field :cost %>
+          </td>
+        </tr>
+      </table>
+      <br>
 
-    <table class="form_class">
-      <tr>
-        <td>
-          <%= f.label 'Nombre' %>
-        </td>
-        <td>
-          <%= f.text_field :name %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Descripcion' %>
-        </td>
-        <td>
-          <%= f.text_field :description %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Costo' %>
-        </td>
-        <td>
-          <%= f.text_field :cost %>
-        </td>
-      </tr>
-    </table><br>
-
-    <div class="actions">
-      <%= f.submit 'Aceptar' %>
+      <div class="actions">
+        <%= f.submit 'Aceptar' %>
+      </div>
     </div>
 <% end %>

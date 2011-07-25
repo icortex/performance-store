@@ -12,7 +12,7 @@
                 <tr>
                   <td><%= not_user.username %></td>
                   <td><%= not_user.email %></td>
-                  <td><%= not_user.type %></td>
+                  <td class='center_td'><%= not_user.type == 'Seller' ? 'Vendedor' : not_user.type %></td>
                   <td class='center_td'><%= check_box_tag "validation[#{not_user.id}]" %></td>
                   <td class='center_td'><%= check_box_tag "destroy[#{not_user.id}]" %></td>
                 </tr>
@@ -33,7 +33,7 @@
                 <tr>
                   <td><%= user.username %></td>
                   <td><%= user.email %></td>
-                  <td><%= user.type %></td>
+                  <td class='center_td'><%= user.type == 'Seller' ? 'Vendedor' : user.type %></td>
                   <td class='center_td'><%= check_box_tag "destroy[#{user.id}]" %></td>
                 </tr>
             <% end %>

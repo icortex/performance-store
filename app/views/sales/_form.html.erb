@@ -35,49 +35,77 @@
       </tr>
     </table>
 
-    <table class="form_class">
-
-      <tr>
-        <td>
-          <%= f.label 'Descuento (%)' %>
-        </td>
-        <td>
-          <input type="text" size="30px" id='discount_percentage'>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Descuento' %>
-        </td>
-        <td>
-          <%= f.text_field :discount %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Razon del descuento' %>
-        </td>
-        <td>
-          <%= f.text_field :discount_reason %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'IVA' %>
-        </td>
-        <td>
-          <%= f.text_field :iva %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Total' %>
-        </td>
-        <td>
-          <%= f.text_field :total %>
-        </td>
-      </tr>
-    </table>
+    <div class="float_left">
+      <table class="form_class">
+        <tr>
+          <td>
+            <%= f.label 'Descuento (%)' %>
+          </td>
+          <td>
+            <input type="text" size="30px" id='discount_percentage'>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Descuento' %>
+          </td>
+          <td>
+            <%= f.text_field :discount %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Razon del descuento' %>
+          </td>
+          <td>
+            <%= f.text_field :discount_reason %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'IVA' %>
+          </td>
+          <td>
+            <%= f.text_field :iva %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Total' %>
+          </td>
+          <td>
+            <%= f.text_field :total %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="float_left">
+      <table>
+        <tr>
+          <td>
+            <%= f.label 'Separado' %>
+          </td>
+          <td>
+            <%= check_box_tag 'separado' %>
+          </td>
+        </tr>        <tr>
+          <td>
+            <%= f.label 'Abono' %>
+          </td>
+          <td>
+            <%#= f.text_field :iva %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Saldo' %>
+          </td>
+          <td>
+            <%#= f.text_field :total %>
+          </td>
+        </tr>
+      </table>
+    </div>
     <br/>
     <div class="actions">
       <%= f.submit 'Aceptar' %>

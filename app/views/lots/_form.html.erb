@@ -1,64 +1,68 @@
 <%= form_for(@lot) do |f| %>
     <%= render 'layouts/error_messages', :model => @lot %>
 
-    <table class="form_class">
-      <tr>
-        <td>
-          <%= f.label 'Fecha de llegada' %>
-        </td>
-        <td>
-          <%= f.text_field :arrival_date, :id => 'datepicker' %>
-          <script>
-              jq(function() {
-                  jq("#datepicker").datepicker({
-                      dateFormat: 'yy-mm-dd'
-                  });
-              });
-          </script>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Origen' %>
-        </td>
-        <td>
-          <%= f.text_field :origin %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Peso' %>
-        </td>
-        <td>
-          <%= f.text_field :weight %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Transportador' %>
-        </td>
-        <td>
-          <%= f.text_field :carrier %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Flete' %>
-        </td>
-        <td>
-          <%= f.text_field :freight %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label 'Costo total' %>
-        </td>
-        <td>
-          <%= f.text_field :total_cost %>
-        </td>
-      </tr>
-    </table><br>
-    <div class="actions">
-      <%= f.submit 'Aceptar' %>
+    <div class="form_class">
+      <table>
+        <tr>
+          <td>
+            <%= f.label 'Fecha de llegada' %>
+          </td>
+          <td>
+            <%= f.text_field :arrival_date, :id => 'datepicker' %>
+            <script>
+                jq(function() {
+                    jq("#datepicker").datepicker({
+                        dateFormat: 'yy-mm-dd'
+                    });
+                });
+            </script>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Origen' %>
+          </td>
+          <td>
+            <%= f.text_field :origin %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Peso' %>
+          </td>
+          <td>
+            <%= f.text_field :weight %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Transportador' %>
+          </td>
+          <td>
+            <%= f.text_field :carrier %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Flete' %>
+          </td>
+          <td>
+            <%= f.text_field :freight %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Costo total' %>
+          </td>
+          <td>
+            <%= f.text_field :total_cost %>
+          </td>
+        </tr>
+      </table>
+      <br>
+
+      <div class="actions">
+        <%= f.submit 'Aceptar' %>
+      </div>
     </div>
 <% end %>

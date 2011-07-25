@@ -23,7 +23,7 @@ class PeopleController < MyApplicationController
         end
         @emails.chop!.chop! if !@emails.chop!.nil?
 
-        @title = 'Lista de cumpleaneros'
+        @title = "Lista de cumpleaneros"
     end
 
     respond_to do |format|
