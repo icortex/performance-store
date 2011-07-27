@@ -7,6 +7,7 @@ class SaleTest < ActiveSupport::TestCase
   end
 end
 
+
 # == Schema Information
 #
 # Table name: sales
@@ -21,5 +22,6 @@ end
 #  updated_at      :datetime
 #  headquarter_id  :integer(4)
 #  total_cost      :integer(4)
+#  separated       :boolean(1)      default(FALSE)
 #
 

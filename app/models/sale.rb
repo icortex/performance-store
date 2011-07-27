@@ -4,13 +4,18 @@ class Sale < ActiveRecord::Base
   belongs_to :headquarter
 
   has_many :sale_products, :dependent => :destroy
+  has_many :separates, :dependent => :destroy
   has_many :products, :through => :sale_products
-  accepts_nested_attributes_for :sale_products, :reject_if => lambda { |sp| sp[:reference].blank? },
+
+  accepts_nested_attributes_for :sale_products,
                                 :allow_destroy => true
 
-  before_update :get_saved_qty
+  accepts_nested_attributes_for :separates, :reject_if => lambda { |sp| sp[:payment].blank?},
+                                :allow_destroy => true
+
+  before_update :get_saved_qty, :verify_status
+  before_save :update_total_cost, :update_payments_cost
   after_save :update_stock
-  before_save :update_total_cost
 
   attr_accessor :old_quantities
 
@@ -46,6 +51,23 @@ class Sale < ActiveRecord::Base
       index+=1
     end
     self.total_cost = total_cost
+  end
+
+  def verify_status
+    payments_sum = self.separates.map(&:payment).inject {|mem,el| mem+el}
+    if payments_sum
+    if payments_sum >= self.total
+      self.separated=0
+    else
+      self.separated=1
+    end
+    end
+  end
+
+  def update_payments_cost
+    self.separates.each do |s|
+        s.payment_cost=s.payment*self.total_cost/(self.total+self.discount)
+    end
   end
 end
 

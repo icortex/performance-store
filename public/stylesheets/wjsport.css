@@ -5,7 +5,7 @@ div.container {
     line-height: 150%;
 }
 
-div.header, div.footer {
+div.header, footer {
     color: white;
     position: fixed;
     width: 99.5%
@@ -18,11 +18,15 @@ div.header {
 /*background:white;*/
 }
 
-div.footer {
+footer{
     bottom: 0;
     left: 0;
     margin: 0 0.25% 2px 0.25%;
     background-color: #25578B;
+}
+
+footer label{
+    padding-left: 1em;
 }
 
 div.content {
@@ -212,4 +216,9 @@ table.users *{
 
 .form_class label{
     font-size:medium;
+}
+
+input[type='submit']{
+    font-size: medium;
+    padding: 0.5em 1em;
 }

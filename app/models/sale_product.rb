@@ -6,6 +6,7 @@ class SaleProduct < ActiveRecord::Base
   belongs_to :sale
   belongs_to :product
 
+  validates_presence_of :product_id, :message => 'Debe especificar el producto que va a vender!'
   validates_numericality_of :quantity, :price, :greater_than => 0, :message => 'debe ser un numero!'
 end
 

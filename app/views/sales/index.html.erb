@@ -1,10 +1,8 @@
 <%= render 'links' %>
 
-<div><h1>Lista de ventas en <%= params[:headquarter] %></h1>
-</div>
+<h1>Lista de ventas en <%= params[:headquarter] %></h1>
 <table class="dataTablesId">
   <thead>
-
   <tr>
     <th>Cliente</th>
     <th>Fecha</th>
@@ -15,7 +13,6 @@
   </tr>
   </thead>
   <tbody>
-
 
   <% @sales.each do |sale| %>
       <tr>
@@ -33,3 +30,5 @@
   <% end %>
   </tbody>
 </table>
+
+<%= render 'layouts/datatables_js' %>

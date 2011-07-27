@@ -16,6 +16,7 @@ two:
   iva: 1
   total: 1
 
+
 # == Schema Information
 #
 # Table name: sales
@@ -30,5 +31,6 @@ two:
 #  updated_at      :datetime
 #  headquarter_id  :integer(4)
 #  total_cost      :integer(4)
+#  separated       :boolean(1)      default(FALSE)
 #
 

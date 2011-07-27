@@ -28,6 +28,14 @@
         } else {
             jq('#discount_percentage').val(discount.val() / sum_subtotals() * 100);
         }
+
+        jq('#sale_separated').mouseup(
+                function() {
+                    separate_visibility(true);
+
+                });
+
+        separate_visibility(false);
     }
 
     function autocomplete_product(fieldset_selector, brand, reference, size, color, product_options) {
@@ -85,6 +93,12 @@
         calculate_total();
 
         quantity_input.keyup(function() {
+            subtotal.html(quantity_input.val() * price_input.val());
+            calculate_total();
+            compare_quantity(quantity_input.val(), max_quantity_label.html());
+        });
+
+        quantity_input.mouseup(function() {
             subtotal.html(quantity_input.val() * price_input.val());
             calculate_total();
             compare_quantity(quantity_input.val(), max_quantity_label.html());
@@ -260,6 +274,35 @@
         else {
             save_button.attr("disabled", false);
             notice.hide();
+        }
+    }
+
+    function calculate_balance() {
+        var payments = jq('tr:visible input[id*="payment"]');
+        var total_payments = 0;
+        var total = jq('#sale_total').val();
+        jq.each(payments, function(i, payment) {
+            total_payments += parseFloat(payment.value);
+        });
+        return total - total_payments;
+    }
+
+    function set_balance() {
+        jq('#balance').val(calculate_balance());
+    }
+
+    function separate_visibility(event) {
+        var el = jq('#sale_separated');
+        var payments = jq('tr:visible input[id*="payment"]');
+        if (eval((event? '!': '')+"el.attr('checked')")) {
+            jq('#sale_separated').closest('div').children('div').show(500 * event);
+        } else {
+            jq('#sale_separated').closest('div').children('div').hide(500 * event);
+            <% if @sale.id.nil? %>
+            jq.each(payments, function(i, payment) {
+                payment.value = '';
+            });
+            <% end %>
         }
     }
 </script>

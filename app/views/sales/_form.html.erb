@@ -29,8 +29,7 @@
       <% end %>
       <tr id='add_product'>
         <td>
-
-          <%= link_to_add_fields image_tag('add.png', :title => 'Agregar articulo'), f, :sale_products %>
+          <%= link_to_add_fields image_tag('add.png', :title => 'Agregar articulo'), f, :sale_products, '#add_product', true %>
         </td>
       </tr>
     </table>
@@ -78,36 +77,37 @@
           </td>
         </tr>
       </table>
+      <br/>
+
+      <div class="actions">
+        <%= f.submit 'Aceptar' %>
+      </div>
     </div>
-    <div class="float_left">
-      <table>
+
+    <div class="float_left form_class">
+      <%= f.label 'Separado?' %>
+      <%= f.check_box :separated %>
+
+      <div>
+        <table>
         <tr>
-          <td>
-            <%= f.label 'Separado' %>
-          </td>
-          <td>
-            <%= check_box_tag 'separado' %>
-          </td>
-        </tr>        <tr>
-          <td>
-            <%= f.label 'Abono' %>
-          </td>
-          <td>
-            <%#= f.text_field :iva %>
-          </td>
+          <th>Abono</th>
+          <th>Fecha</th>
         </tr>
-        <tr>
-          <td>
-            <%= f.label 'Saldo' %>
-          </td>
-          <td>
-            <%#= f.text_field :total %>
-          </td>
+
+        <%= f.fields_for :separates do |sf| %>
+            <tr>
+              <%= render :partial => 'separates_fields', :locals => {:f => sf} %>
+            </tr>
+        <% end %>
+        <tr id='add_payment'>
+          <td><%= link_to_add_fields 'Abonar', f, :separates, '#add_payment' %></td>
         </tr>
       </table>
-    </div>
-    <br/>
-    <div class="actions">
-      <%= f.submit 'Aceptar' %>
+      <br/>
+      <%= label_tag 'Saldo ' %>
+      <%= text_field_tag 'balance' %>
+      <%= button_to_function 'Calcular', 'set_balance()' %>
+      </div>
     </div>
 <% end %>

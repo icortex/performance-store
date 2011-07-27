@@ -4,7 +4,6 @@
 </div>
 <table class="dataTablesId">
   <thead>
-
   <tr>
     <th>Imagen</th>
     <th>Marca</th>
@@ -52,9 +51,10 @@
                   resizable: false,
                   modal: true
               });
-          });</script>
+          });
+      </script>
   <% end %>
   </tbody>
 </table>
-
+<%= render 'layouts/datatables_js' %>
 <div id="stock_popup"></div>

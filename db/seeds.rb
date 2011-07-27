@@ -8,3 +8,7 @@
 Variable.create(:key => 'IVA', :value => '16')
 Variable.create(:key => 'Dolar', :value => '1800')
 Variable.create(:key => 'Utilidad', :value => '20')
+
+Headquarter.create(:name => 'Sede')
+
+User.create(:username=>'admin', :email=>'admin@performance.com', :type=>'Admin',:password=>'admin123', :validated=>'1')

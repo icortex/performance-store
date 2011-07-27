@@ -14,6 +14,9 @@ en:
           sale_products:
             price: "Precio"
             quantity: "Cantidad"
+            product_id: ""
+          separates:
+            payment: ""
         stock:
           product_id: ""
         brand:
@@ -33,4 +36,5 @@ en:
           freight: ""
         variable:
           value: ""
-
+        separate:
+          payment: ""

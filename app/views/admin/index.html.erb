@@ -1,16 +1,17 @@
 <div><%= link_to 'Validar Usuarios', validate_users_path, :class => 'menu_link' %></div>
 <div class="float_left">
-  <%= render '/headquarters/index' %>
-  <br/><br/>
   <%= render '/brands/index' %>
+  <br/><br/>
+  <%= render '/cloth_types/index' %>
 </div>
 <div class="float_left">
-  <%= render '/cloth_types/index' %>
+  <%= render '/colors/index' %>
   <br/><br/>
   <%= render '/sizes/index' %>
 </div>
 <div class="float_left">
-  <%= render '/colors/index' %>
+  <%= render '/headquarters/index' %>
+
   <br/><br/>
   <%= render '/variables/index' %>
 </div>

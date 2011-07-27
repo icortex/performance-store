@@ -1,16 +1,15 @@
 <div id="invoice">
   <div align="center">
     <h2>Performance Store</h2>
-
     <p>
       Nit. 1651561658151 <br/>
-      Calle 9N # 12 - 56 Barrio. Santa Clara<br/>
-      Telefono: 8362536
+      <%= @sale.headquarter.address if @sale.headquarter.address %><br/>
+      <%= ('Teléfono:' + @sale.headquarter.phone) if @sale.headquarter.phone %>
     </p>
   </div>
 <pre>
 <b>Sede: </b><%= @sale.headquarter.name %>                  <b>Fecha: </b><%= @sale.created_at %>
-<b>Cliente: </b><%= @client.split(',')[0] %>                <b>Identificacion: </b><%= @client.split(',')[1] %>
+<b>Cliente: </b><%= @client.split(',')[0] %>                <b>Identificación: </b><%= @client.split(',')[1] %>
 </pre>
 
   <table id='productsTable'>

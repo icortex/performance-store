@@ -16,9 +16,9 @@
   <tr>
     <th>Nombre</th>
     <th>Fecha de nacimiento</th>
-    <th>Identificacion</th>
+    <th>Identificación</th>
     <th>Genero</th>
-    <th>Telefono</th>
+    <th>Teléfono</th>
     <th>Celular</th>
     <th>Email</th>
     <th>Opciones</th>
@@ -40,6 +40,7 @@
           <%= link_to image_tag('/images/delete.png', :title => 'Borrar informacion'), person, :confirm => 'El cliente sera borrado. Deseas continuar?', :method => :delete %>
         </td>
       </tr>
-      </tbody>
   <% end %>
-  </table>
+  </tbody>
+</table>
+<%= render 'layouts/datatables_js' %>
