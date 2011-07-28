@@ -1,0 +1,57 @@
+
+*{
+ font-family: monospace;
+}
+#invoice_title h2 {
+    font-weight: bold;
+}
+table{
+    margin: 1em 0;
+}
+div.header, footer{
+    display:none;
+}
+
+div#content #invoice{
+    width:100%;
+}
+#invoice_title *{
+    margin: 0 0;
+}
+table#invoice_subtitle th,table#invoice_subtitle td{
+    text-align: left;
+}
+table#invoice_subtitle td.paddable{
+    padding-right: 2em;
+}
+table#totals{
+    float: right;
+    margin-top:0
+}
+table#totals th{
+ text-align: left;
+    padding-right: 4em;
+}
+table#totals td{
+ text-align: right;
+}
+#productsTable td,#productsTable th{
+    padding: 1ex 2ex;
+}
+.borden {
+    border-top: #dcdcdc solid 1px;
+    border-left: #dcdcdc solid 1px;
+    text-align: center;
+}
+.borden td, .borden th{
+    border-bottom: #dcdcdc solid 1px;
+    border-right: #dcdcdc solid 1px;
+}
+div#aligner{
+    display:table;
+    margin: auto
+}
+#invoice_title p{
+    font-size: x-small;
+    font-family: Tahoma sans-serif;
+}

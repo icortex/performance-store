@@ -38,3 +38,11 @@ en:
           value: ""
         separate:
           payment: ""
+        user:
+          current_password: "La contraseña actual"
+          username: "El nombre de usuario"
+          password: "La contraseña"
+          email: "El email"
+      errors:
+        messages:
+          taken: "ya existe."

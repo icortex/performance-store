@@ -1,18 +1,32 @@
 <div id="invoice">
-  <div align="center">
-    <h2>Performance Store</h2>
+  <div id="invoice_title" align="center">
+    <h2>PERFORMANCE STORE</h2>
+
     <p>
-      Nit. 1651561658151 <br/>
+      Nit. 1061689636-4 <br/>
       <%= @sale.headquarter.address if @sale.headquarter.address %><br/>
-      <%= ('Teléfono:' + @sale.headquarter.phone) if @sale.headquarter.phone %>
+      <%= ('Teléfono: ' + @sale.headquarter.phone) if @sale.headquarter.phone %>
     </p>
   </div>
-<pre>
-<b>Sede: </b><%= @sale.headquarter.name %>                  <b>Fecha: </b><%= @sale.created_at %>
-<b>Cliente: </b><%= @client.split(',')[0] %>                <b>Identificación: </b><%= @client.split(',')[1] %>
-</pre>
+  <div id="aligner">
+  <table id="invoice_subtitle">
+    <tr>
+      <th>Sede:</th>
+      <td class="paddable"><%= @sale.headquarter.name %></td>
+      <th>Fecha:</th>
+      <td><%= @sale.created_at.to_s(:db) %></td>
+    </tr>
+    <% if !@client.blank? %>
+        <tr>
+          <th>Cliente:</th>
+          <td class="paddable"><%= @client.split(',')[0].strip %></td>
+          <th>Identificación:</th>
+          <td><%= @client.split(',')[1].strip %></td>
+        </tr>
+    <% end %>
+  </table>
 
-  <table id='productsTable'>
+  <table id='productsTable' class="borden">
     <thead>
     <th>Marca</th>
     <th>Referencia</th>
@@ -36,19 +50,21 @@
     <% end %>
     </tbody>
   </table>
-  <br/>
-  <table>
+
+  <table id="totals" class="borden">
     <tr>
-      <td><b>Descuento: </b></td>
-      <td><%= number_to_currency @sale.discount %></td>
+      <th>Descuento:</th>
+      <td><%= number_to_currency @sale.discount, :precision => 0 %></td>
     </tr>
     <tr>
-      <td><b>IVA: </b></td>
-      <td><%= number_to_currency @sale.iva %></td>
+      <th>IVA:</th>
+      <td><%= number_to_currency @sale.iva, :precision => 0 %></td>
     </tr>
     <tr>
-      <td><b>Total: </b></td>
-      <td><%= number_to_currency @sale.total %></td>
+      <th>Total:</th>
+      <td><%= number_to_currency @sale.total, :precision => 0 %></td>
     </tr>
   </table>
+    </div>
 </div>
+<%= content_for :head, stylesheet_tag('print', :media => 'print') %>

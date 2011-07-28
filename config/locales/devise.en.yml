@@ -10,7 +10,9 @@ en:
       not_saved:
         one: "1 error no permite que este %{resource} sea guardado:"
         other: "%{count} errores no permiten que este %{resource} sea guardado:"
-
+      blank: "debe escribirse."
+      invalid: "es invalida."
+      taken: "bbbb"
   devise:
     failure:
       already_authenticated: 'Ya has iniciado sesion..'

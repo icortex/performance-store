@@ -46,4 +46,3 @@ end
 #  headquarter_id         :integer(4)
 #  validated              :boolean(1)      default(FALSE)
 #
-

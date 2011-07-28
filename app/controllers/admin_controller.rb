@@ -1,4 +1,5 @@
 class AdminController < MyApplicationController
+
   def index
     @brands = Brand.all
     @headquarters = Headquarter.all
