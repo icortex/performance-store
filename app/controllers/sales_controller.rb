@@ -25,6 +25,7 @@ class SalesController < MyApplicationController
     @sale = Sale.new
     @sale.sale_products.build
     @products='[]'
+    @person = Person.new
   end
 
   def edit
@@ -33,6 +34,7 @@ class SalesController < MyApplicationController
       organize(Product.where("reference = ? ", p.reference))[0]
     end
     @products=products.to_json
+    @person = Person.new
   end
 
   def create

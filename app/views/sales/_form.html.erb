@@ -10,8 +10,10 @@
     <%= f.label 'Cliente' %>
     <div style="width:400px">
       <%= f.text_field :person_id %>
+      <%= link_to_function 'Nuevo cliente', 'create_client();' %>
       <%= javascript_tag 'autocomplete_client();' %>
     </div>
+
     <br/>
     <table id='productsTable'>
       <th>Articulo</th>
@@ -111,3 +113,12 @@
       </div>
     </div>
 <% end %>
+<script type="text/javascript">
+              function create_client(){
+          jq('#new_client').dialog('open');
+      }
+</script>
+
+<div id="new_client">
+  <%= render 'people/form' %>
+</div>

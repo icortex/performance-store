@@ -49,7 +49,7 @@ class PeopleController < MyApplicationController
 
     respond_to do |format|
       if @person.save
-        format.html { redirect_to(people_path, :notice => 'Cliente agregado exitosamente.') }
+        format.html { redirect_to(:back, :notice => 'Cliente agregado exitosamente.') }
       else
         format.html { render :action => "new" }
       end
