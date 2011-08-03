@@ -4,6 +4,7 @@
 
   <% @colors.each do |color| %>
       <tr>
+        <td><%= label_tag 'ps', nil, {:style=>"background:##{color.rgb};color:##{color.rgb};", :class=>'color_selector'} %></td>
         <td><%= color.color %></td>
         <td><%= link_to image_tag('/images/edit.png', :title => 'Modificar color'), '#', :id=>'color_'+color.id.to_s %>
           <script type="text/javascript">
@@ -12,8 +13,6 @@
 
                   });
                   jq('#edit_popup').dialog({
-                      height: 180,
-                      width: 300 ,
                       title: 'Modificar color',
                       modal: true,
                       resizable: false
