@@ -6,6 +6,7 @@
   <tr>
     <th>Nombre</th>
     <th>Descripcion</th>
+    <th>Tipo de Gasto</th>
     <th>Fecha</th>
     <th>Costo</th>
     <th>Opciones</th>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= expense.name %></td>
         <td><%= expense.description %></td>
+        <td><%= expense.expense_type.name.capitalize %></td>
         <td><%= expense.created_at %></td>
         <td><%= expense.cost %></td>
         <td width="110px">

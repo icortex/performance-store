@@ -20,6 +20,16 @@
         </tr>
         <tr>
           <td>
+            <%= f.label 'Tipo de gasto' %>
+          </td>
+          <td>
+            <%  ExpenseType.all.each do |type| %>
+            <%= f.radio_button :expense_type_id, type.id, :checked => true %> <%= type.name.capitalize %>
+            <% end  %>
+          </td>
+        </tr>
+        <tr>
+          <td>
             <%= f.label 'Costo' %>
           </td>
           <td>
