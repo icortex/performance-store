@@ -31,24 +31,29 @@
           <td><%= sale_product.product.size.size %></td>
           <td><%= sale_product.product.color.color %></td>
           <td><%= sale_product.quantity %></td>
-          <td><%= sale_product.price %></td>
+          <td><%= number_to_currency sale_product.price, :precision => 0 %></td>
         </tr>
     <% end %>
     </tbody>
   </table>
   <br/>
   <table>
+    <% if @sale.discount != 0 %>
     <tr>
       <td><b>Descuento: </b></td>
-      <td><%= number_to_currency @sale.discount %></td>
+      <td><%= number_to_currency @sale.discount, :precision => 0 %></td>
     </tr>
+    <% end %>
+    <% if @sale.iva != 0 %>
     <tr>
       <td><b>IVA: </b></td>
-      <td><%= number_to_currency @sale.iva %></td>
+      <td><%= number_to_currency @sale.iva, :precision => 0 %></td>
     </tr>
+    <% end %>
     <tr>
       <td><b>Total: </b></td>
-      <td><%= number_to_currency @sale.total %></td>
+      <td><%= number_to_currency @sale.total, :precision => 0 %></td>
     </tr>
   </table>
 </div>
+<%= content_for :head, stylesheet_tag('print', :media => 'print') %>

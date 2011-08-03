@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Performance Store</title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag 'colorpicker','jquery-ui-1.8.13.custom','scaffold','token-input','wjsport' %>
   <%= javascript_include_tag 'jquery', 'rails', 'jquery-ui-1.8.14.custom.min', 'jquery.dataTables.min', 'colorpicker', 'jquery.zclip.min' %>
   <%= csrf_meta_tag %>
   <script type="text/javascript">
@@ -15,6 +15,7 @@
           }
       });
   </script>
+  <%= yield :head %>
 </head>
 <body>
 
@@ -29,7 +30,7 @@
         <td id="session_name">
           <% if user_signed_in? %>
               Hola <%= link_to current_user.username, edit_user_registration_path %>!
-              <%= link_to "Cerrar Sesion", destroy_user_session_path %>&emsp;
+              <%= link_to "Cerrar Sesión", destroy_user_session_path %>&emsp;
           <% end %>
         </td>
       </tr>

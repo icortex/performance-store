@@ -10,10 +10,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110803193242) do
+ActiveRecord::Schema.define(:version => 20110803215619) do
 
   create_table "brands", :force => true do |t|
     t.string   "brand"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "carriers", :force => true do |t|
+    t.string   "company"
+    t.string   "city"
+    t.string   "contact"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "website"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
