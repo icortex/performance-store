@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Performance Store</title>
-  <%= stylesheet_link_tag 'colorpicker','jquery-ui-1.8.13.custom','scaffold','token-input','wjsport' %>
+  <%= stylesheet_link_tag 'colorpicker', 'jquery-ui-1.8.13.custom', 'scaffold', 'token-input', 'wjsport' %>
   <%= javascript_include_tag 'jquery', 'rails', 'jquery-ui-1.8.14.custom.min', 'jquery.dataTables.min', 'colorpicker', 'jquery.zclip.min' %>
   <%= csrf_meta_tag %>
   <script type="text/javascript">
@@ -21,29 +21,29 @@
 
 <div class="container">
 
-  <div class='header'>
+  <header>
     <table id="header_table">
       <tr>
         <td>
-          <h1>&emsp;PERFORMANCE STORE</h1>
+          <h1>PERFORMANCE STORE</h1>
         </td>
         <td id="session_name">
           <% if user_signed_in? %>
               Hola <%= link_to current_user.username, edit_user_registration_path, :id => 'username' %>!
-              <%= link_to "Cerrar Sesión", destroy_user_session_path %>&emsp;
+              <%= link_to "Cerrar Sesión", destroy_user_session_path, :id => 'sign_out' %>
           <% end %>
         </td>
       </tr>
     </table>
-
-    <%= render 'layouts/menu' %>
-
+    <nav id='principal-menu'>
+      <%= render 'layouts/menu' %>
+    </nav>
     <span class="notice"><%= notice %></span>
     <span class="alert"><%= alert %></span>
-  </div>
-  <div class='content'>
+  </header>
+  <section>
     <%= yield %>
-  </div>
+  </section>
   <footer>
     <label for="us">© 2011 CodeScrum</label>
   </footer>
