@@ -14,17 +14,22 @@ class ReportsController < MyApplicationController
 
           first_day_s= first_day.to_s
           end_day_s= end_day.to_s
-          separations_results = chart_helper(first_day_s, end_day_s,'separate',['payment','payment_cost'],'ss.created_at','s.separated=1 and', 'as ss join sales as s on ss.sale_id=s.id')
-          sales_results = chart_helper(first_day_s, end_day_s,'sale',['total','total_cost'],'created_at', 'separated=0 and')
+          separations_results = chart_helper(first_day_s, end_day_s,'separate',['payment','payment_cost'],'ss.created_at',"s.separated=1 and s.headquarter_id=#{params[:headquarter]} and", 'as ss join sales as s on ss.sale_id=s.id')
+          sales_results = chart_helper(first_day_s, end_day_s,'sale',['total','total_cost'],'created_at', "separated=0 and headquarter_id=#{params[:headquarter]} and")
           sales = sales_results[0]
           separates = separations_results[0]
-          expenses_results = chart_helper(first_day_s, end_day_s,'expense',['cost'])
-          expenses = expenses_results[0]
+          expenses_results = chart_helper(first_day_s, end_day_s,'expense',['cost'],'created_at',"headquarter_id=#{params[:headquarter]} and",'','expense_type_id')
+          p "************************************"
+          p expenses_results[0][0].cost
+          @op_expenses = expenses_results[0][0].cost
+          @s_expenses = expenses_results[0][1].cost
+          @ot_expenses = expenses_results[0][2].cost
           lots_results = chart_helper(first_day_s, end_day_s,'lot',['freight'],'arrival_date')
           @sales=sales_results[1][0] + separations_results[1][0]
           @sales_cost=sales_results[1][1]+separations_results[1][1]
           @gross_profit=@sales-@sales_cost
-          @expenses=expenses_results[1][0]+lots_results[1][0]
+          @expenses=@op_expenses+@s_expenses+@ot_expenses
+          @freight=lots_results[1][0]
           @before_taxes_reserve_profit=@gross_profit-@expenses
           @taxes=Variable.find(4).value.to_f/100 * zero_if_neg(@before_taxes_reserve_profit)
           @reserve=Variable.find(5).value.to_f/100 * zero_if_neg(@before_taxes_reserve_profit)
@@ -58,8 +63,8 @@ class ReportsController < MyApplicationController
   #  sales = sales_results[0]  # array with sales per day
   #  sales_total = sales_results[1][0]
   #  sales_total_cost = sales_results[1][1]
-  def chart_helper(start_date, end_date, model, columns, date='created_at', where_modifier = '',join_modifier='')
-    statement = build_statement(start_date, end_date, model, columns, date, where_modifier,join_modifier)
+  def chart_helper(start_date, end_date, model, columns, date='created_at', where_modifier = '',join_modifier='', group='')
+    statement = build_statement(start_date, end_date, model, columns, date, where_modifier,join_modifier,group)
     results=eval(model.capitalize).find_by_sql(statement)
     sums=Array.new columns.length
     index=0
@@ -75,13 +80,14 @@ class ReportsController < MyApplicationController
     [results, sums]
   end
 
-  def build_statement(start_date, end_date, model, columns, date, where_modifier = '',join_modifier='')
-      statement='select *'
+  def build_statement(start_date, end_date, model, columns, date, where_modifier = '',join_modifier='',group='')
+    statement='select *'
     columns.each { |c| statement+=",sum(#{c}) as #{c}" }
     statement+=" from #{pluralize(2,model).sub(/[2] /,'')} #{join_modifier} " +
         "where #{where_modifier} #{date} > '#{start_date}' "+
         "and #{date} < '#{end_date}' "
-    statement+="group by date(#{date})"
+    statement+="group by date(#{date})" if group.blank?
+    statement+="group by #{group}" if !group.blank?
     statement
   end
 

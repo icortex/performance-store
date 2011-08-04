@@ -15,8 +15,9 @@ WJSport::Application.routes.draw do
     resources :brands
     resources :cloth_types
     resources :sizes
-    resources :contacts
     resources :variables
+    resources :carriers, :path => 'transportador'
+
 
     get "admin/validar" => "admin#validate", :as => :validate_users
     post "admin/validar" => "admin#validation", :as => :validate_users

@@ -45,23 +45,28 @@
           <td><%= sale_product.product.size.size %></td>
           <td><%= sale_product.product.color.color %></td>
           <td><%= sale_product.quantity %></td>
-          <td><%= sale_product.price %></td>
+          <td><%= number_to_currency sale_product.price, :precision => 0 %></td>
         </tr>
     <% end %>
     </tbody>
   </table>
 
-  <table id="totals" class="borden">
+  <br/>
+  <table>
+    <% if @sale.discount != 0 %>
     <tr>
-      <th>Descuento:</th>
+      <td><b>Descuento: </b></td>
       <td><%= number_to_currency @sale.discount, :precision => 0 %></td>
     </tr>
+    <% end %>
+    <% if @sale.iva != 0 %>
     <tr>
-      <th>IVA:</th>
+      <td><b>IVA: </b></td>
       <td><%= number_to_currency @sale.iva, :precision => 0 %></td>
     </tr>
+    <% end %>
     <tr>
-      <th>Total:</th>
+      <td><b>Total: </b></td>
       <td><%= number_to_currency @sale.total, :precision => 0 %></td>
     </tr>
   </table>

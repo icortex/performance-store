@@ -80,7 +80,8 @@
           <td width="100px">
             <% Color.all.each do |color| %>
                 <div style="display:inline-block;">
-                  <%= check_box_tag "color_ids[#{color.color}]", color.id, checked_if_included(@colors, color.color) %><%= f.label 'wj', :style=>"background:##{color.rgb};color:##{color.rgb};", :class=>'color_selector' %>
+                  <%= check_box_tag "color_ids[#{color.color}]", color.id, checked_if_included(@colors, color.color) %>
+                  <%= f.label 'ps', :style=>"background:##{color.rgb};color:##{color.rgb};", :class=>'color_selector' %>
                 </div>
             <% end %>
           </td>

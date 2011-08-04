@@ -6,6 +6,7 @@
   <tr>
     <th>Nombre</th>
     <th>Descripcion</th>
+    <th>Tipo de Gasto</th>
     <th>Fecha</th>
     <th>Costo</th>
     <th>Opciones</th>
@@ -16,8 +17,9 @@
       <tr>
         <td><%= expense.name %></td>
         <td><%= expense.description %></td>
+        <td><%= expense.expense_type.name.capitalize %></td>
         <td><%= expense.created_at %></td>
-        <td><%= expense.cost %></td>
+        <td><%= number_to_currency expense.cost, :precision => 0 %></td>
         <td width="110px">
           <%= link_to image_tag('/images/edit.png', :title => 'Modificar gasto'), edit_expense_path(expense) %>
           <%= link_to image_tag('/images/delete.png', :title => 'Borrar gasto'), expense, :confirm => 'El gasto sera borrado. Deseas continuar?', :method => :delete %>

@@ -46,3 +46,30 @@ en:
       errors:
         messages:
           taken: "ya existe."
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "cerca de 1 hora"
+        other: "cerca de %{count} horas"
+      x_days:
+        one: "1 día"
+        other: "%{count} días"
+      x_months:
+        one: "1 mes"
+        other: "%{count} meses"
+      x_minutes:
+        one: "1 minuto"
+        other: "hace %{count} minutos"
+      half_a_minute: "medio minuto"
+      x_seconds:
+        one:   "1 segundo"
+        other: "%{count} segundos"
+      less_than_x_minutes:
+        one:   "menos de un minuto"
+        other: "menos de %{count} minutos"
+      x_minutes:
+        one:   "1 minuto"
+        other: "%{count} minutos"
+      about_x_months:
+        one:   "cerca de 1 mes"
+        other: "cerca de  %{count} meses"

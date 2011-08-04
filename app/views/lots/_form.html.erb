@@ -39,7 +39,7 @@
             <%= f.label 'Transportador' %>
           </td>
           <td>
-            <%= f.text_field :carrier %>
+            <%= f.collection_select :carrier, Carrier.all, :company, :company %>
           </td>
         </tr>
         <tr>

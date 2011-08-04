@@ -1,6 +1,7 @@
 <%= javascript_include_tag 'jsapi' %>
 <%= render 'reports/chart', :chart => @chart %>
 <%= stylesheet_link_tag reports_path+'.css' %>
+
 <h1>Generar reporte</h1>
 <%= form_tag reports_path do %>
 
@@ -10,6 +11,8 @@
         <%= text_field_tag :start_date, '', :class=>'date_picker' %>
         <%= label_tag 'Fecha final' %>
         <%= text_field_tag :end_date, '', :class=>'date_picker' %>
+        <%= label_tag 'Sede' %>
+        <%= select_tag "headquarter", options_from_collection_for_select(Headquarter.all, "id", "name") %>
         <%= submit_tag 'Generar' %>
       </p>
 
@@ -38,9 +41,17 @@
           <td><b>Utilidad bruta:</b></td>
           <td>  <%= number_to_currency @gross_profit, :precision =>0 %></td>
         </tr>
+        <tr>
+          <td><b>- Gastos operacionales:</b></td>
+          <td><%= number_to_currency @op_expenses, :precision =>0 %></td>
+        </tr>
+        <tr>
+          <td><b>- Gastos de ventas:</b></td>
+          <td><%= number_to_currency @s_expenses, :precision =>0 %></td>
+        </tr>
         <tr class="bottom_line">
-          <td><b>- Gastos y fletes:</b></td>
-          <td><%= number_to_currency @expenses, :precision =>0 %></td>
+          <td><b>- Otros gastos:</b></td>
+          <td><%= number_to_currency @ot_expenses, :precision =>0 %></td>
         </tr>
         <tr>
           <td><b>Utilidad AI:</b></td>

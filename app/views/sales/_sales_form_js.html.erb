@@ -36,6 +36,14 @@
                 });
 
         separate_visibility(false);
+
+        jq('#new_client').dialog({
+            autoOpen: false,
+            resizable: false,
+            width:'auto',
+            title: 'Nuevo cliente',
+            modal: true
+        });
     }
 
     function autocomplete_product(fieldset_selector, brand, reference, size, color, product_options) {
@@ -294,15 +302,15 @@
     function separate_visibility(event) {
         var el = jq('#sale_separated');
         var payments = jq('tr:visible input[id*="payment"]');
-        if (eval((event? '!': '')+"el.attr('checked')")) {
+        if (eval((event ? '!' : '') + "el.attr('checked')")) {
             jq('#sale_separated').closest('div').children('div').show(500 * event);
         } else {
             jq('#sale_separated').closest('div').children('div').hide(500 * event);
-            <% if @sale.id.nil? %>
+        <% if @sale.id.nil? %>
             jq.each(payments, function(i, payment) {
                 payment.value = '';
             });
-            <% end %>
+        <% end %>
         }
     }
 </script>

@@ -25,6 +25,7 @@ class SalesController < MyApplicationController
     @sale = Sale.new
     @sale.sale_products.build
     @products='[]'
+    @person = Person.new
   end
 
   def edit
@@ -33,10 +34,11 @@ class SalesController < MyApplicationController
       organize(Product.where("reference = ? ", p.reference))[0]
     end
     @products=products.to_json
+    @person = Person.new
   end
 
   def create
-    params[:sale][:headquarter_id]=current_user.headquarter.id
+    params[:sale][:headquarter_id]=current_user.headquarter_id
     set_ids params[:sale][:sale_products_attributes] if params[:sale][:sale_products_attributes]
     @sale = Sale.new(params[:sale])
 
@@ -50,7 +52,7 @@ class SalesController < MyApplicationController
   end
 
   def update
-    params[:sale][:headquarter_id]=current_user.headquarter.id
+    params[:sale][:headquarter_id]=current_user.headquarter_id
     set_ids params[:sale][:sale_products_attributes] if params[:sale][:sale_products_attributes]
     @sale = Sale.find(params[:id])
 

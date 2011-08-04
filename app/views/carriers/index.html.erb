@@ -1,0 +1,38 @@
+<%= link_to 'Nuevo Lote', new_lot_path, :class => 'menu_link' %>
+<%= link_to 'Nuevo transportador', new_carrier_path, :class => 'menu_link' %>
+<%= link_to 'Transportadores', carriers_path, :class => 'menu_link_hq' %>
+
+<h1>Lista de transportadores</h1>
+
+<table class="dataTablesId">
+  <thead>
+  <tr>
+    <th>Empresa</th>
+    <th>Ciudad</th>
+    <th>Nombre</th>
+    <th>Email</th>
+    <th>Teléfono</th>
+    <th>Dirección</th>
+    <th>Sitio web</th>
+    <th>Opciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @carriers.each do |carrier| %>
+      <tr>
+        <td><%= carrier.company %></td>
+        <td><%= carrier.city %></td>
+        <td><%= carrier.contact %></td>
+        <td><%= carrier.email %></td>
+        <td><%= carrier.phone %></td>
+        <td><%= carrier.address %></td>
+        <td><%= carrier.website %></td>
+        <td width="110px">
+          <%= link_to image_tag('/images/edit.png', :title => 'Modificar transportador'), edit_carrier_path(carrier) %>
+          <%= link_to image_tag('/images/delete.png', :title => 'Borrar transportador'), carrier, :confirm => 'El transportador sera borrado. Deseas continuar?', :method => :delete %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= render 'layouts/datatables_js' %>

@@ -13,6 +13,7 @@ class ExpensesController < MyApplicationController
   end
 
   def create
+    params[:expense][:headquarter_id]=current_user.headquarter_id
     @expense = Expense.new(params[:expense])
 
     respond_to do |format|
@@ -25,6 +26,7 @@ class ExpensesController < MyApplicationController
   end
 
   def update
+    params[:expense][:headquarter_id]=current_user.headquarter_id
     @expense = Expense.find(params[:id])
 
     respond_to do |format|

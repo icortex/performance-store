@@ -1,3 +1,6 @@
+
+/*  GENERAL LAYOUTS*/
+
 div.container {
     width: 100%;
     margin: 0;
@@ -5,44 +8,63 @@ div.container {
     line-height: 150%;
 }
 
-div.header, footer {
+header, footer {
     color: white;
     position: fixed;
     width: 99.5%
 }
 
-div.header {
+header {
     top: 0;
     left: 0;
-    margin: 2px 0.25% 0 0.25%; /*z-index:10;*/
-/*background:white;*/
+    margin: 2px 0.25% 0 0.25%;
 }
 
-footer{
-    bottom: 0;
-    left: 0;
-    margin: 0 0.25% 2px 0.25%;
-    background-color: #25578B;
-}
-
-footer label{
+header h1 {
     padding-left: 1em;
 }
 
-div.content {
+section {
     padding: 1% 1% 1% 1%;
     position: fixed;
     top: 18%;
     left: 0;
     width: 98%;
     height: 75%;
-    overflow: auto;
     margin-left:1em;
+}
+
+footer {
+    bottom: 0;
+    left: 0;
+    margin: 0 0.25% 2px 0.25%;
+    background-color: #25578B;
+}
+
+footer label {
+    padding-left: 1em;
 }
 
 #header_table {
     width: 100%;
     background: url("../images/header.png") repeat-x;
+    height: 60px;
+}
+/*  END GENERAL LAYOUTS*/
+
+
+
+#username {
+    color: white;
+    text-decoration: none;
+}
+
+#username:hover {
+    color: #75C6F5;
+}
+
+#sign_out{
+    padding: 0 1em 0 1em;
 }
 
 table.product td {
@@ -54,11 +76,11 @@ table.product td {
     font-size: large;
 }
 
-.principal-menu {
+#principal-menu {
     background-color: white;
 }
 
-.principal-menu ul {
+#principal-menu ul {
     float: left;
     width: 100%;
     padding-left: 1em;
@@ -66,7 +88,7 @@ table.product td {
 
 }
 
-.principal-menu a {
+#principal-menu a {
     float: left;
     width: 6em;
     text-decoration: none;
@@ -82,11 +104,11 @@ table.product td {
     margin-right: 4px;
 }
 
-.principal-menu a:hover {
+#principal-menu a:hover {
     background-color: #0D699F;
 }
 
-.principal-menu li {
+#principal-menu li {
     display: inline;
 }
 
