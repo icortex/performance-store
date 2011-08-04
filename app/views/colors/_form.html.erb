@@ -1,5 +1,3 @@
-<%= javascript_include_tag :all %>
-
 <%= form_for(@color) do |f| %>
     <%= render 'layouts/error_messages', :model => @color %>
 
@@ -36,8 +34,7 @@
         onBeforeShow: function () {
             jQuery(this).ColorPickerSetColor(this.value);
         }
-    })
-            .bind('keyup', function() {
+    }).bind('keyup', function() {
         jQuery(this).ColorPickerSetColor(this.value);
     });
 </script>
