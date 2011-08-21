@@ -3,7 +3,7 @@
             <li id="sell_tab"><%= link_to 'Ventas', sales_path, :style => is_active?("sales") %></li>
             <li id="client_tab"><%= link_to 'Clientes', people_path, :style => is_active?("people") %></li>
             <li id="stock_tab"><%= link_to 'Inventario', products_path, :style => is_active?('stocks', 'products') %></li>
-            <li id="lot_tab"><%= link_to 'Lotes', lots_path, :style => is_active?('lots', 'carriers') %></li>
+            <li id="lot_tab"><%= link_to 'Lotes', lots_path, :style => is_active?('lots', 'carriers')  if can? :manage, Lot %></li>
             <li id="expense_tab"><%= link_to 'Gastos', expenses_path, :style => is_active?('expenses') if can? :manage, Expense %></li>
             <li id="report_tab"><%= link_to 'Reportes', reports_path, :style => is_active?('reports') if can? :manage, Report %></li>
             <li id="admin_tab"><%= link_to 'Admin', admin_index_path, :style => is_active?('admin') if can? :manage, Admin %></li>

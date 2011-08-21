@@ -29,7 +29,8 @@
         </td>
         <td id="session_name">
           <% if user_signed_in? %>
-              Hola <%= link_to current_user.username, edit_user_registration_path, :id => 'username' %>!
+              Hola <%= link_to current_user.username, edit_user_registration_path, :id => 'username' %>
+              has iniciado en la sede <%= Headquarter.find(current_user.headquarter_id).name %>&emsp;|
               <%= link_to "Cerrar Sesión", destroy_user_session_path, :id => 'sign_out' %>
           <% end %>
         </td>

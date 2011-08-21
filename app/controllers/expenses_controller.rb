@@ -1,7 +1,12 @@
 class ExpensesController < MyApplicationController
 
   def index
-    @expenses = Expense.all
+    if params[:headquarter]
+      hq= Headquarter.find_all_by_name params[:headquarter]
+      @expenses = Expense.where('headquarter_id = ?', hq.first.id)
+    else
+      @expenses = Expense.all
+    end
   end
 
   def new

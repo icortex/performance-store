@@ -7,9 +7,10 @@
 <table class="dataTablesId">
   <thead>
   <tr>
+    <th>Descripcion</th>
     <th>Fecha de llegada</th>
     <th>Origen</th>
-    <th>Peso</th>
+    <th>Peso (kg)</th>
     <th>Transportador</th>
     <th>Flete</th>
     <th>Costo total</th>
@@ -19,12 +20,13 @@
   <tbody>
   <% @lots.each do |lot| %>
       <tr>
+        <td><%= lot.description %></td>
         <td><%= lot.arrival_date %></td>
         <td><%= lot.origin %></td>
         <td><%= lot.weight %></td>
         <td><%= lot.carrier %></td>
-        <td><%= lot.freight %></td>
-        <td><%= lot.total_cost %></td>
+        <td><%= number_to_currency lot.freight, :precision => 0 %></td>
+        <td><%= number_to_currency lot.total_cost, :precision => 0 %></td>
         <td width="110px">
           <%= link_to image_tag('/images/edit.png', :title => 'Modificar lote'), edit_lot_path(lot) %>
           <%= link_to image_tag('/images/delete.png', :title => 'Borrar lote'), lot, :confirm => 'El lote sera borrado. Deseas continuar?', :method => :delete %>

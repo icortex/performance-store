@@ -1,8 +1,8 @@
 <%= javascript_include_tag 'jsapi' %>
-<%= render 'reports/chart', :chart => @chart %>
+<%= render('reports/chart', :chart => @chart ) if request.post?%>
 <%= stylesheet_link_tag reports_path+'.css' %>
 
-<h1>Generar reporte</h1>
+<h1><%= @title %> </h1>
 <%= form_tag reports_path do %>
 
     <div class='float_left'>
@@ -17,13 +17,18 @@
       </p>
 
       <% if @chart %>
-      <p>
-      <div align="center" class="report_title">
-        <h3><%= 'Reporte desde ' + @chart[0][0] +' hasta ' + @chart.last[0] %></h3>
-      </div>
-      <div id="chart_div"></div>
-      </p>
-          <% end %>
+          <p>
+
+          <div align="center" class="report_title">
+            <% if !@chart[0][0].blank? %>
+                <h3><%= 'Reporte desde ' + @chart[0][0] +' hasta ' + @chart.last[0] %></h3>
+                <% else %>
+                <h3><%= 'No hay datos para el reporte' %></h3>
+            <% end %>
+          </div>
+          <div id="chart_div"></div>
+          </p>
+      <% end %>
     </div>
 
     <div class='float_left'>

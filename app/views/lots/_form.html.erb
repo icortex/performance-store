@@ -5,6 +5,14 @@
       <table>
         <tr>
           <td>
+            <%= f.label 'Descripcion' %>
+          </td>
+          <td>
+            <%= f.text_field :description %>
+          </td>
+        </tr>
+        <tr>
+          <td>
             <%= f.label 'Fecha de llegada' %>
           </td>
           <td>
@@ -28,7 +36,7 @@
         </tr>
         <tr>
           <td>
-            <%= f.label 'Peso' %>
+            <%= f.label 'Peso (kg)' %>
           </td>
           <td>
             <%= f.text_field :weight %>
