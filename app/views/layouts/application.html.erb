@@ -18,32 +18,33 @@
   <%= yield :head %>
 </head>
 <body>
-
 <div class="container">
 
   <header>
-    <table id="header_table">
-      <tr>
-        <td>
-          <h1>PERFORMANCE STORE</h1>
-        </td>
-        <td id="session_name">
-          <% if user_signed_in? %>
-              Hola <%= link_to current_user.username, edit_user_registration_path, :id => 'username' %>!
-              <%= link_to "Cerrar Sesión", destroy_user_session_path, :id => 'sign_out' %>
-          <% end %>
-        </td>
-      </tr>
-    </table>
-    <nav id='principal-menu'>
-      <%= render 'layouts/menu' %>
-    </nav>
+    <h1 id="header_title">PERFORMANCE STORE</h1>
+    <div id="session_name">
+      <% if user_signed_in? %>
+          Hola <%= link_to current_user.username, edit_user_registration_path, :id => 'username' %>
+          has iniciado en la sede <%= Headquarter.find(current_user.headquarter_id).name %>&emsp;|
+          <%= link_to "Cerrar Sesión", destroy_user_session_path, :id => 'sign_out' %>
+      <% end %>
+    </div>
+  </header>
+
+  <nav id='principal_menu'>
+    <%= render 'layouts/menu' %>
+  </nav>
+
+  <nav id="secondary_menu">
     <span class="notice"><%= notice %></span>
     <span class="alert"><%= alert %></span>
-  </header>
+    <%= yield :secondary_menu %>
+  </nav>
+
   <section>
     <%= yield %>
   </section>
+
   <footer>
     <label for="us">© 2011 CodeScrum</label>
   </footer>

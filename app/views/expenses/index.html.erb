@@ -1,5 +1,8 @@
-<%= link_to 'Nuevo Gasto', new_expense_path, :class => 'menu_link' %>
-<h1>Lista de gastos</h1>
+<% content_for :secondary_menu do %>
+<%= render 'links' %>
+<% end %>
+
+<h1>Lista de gastos <%= "en #{params[:headquarter]}" if params[:headquarter]%></h1>
 
 <table class="dataTablesId">
   <thead>

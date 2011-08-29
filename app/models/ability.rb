@@ -7,8 +7,9 @@ class Ability
       can :manage, :all
     elsif user.is_a? Seller
       can :manage, :all
-      cannot :manage, [Report, Expense, Admin]
+      cannot :manage, [Report, Expense, Admin, Lot]
       cannot [:create, :update, :destroy], [Product, Stock]
+      cannot :destroy, Person
     end
   end
 end

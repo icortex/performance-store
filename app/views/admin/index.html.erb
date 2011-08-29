@@ -1,4 +1,7 @@
-<div><%= link_to 'Usuarios', validate_users_path, :class => 'menu_link' %></div>
+<% content_for :secondary_menu do %>
+<%= render 'links' %>
+<% end %>
+
 <div class="float_left">
   <%= render '/brands/index' %>
   <br/><br/>

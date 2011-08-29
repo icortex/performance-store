@@ -1,5 +1,6 @@
-<%= link_to 'Nuevo Cliente', new_person_path, :class => 'menu_link' %>
-<%= link_to 'Listar Cumpleaños', birthday_people_path, :class => 'menu_link' %>
+<% content_for :secondary_menu do %>
+<%= render 'links' %>
+<% end %>
 
 <h1><%= @title %></h1>
 <% if @emails %>
@@ -20,6 +21,7 @@
     <th>Genero</th>
     <th>Teléfono</th>
     <th>Celular</th>
+    <th>Pin</th>
     <th>Email</th>
     <th>Opciones</th>
   </tr>
@@ -34,10 +36,11 @@
         <td><%= person.gender %></td>
         <td><%= person.phone %></td>
         <td><%= person.mobile %></td>
+        <td><%= person.pin %></td>
         <td><%= person.email %></td>
         <td width="110px">
           <%= link_to image_tag('/images/edit.png', :title => 'Modificar informacion'), edit_person_path(person) %>
-          <%= link_to image_tag('/images/delete.png', :title => 'Borrar informacion'), person, :confirm => 'El cliente sera borrado. Deseas continuar?', :method => :delete %>
+          <%= link_to image_tag('/images/delete.png', :title => 'Borrar informacion'), person, :confirm => 'El cliente sera borrado. Deseas continuar?', :method => :delete if can? :destroy, Person %>
         </td>
       </tr>
   <% end %>

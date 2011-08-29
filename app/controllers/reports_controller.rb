@@ -16,15 +16,14 @@ class ReportsController < MyApplicationController
           end_day_s= end_day.to_s
           separations_results = chart_helper(first_day_s, end_day_s,'separate',['payment','payment_cost'],'ss.created_at',"s.separated=1 and s.headquarter_id=#{params[:headquarter]} and", 'as ss join sales as s on ss.sale_id=s.id')
           sales_results = chart_helper(first_day_s, end_day_s,'sale',['total','total_cost'],'created_at', "separated=0 and headquarter_id=#{params[:headquarter]} and")
+          expenses_results = chart_helper(first_day_s, end_day_s,'expense',['cost'],'created_at',"headquarter_id=#{params[:headquarter]} and",'','expense_type_id')
+          expenses_day = chart_helper(first_day_s, end_day_s,'expense',['cost'],'created_at',"headquarter_id=#{params[:headquarter]} and")
+          lots_results = chart_helper(first_day_s, end_day_s,'lot',['freight'],'arrival_date')
           sales = sales_results[0]
           separates = separations_results[0]
-          expenses_results = chart_helper(first_day_s, end_day_s,'expense',['cost'],'created_at',"headquarter_id=#{params[:headquarter]} and",'','expense_type_id')
-          p "************************************"
-          p expenses_results[0][0].cost
-          @op_expenses = expenses_results[0][0].cost
-          @s_expenses = expenses_results[0][1].cost
-          @ot_expenses = expenses_results[0][2].cost
-          lots_results = chart_helper(first_day_s, end_day_s,'lot',['freight'],'arrival_date')
+          @op_expenses =   expenses_results[0][0] ? expenses_results[0][0].cost : 0
+          @s_expenses = expenses_results[0][1] ? expenses_results[0][1].cost : 0
+          @ot_expenses = expenses_results[0][2] ? expenses_results[0][2].cost : 0
           @sales=sales_results[1][0] + separations_results[1][0]
           @sales_cost=sales_results[1][1]+separations_results[1][1]
           @gross_profit=@sales-@sales_cost
@@ -39,7 +38,7 @@ class ReportsController < MyApplicationController
             sale = sale == 0 ? {:total => 0, :total_cost => 0} : sale
             separate=search_date_in_array(separates, day)
             separate = separate == 0 ? {:payment => 0, :payment_cost => 0} : separate
-            day_expense=search_date_in_array(expenses, day, 'cost')
+            day_expense=search_date_in_array(expenses_day[0], day, 'cost')
             day_income=sale[:total]+separate[:payment]
             day_costs=sale[:total_cost]+separate[:payment_cost]
             day_gross_util= day_income - day_costs
@@ -52,6 +51,11 @@ class ReportsController < MyApplicationController
             end
           end
           @chart.delete_if { |c| c==nil }
+          @chart=[['',0,0,0]] if @chart.empty?
+          hq=Headquarter.find params[:headquarter]
+          @title='Reporte en '+hq.name
+        elsif request.get?
+          @title='Generar reporte'
         end
 
       end

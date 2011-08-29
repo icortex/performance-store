@@ -1,3 +1,7 @@
+<% content_for :secondary_menu do %>
+<%= render 'links' %>
+<% end %>
+
 <%= form_for(@person) do |f| %>
     <%= render 'layouts/error_messages', :model => @person %>
 
@@ -61,6 +65,14 @@
           </td>
           <td>
             <%= f.text_field :mobile %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label 'Pin' %>
+          </td>
+          <td>
+            <%= f.text_field :pin %>
           </td>
         </tr>
         <tr>

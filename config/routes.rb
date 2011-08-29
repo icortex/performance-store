@@ -31,6 +31,7 @@ WJSport::Application.routes.draw do
   post 'reportes' => 'reports#index'
   get "inventario/sede/:headquarter"=>'stocks#index'
   get "ventas/sede/:headquarter"=>'sales#index'
+  get "gastos/sede/:headquarter"=>'expenses#index'
 
   root :to => "passthrough#index"
 end

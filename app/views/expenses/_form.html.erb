@@ -1,3 +1,7 @@
+<% content_for :secondary_menu do %>
+<%= render 'links' %>
+<% end %>
+
 <%= form_for(@expense) do |f| %>
     <%= render 'layouts/error_messages', :model => @expense %>
     <div class="form_class">
