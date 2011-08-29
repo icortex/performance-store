@@ -1,3 +1,7 @@
+<% content_for :secondary_menu do %>
+<%= render 'links' %>
+<% end %>
+
 <%= form_for(@lot) do |f| %>
     <%= render 'layouts/error_messages', :model => @lot %>
 

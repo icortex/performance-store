@@ -1,6 +1,6 @@
-<%= link_to 'Nuevo Lote', new_lot_path, :class => 'menu_link' %>
-<%= link_to 'Nuevo transportador', new_carrier_path, :class => 'menu_link' %>
-<%= link_to 'Transportadores', carriers_path, :class => 'menu_link_hq' %>
+<% content_for :secondary_menu do %>
+<%= render 'links' %>
+<% end %>
 
 <h1>Lista de lotes</h1>
 

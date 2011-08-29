@@ -2,93 +2,54 @@
 /*  GENERAL LAYOUTS*/
 
 div.container {
-    width: 100%;
     margin: 0;
-    border: 1px solid #3787B0;
-    line-height: 150%;
+    padding: 0;
 }
 
-header, footer {
-    color: white;
-    position: fixed;
-    width: 99.5%
-}
-
-header {
-    top: 0;
-    left: 0;
-    margin: 2px 0.25% 0 0.25%;
-}
-
-header h1 {
-    padding-left: 1em;
-}
-
-section {
-    padding: 1% 1% 1% 1%;
-    position: fixed;
-    top: 18%;
-    left: 0;
-    width: 98%;
-    height: 75%;
-    margin-left:1em;
-    overflow-x: auto;
-}
-
-footer {
-    bottom: 0;
-    left: 0;
-    margin: 0 0.25% 2px 0.25%;
-    background-color: #25578B;
-}
-
-footer label {
-    padding-left: 1em;
-}
-
-#header_table {
+header, footer{
     width: 100%;
-    background: url("../images/header.png") repeat-x;
-    height: 60px;
-}
-/*  END GENERAL LAYOUTS*/
-
-
-
-#username {
+    border: 3px solid white;
+    position: fixed;
+    left: 0;
     color: white;
+    z-index: 3;
 }
 
-#username:hover {
-    color: #75C6F5;
+header{
+    height: 60px;
+    background: url("../images/header.png") repeat-x;
+    top: 0;
+    padding: 0 25px;
 }
 
-#sign_out{
-    padding: 0 1em 0 1em;
+#header_title, #session_name{
+    display: inline;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+
 }
 
-table.product td {
-    padding-bottom: 10px;
-}
-
-#session_name {
-    text-align: right;
+#session_name{
     font-size: large;
+    right: 50px;
 }
 
-#principal-menu {
+#principal_menu {
+    position: fixed;
+    top: 60px;
     background-color: white;
+    height: 62px;
+    z-index: 2;
 }
 
-#principal-menu ul {
-    float: left;
+#principal_menu ul {
     width: 100%;
     padding-left: 1em;
     list-style-type: none;
-
 }
 
-#principal-menu a {
+#principal_menu a {
     float: left;
     width: 6em;
     text-decoration: none;
@@ -104,12 +65,53 @@ table.product td {
     margin-right: 4px;
 }
 
-#principal-menu a:hover {
+#principal_menu a:hover {
     background-color: #0D699F;
 }
 
-#principal-menu li {
+#principal_menu li {
     display: inline;
+}
+
+#secondary_menu{
+    position: fixed;
+    top: 125px;
+    background-color: white;
+    z-index: 2;        
+}
+
+section {
+    /*position: fixed;*/
+    /*left: 0;*/
+    /*width: 98%;*/
+    /*height: 75%;*/
+    margin-left:1em;
+    /*overflow: auto;*/
+    padding-top: 135px;
+}
+
+footer {
+    bottom: 0;
+    background-color: #25578B;
+    padding-left: 1em;
+}
+
+/*  END GENERAL LAYOUTS*/
+
+#username {
+    color: white;
+}
+
+#username:hover {
+    color: #75C6F5;
+}
+
+#sign_out{
+    padding: 0 1em 0 1em;
+}
+
+table.product td {
+    padding-bottom: 10px;
 }
 
 .menu_link, .menu_link_hq {
