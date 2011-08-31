@@ -1,10 +1,4 @@
-
 /*  GENERAL LAYOUTS*/
-
-div.container {
-    margin: 0;
-    padding: 0;
-}
 
 header, footer{
     width: 100%;
@@ -39,12 +33,12 @@ header{
     position: fixed;
     top: 60px;
     background-color: white;
-    height: 62px;
+    /*height: 62px;*/
     z-index: 2;
+    width: 100%;
 }
 
 #principal_menu ul {
-    width: 100%;
     padding-left: 1em;
     list-style-type: none;
 }
@@ -76,17 +70,20 @@ header{
 #secondary_menu{
     position: fixed;
     top: 125px;
+    left: 0;
     background-color: white;
-    z-index: 2;        
+    z-index: 2;
+    width: 100%
 }
 
 section {
     /*position: fixed;*/
     /*left: 0;*/
-    /*width: 98%;*/
-    /*height: 75%;*/
-    margin-left:1em;
+    width: 98%;
+    height: 1%;
     /*overflow: auto;*/
+
+    margin-left:1em;
     padding-top: 135px;
 }
 

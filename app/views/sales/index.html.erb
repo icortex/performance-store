@@ -27,12 +27,16 @@
         <td><%= sale.separated ? 'Separado' : 'Vendido' %></td>
         <td width="100px">
           <%= link_to image_tag('/images/view.png', :title => 'Ver venta'), sale_path(sale.id) %>
-          <%= link_to image_tag('/images/edit.png', :title => 'Modificar venta'), edit_sale_path(sale) %>
-          <%= link_to image_tag('/images/delete.png', :title => 'Borrar venta'), sale, :confirm => 'La venta sera borrada. Deseas continuar?', :method => :delete %>
+          <%= link_to image_tag('/images/edit.png', :title => 'Modificar venta'), edit_sale_path(sale) if can? :update,Sale%>
+          <%= link_to_function image_tag('/images/edit.png', :title => 'Abonar a venta'), "open_sep_dialog();" if cannot? :update,Sale%>
+          <%= link_to image_tag('/images/delete.png', :title => 'Borrar venta'), sale, :confirm => 'La venta sera borrada. Deseas continuar?', :method => :delete if can? :destroy,Sale%>
         </td>
       </tr>
   <% end %>
   </tbody>
 </table>
-
+<% if cannot? :update, Sale %>
+    <%= render :partial => 'separations',:locals => {:f => f} %>
+    <%= render 'open_dialog' %>
+<% end %>
 <%= render 'layouts/datatables_js' %>

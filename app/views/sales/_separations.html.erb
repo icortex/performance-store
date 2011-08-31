@@ -1,0 +1,26 @@
+<div class="float_left form_class">
+  <%= f.label 'Separado?' %>
+  <%= f.check_box :separated %>
+
+  <div>
+    <table>
+      <tr>
+        <th>Abono</th>
+        <th>Fecha</th>
+      </tr>
+
+      <%= f.fields_for :separates do |sf| %>
+          <tr>
+            <%= render :partial => 'separates_fields', :locals => {:f => sf} %>
+          </tr>
+      <% end %>
+      <tr id='add_payment'>
+        <td><%= link_to_add_fields 'Abonar', f, :separates, '#add_payment' %></td>
+      </tr>
+    </table>
+    <br/>
+    <%= label_tag 'Saldo ' %>
+    <%= text_field_tag 'balance' %>
+    <%= button_to_function 'Calcular', 'set_balance()' %>
+  </div>
+</div>

@@ -4,7 +4,12 @@ class ProductsController < MyApplicationController
 
   def index
 
-    @products= Product.where('reference like ?', "%#{params[:q]}%")
+    if can? :see, 'hq_links'
+      @products= Product.where('reference like ?', "%#{params[:q]}%")
+    else
+      redirect_to stocks_path
+      return
+    end
 
     respond_to do |format|
       format.html # index.html.erb

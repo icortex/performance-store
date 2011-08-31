@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110821171227) do
+ActiveRecord::Schema.define(:version => 20110831230604) do
 
   create_table "brands", :force => true do |t|
     t.string   "brand"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20110821171227) do
     t.integer  "headquarter_id"
     t.integer  "total_cost"
     t.boolean  "separated",       :default => false
+    t.integer  "seller_id"
   end
 
   create_table "separates", :force => true do |t|
