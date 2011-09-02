@@ -1,11 +1,17 @@
 <script type='text/javascript'>
-    /*
-     *  fieldset_selector='#sale_sale_products_attributes_'+#
-     *  # stands for a number, for example:1 , 2 , 3
-     */
+
     <%= "var products = " %><%= @products ? @products.html_safe : '[]' %><%= ';' %>
 
     function local_ready() {
+
+        jq('#new_client').dialog({
+            autoOpen: false,
+            resizable: false,
+            width:'auto',
+            title: 'Nuevo cliente',
+            modal: true
+        });
+        
         jq('label[for*="_in_stock"]').html('');
         calculator_handlers();
     <% index=0 %>
@@ -37,15 +43,13 @@
 
         separate_visibility(false);
 
-        jq('#new_client').dialog({
-            autoOpen: false,
-            resizable: false,
-            width:'auto',
-            title: 'Nuevo cliente',
-            modal: true
-        });
+
     }
 
+     /*
+     *  fieldset_selector='#sale_sale_products_attributes_'+#
+     *  # stands for a number, for example:1 , 2 , 3
+     */
     function autocomplete_product(fieldset_selector, brand, reference, size, color, product_options) {
         var price_input = jq(fieldset_selector + '_price');
         var quantity_input = jq(fieldset_selector + '_quantity');

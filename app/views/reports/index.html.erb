@@ -15,10 +15,17 @@
         <%= select_tag "headquarter", options_from_collection_for_select(Headquarter.all, "id", "name") %>
         <%= submit_tag 'Generar' %>
       </p>
+      <script type="text/javascript">
+        jq(".date_picker").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeYear: true,
+            changeMonth: true
+        });
+      </script>
+
 
       <% if @chart %>
           <p>
-
           <div align="center" class="report_title">
             <% if !@chart[0][0].blank? %>
                 <h3><%= 'Reporte desde ' + @chart[0][0] +' hasta ' + @chart.last[0] %></h3>

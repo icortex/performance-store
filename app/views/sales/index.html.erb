@@ -1,7 +1,7 @@
 <% content_for :secondary_menu do %>
 <%= render 'links' %>
 <% end %>
-
+<%= javascript_include_tag 'nested_fields' %>
 <h1>Lista de ventas en <%= params[:headquarter] %></h1>
 <table class="dataTablesId">
   <thead>
@@ -11,7 +11,9 @@
     <th>Descuento</th>
     <th>Iva</th>
     <th>Total</th>
+    <th>Saldo</th>
     <th>Estado</th>
+    <th>Vendedor</th>
     <th>Opciones</th>
   </tr>
   </thead>
@@ -24,19 +26,20 @@
         <td><%= sale.discount %></td>
         <td><%= sale.iva %></td>
         <td><%= sale.total %></td>
+        <td><%= sale.balance %></td>
         <td><%= sale.separated ? 'Separado' : 'Vendido' %></td>
+        <td><%= sale.seller.username if sale.seller%></td>
         <td width="100px">
           <%= link_to image_tag('/images/view.png', :title => 'Ver venta'), sale_path(sale.id) %>
-          <%= link_to image_tag('/images/edit.png', :title => 'Modificar venta'), edit_sale_path(sale) if can? :update,Sale%>
-          <%= link_to_function image_tag('/images/edit.png', :title => 'Abonar a venta'), "open_sep_dialog();" if cannot? :update,Sale%>
+          <%= link_to image_tag('/images/edit.png', :title => 'Modificar venta'), edit_sale_path(sale) if can? :update,sale%>
+          <%= link_to_function image_tag('/images/edit.png', :title => 'Abonar a venta'), "open_dialog(#{sale.id});" if cannot? :update,sale%>
           <%= link_to image_tag('/images/delete.png', :title => 'Borrar venta'), sale, :confirm => 'La venta sera borrada. Deseas continuar?', :method => :delete if can? :destroy,Sale%>
+
         </td>
       </tr>
   <% end %>
   </tbody>
 </table>
-<% if cannot? :update, Sale %>
-    <%= render :partial => 'separations',:locals => {:f => f} %>
-    <%= render 'open_dialog' %>
-<% end %>
+<div id="payment_popup"></div>
+<%= render 'open_dialog' %>
 <%= render 'layouts/datatables_js' %>

@@ -2,12 +2,7 @@ class StocksController < MyApplicationController
   layout 'application', :except=>['new', 'edit']
 
   def index
-    p 'pppppppppppppppppppppppppppppppppp'
-    p params[:headquarter]
     params[:headquarter] ||= current_user.headquarter.name
-    p 'pppppppppppppppppppppppppppppppppp'
-    p params[:headquarter]
-    p current_user.headquarter.name
     @stocks = Stock.find_all_by_headquarter_id (Headquarter.find_by_name params[:headquarter]).id
     @headquarter = params[:headquarter]
   end

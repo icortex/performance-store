@@ -10,6 +10,7 @@
             <th>Nombre de usuario</th>
             <th>Email</th>
             <th>Tipo</th>
+            <th>Sede</th>
             <th>Validar</th>
             <th>Eliminar</th>
             <% @unvalidated_users.each do |not_user| %>
@@ -17,6 +18,7 @@
                   <td><%= not_user.username %></td>
                   <td><%= not_user.email %></td>
                   <td class='center_td'><%= not_user.type == 'Seller' ? 'Vendedor' : not_user.type %></td>
+                  <td class='center_td'><%= select_tag "headquarter_id", options_from_collection_for_select(Headquarter.all, "id", "name") %></td>
                   <td class='center_td'><%= check_box_tag "validation[#{not_user.id}]" %></td>
                   <td class='center_td'><%= check_box_tag "destroy[#{not_user.id}]" %></td>
                 </tr>

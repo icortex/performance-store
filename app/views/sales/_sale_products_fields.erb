@@ -8,7 +8,7 @@
   <%= f.collection_select :color, [Color.new], :color, :color %>
 </td>
 <td>
-  <%= f.text_field :price, :autocomplete => 'off', :size => '14' %>
+  <%= f.text_field :price, :autocomplete => 'off', :size => '14', :readonly =>true %>
 </td>
 <td>
   <%= f.number_field :quantity, :autocomplete => 'off', :size => '14', :min => 0 %>

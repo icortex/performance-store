@@ -21,6 +21,7 @@ class AdminController < MyApplicationController
   def validation
     User.find(empty_hash_if_nil(params[:validation]).keys).each do |user|
       user.validated = true
+      user.headquarter_id = params[:headquarter_id].to_i
       user.save
     end
     User.find(empty_hash_if_nil(params[:destroy]).keys).each do |user|

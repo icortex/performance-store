@@ -1,9 +1,10 @@
 <% content_for :secondary_menu do %>
-<%= render 'links' %>
+    <%= render 'links' %>
 <% end %>
 
-<%= form_for(@person) do |f| %>
-    <%= render 'layouts/error_messages', :model => @person %>
+
+<%= form_for(person) do |f| %>
+    <%= render 'layouts/error_messages', :model => person %>
 
     <div class="form_class">
       <table>
@@ -91,3 +92,20 @@
       </div>
     </div>
 <% end %>
+
+<script type="text/javascript">
+    jq('#person_document_id').keyup(function(){
+        var el=jq('#person_document_id').val();
+        disable(el);
+    });
+
+    function disable(el){
+        if(el.length == 0)
+            jq('#person_submit').attr('disabled',true);
+        else
+            jq('#person_submit').removeAttr('disabled');
+    }
+    var el=jq('#person_document_id').val();
+    disable(el);
+</script>
+

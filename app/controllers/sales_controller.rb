@@ -1,15 +1,21 @@
 class SalesController < MyApplicationController
 
   include SalesHelper
+  layout 'application',:except => [:payment]
+  before_filter :set_seller_id, :only=>[:create,:update]
 
   def index
+    if current_user.is_a? Admin
     if params[:headquarter]
       hq=Headquarter.find_by_name params[:headquarter]
     else
       hq=Headquarter.find current_user.headquarter_id
-      params[:headquarter] =hq.name
+      params[:headquarter] = hq.name
     end
     @sales = Sale.find_all_by_headquarter_id hq.id
+    else
+      @sales = Sale.where("separated = ? or seller_id = ?",true,"#{current_user.id}")
+    end
   end
 
   def show
@@ -37,6 +43,10 @@ class SalesController < MyApplicationController
     @person = Person.new
   end
 
+  def payment
+    @sale = Sale.find(params[:sale_id])
+  end
+
   def create
     params[:sale][:headquarter_id]=current_user.headquarter_id
     set_ids params[:sale][:sale_products_attributes] if params[:sale][:sale_products_attributes]
@@ -46,6 +56,7 @@ class SalesController < MyApplicationController
       if @sale.save
         format.html { redirect_to(@sale, :notice => 'Venta creada exitosamente.') }
       else
+        @person = Person.new
         format.html { render :action => "new" }
       end
     end
@@ -60,6 +71,7 @@ class SalesController < MyApplicationController
       if @sale.update_attributes(params[:sale])
         format.html { redirect_to(@sale, :notice => 'Venta actualizada exitosamente.') }
       else
+        @person = Person.new
         format.html { render :action => "edit" }
       end
     end
@@ -70,6 +82,11 @@ class SalesController < MyApplicationController
     @sale.destroy
 
     redirect_to(:back, :notice => 'Venta borrada exitosamente.')
+  end
+
+  private
+  def set_seller_id
+    params[:sale][:seller_id]=current_user.id
   end
 end
 

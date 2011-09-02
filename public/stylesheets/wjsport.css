@@ -36,6 +36,8 @@ header{
     /*height: 62px;*/
     z-index: 2;
     width: 100%;
+    max-width: 1350px;
+    margin: 0 auto;
 }
 
 #principal_menu ul {
@@ -73,18 +75,22 @@ header{
     left: 0;
     background-color: white;
     z-index: 2;
-    width: 100%
+    width: 100%;
+    margin-left: 2em;
 }
 
 section {
     /*position: fixed;*/
     /*left: 0;*/
-    width: 98%;
-    height: 1%;
+    /*width: 98%;*/
+    /*height: 1%;*/
     /*overflow: auto;*/
 
-    margin-left:1em;
+    /*margin-left:1em;*/
     padding-top: 135px;
+    padding-left: 1em;
+    max-width: 1350px;
+    margin: 0 auto;
 }
 
 footer {
@@ -191,17 +197,17 @@ div.left {
 }
 
 #productsTable tr.over td, #productsTable tr:hover td {
-    border-right: 1px solid #CCC;
-    border-bottom: 1px solid #CCC;
-    padding: 5px;
-    color: #222;
-    text-align: center;
+    /*border-right: 1px solid #CCC;*/
+    /*border-bottom: 1px solid #CCC;*/
+    /*padding: 5px;*/
+    /*color: #222;*/
+    /*text-align: center;*/
     background: #bcd4ec;
 }
 
 .float_left {
     float: left;
-    margin-right: 10em
+    margin-right: 8em
 }
 
 pre {

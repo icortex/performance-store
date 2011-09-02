@@ -2,6 +2,7 @@ class Sale < ActiveRecord::Base
 
   belongs_to :person
   belongs_to :headquarter
+  belongs_to :seller
 
   has_many :sale_products, :dependent => :destroy
   has_many :separates, :dependent => :destroy
@@ -56,19 +57,28 @@ class Sale < ActiveRecord::Base
   def verify_status
     payments_sum = self.separates.map(&:payment).inject {|mem,el| mem+el}
     if payments_sum
-    if payments_sum >= self.total
-      self.separated=0
-    else
-      self.separated=1
-    end
+      if payments_sum >= self.total
+        self.separated=0
+      else
+        self.separated=1
+      end
     end
   end
 
   def update_payments_cost
     self.separates.each do |s|
-        s.payment_cost=s.payment*self.total_cost/(self.total+self.discount)
+      s.payment_cost=s.payment*self.total_cost/(self.total+self.discount)
     end
   end
+
+  def balance
+    if self.separated?
+      self.total-self.separates.map(&:payment).inject{|sum,x| sum+x}
+    else
+      0
+    end
+  end
+
 end
 
 # == Schema Information
