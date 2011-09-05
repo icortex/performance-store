@@ -1,6 +1,6 @@
 class AddTypeToUsers < ActiveRecord::Migration
   def self.up
-    add_column :users, :type, :string
+    add_column :users, :type, :string, :default => 'Seller'
   end
 
   def self.down

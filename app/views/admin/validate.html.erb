@@ -17,7 +17,7 @@
                 <tr>
                   <td><%= not_user.username %></td>
                   <td><%= not_user.email %></td>
-                  <td class='center_td'><%= not_user.type == 'Seller' ? 'Vendedor' : not_user.type %></td>
+                  <td class='center_td'><%= select 'user', 'type', options_for_select([['SuperAdmin', 'SuperAdmin'],['Administrador', 'Admin'], ['Vendedor', 'Seller']]) %></td>
                   <td class='center_td'><%= select_tag "headquarter_id", options_from_collection_for_select(Headquarter.all, "id", "name") %></td>
                   <td class='center_td'><%= check_box_tag "validation[#{not_user.id}]" %></td>
                   <td class='center_td'><%= check_box_tag "destroy[#{not_user.id}]" %></td>
@@ -50,9 +50,9 @@
                     <% end %>
                   </td>
                   <td class='center_td'><%= user.sign_in_count %></td>
-                  <td class='center_td'><%= user.type == 'Seller' ? 'Vendedor' : user.type %></td>
-                  <td class='center_td'>Sede</td>
-                  <td class='center_td'>Actualizar</td>
+                  <td class='center_td'><%= select 'user', 'type', options_for_select([['SuperAdmin', 'SuperAdmin'],['Administrador', 'Admin'], ['Vendedor', 'Seller']], :selected => "#{user.type}") %></td>
+                  <td class='center_td'><%= select_tag "headquarter_id", options_from_collection_for_select(Headquarter.all, "id", "name", :selected => "#{user.headquarter_id}")  %></td>
+                  <td class='center_td'><%= check_box_tag "update[#{user.id}]" %></td>
                   <td class='center_td'><%= check_box_tag "destroy[#{user.id}]" %></td>
                 </tr>
             <% end %>

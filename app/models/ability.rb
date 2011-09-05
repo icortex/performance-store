@@ -8,6 +8,7 @@ class Ability
     elsif user.is_a? Admin
       can :manage, :all
       cannot :see, 'users'
+      cannot :validate, User
     elsif user.is_a? Seller
       can :manage, :all
       cannot :manage, [Report, Expense, Admin, Lot]
