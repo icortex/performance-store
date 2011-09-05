@@ -1,5 +1,7 @@
+<% if can? :see,'users'%>
 <% content_for :secondary_menu do %>
 <%= render 'links' %>
+<% end %>
 <% end %>
 
 <div class="float_left">

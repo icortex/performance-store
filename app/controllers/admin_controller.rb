@@ -27,7 +27,7 @@ class AdminController < MyApplicationController
     User.find(empty_hash_if_nil(params[:destroy]).keys).each do |user|
       user.destroy
     end
-    redirect_to admin_index_path
+    redirect_to validate_users_path
   end
 
   def empty_hash_if_nil(arg)

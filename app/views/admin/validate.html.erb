@@ -36,6 +36,8 @@
             <th>Ultimo inicio de sesión</th>
             <th>Contador</th>
             <th>Tipo</th>
+            <th>Sede</th>
+            <th>Actualizar</th>
             <th>Eliminar</th>
             <% @validated_users.each do |user| %>
                 <tr>
@@ -49,6 +51,8 @@
                   </td>
                   <td class='center_td'><%= user.sign_in_count %></td>
                   <td class='center_td'><%= user.type == 'Seller' ? 'Vendedor' : user.type %></td>
+                  <td class='center_td'>Sede</td>
+                  <td class='center_td'>Actualizar</td>
                   <td class='center_td'><%= check_box_tag "destroy[#{user.id}]" %></td>
                 </tr>
             <% end %>

@@ -85,10 +85,8 @@ section {
     /*width: 98%;*/
     /*height: 1%;*/
     /*overflow: auto;*/
-
     /*margin-left:1em;*/
-    padding-top: 135px;
-    padding-left: 1em;
+    padding: 135px 0 0 1em;
     max-width: 1350px;
     margin: 0 auto;
 }
@@ -96,7 +94,7 @@ section {
 footer {
     bottom: 0;
     background-color: #25578B;
-    padding-left: 1em;
+    padding: 4px 0 4px 1em;
 }
 
 /*  END GENERAL LAYOUTS*/
@@ -169,7 +167,7 @@ div.left {
     width: 99%;
     border-top: 1px solid #CCC;
     border-left: 1px solid #CCC;
-    margin: 2em 0;
+    margin: 0 0 2em 0;
 }
 
 #productsTable th {
