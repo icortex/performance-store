@@ -205,7 +205,8 @@ div.left {
 
 .float_left {
     float: left;
-    margin-right: 8em
+    margin-right: 8em;
+    padding-bottom: 40px;
 }
 
 pre {

@@ -19,15 +19,20 @@ class AdminController < MyApplicationController
   end
 
   def validation
-    User.find(empty_hash_if_nil(params[:validation]).keys).each do |user|
-      user.validated = true
-      user.headquarter_id = params[:headquarter_id].to_i
-      user.type = params[:user][:type]
-      user.save
-    end
     User.find(empty_hash_if_nil(params[:destroy]).keys).each do |user|
       user.destroy
     end
+
+    User.find(empty_hash_if_nil(params[:validation]).keys).each do |user|
+      p 'sssssssssssssssssssssssssssssss'
+      p user
+      user.validated = true
+      user.headquarter_id = params[:headquarter_id][user.id.to_s].to_i
+      user.type = params[:user][:type][user.id.to_s]
+      user.save
+    end
+    
+
     redirect_to validate_users_path
   end
 

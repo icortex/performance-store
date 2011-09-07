@@ -15,9 +15,7 @@ class Ability
       cannot [:create, :update, :destroy], [Product, Stock]
       cannot :destroy, [Person,Sale]
       cannot :see, 'hq_links'
-      cannot :update, Sale do |sale|
-        sale.seller_id != user.id
-      end
+      
     end
   end
 end

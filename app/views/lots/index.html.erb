@@ -29,7 +29,7 @@
         <td><%= number_to_currency lot.total_cost, :precision => 0 %></td>
         <td width="110px">
           <%= link_to image_tag('/images/edit.png', :title => 'Modificar lote'), edit_lot_path(lot) %>
-          <%= link_to image_tag('/images/delete.png', :title => 'Borrar lote'), lot, :confirm => 'El lote sera borrado. Deseas continuar?', :method => :delete %>
+          <%= link_to image_tag('/images/delete.png', :title => 'Borrar lote'), lot, :confirm => 'ATENCION!!! El lote sera borrado para siempre. Deseas continuar?', :method => :delete %>
         </td>
 
       </tr>

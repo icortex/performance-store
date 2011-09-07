@@ -2,7 +2,7 @@
 <%= render 'links' %>
 <% end %>
 <%= javascript_include_tag 'nested_fields' %>
-<h1>Lista de ventas en <%= params[:headquarter] %></h1>
+<h1>Lista de ventas <%= @headquarter %></h1>
 <table class="dataTablesId">
   <thead>
   <tr>
@@ -31,8 +31,8 @@
         <td><%= sale.seller.username if sale.seller%></td>
         <td width="100px">
           <%= link_to image_tag('/images/view.png', :title => 'Ver venta'), sale_path(sale.id) %>
-          <%= link_to image_tag('/images/edit.png', :title => 'Modificar venta'), edit_sale_path(sale) if can? :update,sale%>
-          <%= link_to_function image_tag('/images/edit.png', :title => 'Abonar a venta'), "open_dialog(#{sale.id});" if cannot? :update,sale%>
+          <%= link_to image_tag('/images/edit.png', :title => 'Modificar venta'), edit_sale_path(sale)%>
+          <%#= link_to_function image_tag('/images/edit.png', :title => 'Abonar a venta'), "open_dialog(#{sale.id});" if cannot? :update,sale%>
           <%= link_to image_tag('/images/delete.png', :title => 'Borrar venta'), sale, :confirm => 'La venta sera borrada. Deseas continuar?', :method => :delete if can? :destroy,Sale%>
 
         </td>
@@ -41,5 +41,5 @@
   </tbody>
 </table>
 <div id="payment_popup"></div>
-<%= render 'open_dialog' %>
+<%#= render 'open_dialog' %>
 <%= render 'layouts/datatables_js' %>

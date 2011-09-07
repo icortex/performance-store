@@ -5,17 +5,20 @@ class SalesController < MyApplicationController
   before_filter :set_seller_id, :only=>[:create,:update]
 
   def index
-    if current_user.is_a? Admin
-    if params[:headquarter]
-      hq=Headquarter.find_by_name params[:headquarter]
+    if (current_user.is_a? Admin) || (current_user.is_a? SuperAdmin)
+      if params[:headquarter]
+        hq=Headquarter.find_by_name params[:headquarter]
+      else
+        hq=Headquarter.find current_user.headquarter_id
+        params[:headquarter] = hq.name
+      end
+      @sales = Sale.find_all_by_headquarter_id hq.id
+      @headquarter = "en #{params[:headquarter]}"
     else
-      hq=Headquarter.find current_user.headquarter_id
-      params[:headquarter] = hq.name
+      @sales = Sale.where("headquarter_id = ? and (separated = ? or seller_id = ?)", current_user.headquarter_id,true,"#{current_user.id}")
+      @headquarter = "en #{current_user.headquarter.name}"
     end
-    @sales = Sale.find_all_by_headquarter_id hq.id
-    else
-      @sales = Sale.where("separated = ? or seller_id = ?",true,"#{current_user.id}")
-    end
+
   end
 
   def show

@@ -1,65 +1,70 @@
 <% content_for :secondary_menu do %>
-<%= render 'links' %>
+    <%= render 'links' %>
 <% end %>
 
 <%= form_tag validate_users_path do %>
 
-      <h3>Usuarios no validados</h3>
-      <% if !@unvalidated_users.empty? %>
-          <table cellspacing="0" cellpadding="0" class="users">
-            <th>Nombre de usuario</th>
-            <th>Email</th>
-            <th>Tipo</th>
-            <th>Sede</th>
-            <th>Validar</th>
-            <th>Eliminar</th>
-            <% @unvalidated_users.each do |not_user| %>
-                <tr>
-                  <td><%= not_user.username %></td>
-                  <td><%= not_user.email %></td>
-                  <td class='center_td'><%= select 'user', 'type', options_for_select([['SuperAdmin', 'SuperAdmin'],['Administrador', 'Admin'], ['Vendedor', 'Seller']]) %></td>
-                  <td class='center_td'><%= select_tag "headquarter_id", options_from_collection_for_select(Headquarter.all, "id", "name") %></td>
-                  <td class='center_td'><%= check_box_tag "validation[#{not_user.id}]" %></td>
-                  <td class='center_td'><%= check_box_tag "destroy[#{not_user.id}]" %></td>
-                </tr>
-            <% end %>
-          </table>
-      <% else %>
-          <p>No hay usuarios esperando tu validacion!</p>
-      <% end %>
+    <h3>Usuarios no validados</h3>
+    <% if !@unvalidated_users.empty? %>
+        <table cellspacing="0" cellpadding="0" class="users">
+          <th>Nombre de usuario</th>
+          <th>Email</th>
+          <th>Tipo</th>
+          <th>Sede</th>
+          <th>Validar</th>
+          <th>Eliminar</th>
+          <% @unvalidated_users.each do |not_user| %>
+              <tr>
+                <td><%= not_user.username %></td>
+                <td><%= not_user.email %></td>
+                <td class='center_td'><%= select 'user', "type[#{not_user.id}]", options_for_select([['Super Admin', 'SuperAdmin'],['Administrador', 'Admin'], ['Vendedor', 'Seller']]) %></td>
+                <td class='center_td'><%= select_tag "headquarter_id[#{not_user.id}]", options_from_collection_for_select(Headquarter.all, "id", "name") %></td>
+                <td class='center_td'><%= check_box_tag "validation[#{not_user.id}]" %></td>
+                <td class='center_td'><%= check_box_tag "destroy[#{not_user.id}]" %></td>
+              </tr>
+          <% end %>
+        </table>
+        <br>
+        <%= submit_tag 'Aceptar cambios' %>
+    <% else %>
+        <p>No hay usuarios esperando tu validacion!</p>
+    <% end %>
+<% end %>
 
-      <h3>Usuarios registrados</h3>
-      <% if !@validated_users.empty? %>
-          <table cellspacing="0" cellpadding="0" class="users">
-            <th>Nombre de usuario</th>
-            <th>Email</th>
-            <th>Ultimo inicio de sesión</th>
-            <th>Contador</th>
-            <th>Tipo</th>
-            <th>Sede</th>
-            <th>Actualizar</th>
-            <th>Eliminar</th>
-            <% @validated_users.each do |user| %>
-                <tr>
-                  <td><%= user.username %></td>
-                  <td><%= user.email %></td>
-                  <td class='center_td'>
-                    <% if user.current_sign_in_at %>
-                    <%= user.current_sign_in_at.to_s(:db) %>&emsp; hace
-                    <%= time_ago_in_words user.current_sign_in_at   %>
-                    <% end %>
-                  </td>
-                  <td class='center_td'><%= user.sign_in_count %></td>
-                  <td class='center_td'><%= select 'user', 'type', options_for_select([['SuperAdmin', 'SuperAdmin'],['Administrador', 'Admin'], ['Vendedor', 'Seller']], :selected => "#{user.type}") %></td>
-                  <td class='center_td'><%= select_tag "headquarter_id", options_from_collection_for_select(Headquarter.all, "id", "name", :selected => "#{user.headquarter_id}")  %></td>
-                  <td class='center_td'><%= check_box_tag "update[#{user.id}]" %></td>
-                  <td class='center_td'><%= check_box_tag "destroy[#{user.id}]" %></td>
-                </tr>
-            <% end %>
-          </table>
-      <% else %>
-          <p>No hay usuarios registrados en el sistema!</p>
-      <% end %>
+<%= form_tag validate_users_path do %>
+
+    <h3>Usuarios registrados</h3>
+    <% if !@validated_users.empty? %>
+        <table cellspacing="0" cellpadding="0" class="users">
+          <th>Nombre de usuario</th>
+          <th>Email</th>
+          <th>Ultimo inicio de sesión</th>
+          <th>Contador</th>
+          <th>Tipo</th>
+          <th>Sede</th>
+          <th>Actualizar</th>
+          <th>Eliminar</th>
+          <% @validated_users.each do |user| %>
+              <tr>
+                <td><%= user.username %></td>
+                <td><%= user.email %></td>
+                <td class='center_td'>
+                  <% if user.current_sign_in_at %>
+                      <%= user.current_sign_in_at.to_s(:db) %>&emsp; hace
+                      <%= time_ago_in_words user.current_sign_in_at   %>
+                  <% end %>
+                </td>
+                <td class='center_td'><%= user.sign_in_count %></td>
+                <td class='center_td'><%= select 'user', "type[#{user.id}]", options_for_select([['Super Admin', 'SuperAdmin'],['Administrador', 'Admin'], ['Vendedor', 'Seller']], :selected => "#{user.type}") %></td>
+                <td class='center_td'><%= select_tag "headquarter_id[#{user.id}]", options_from_collection_for_select(Headquarter.all, "id", "name", :selected => "#{user.headquarter_id}")  %></td>
+                <td class='center_td'><%= check_box_tag "validation[#{user.id}]" %></td>
+                <td class='center_td'><%= check_box_tag "destroy[#{user.id}]" %></td>
+              </tr>
+          <% end %>
+        </table>
+    <% else %>
+        <p>No hay usuarios registrados en el sistema!</p>
+    <% end %>
     <br>
     <%= submit_tag 'Aceptar cambios' %>
 <% end %>

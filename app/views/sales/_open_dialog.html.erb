@@ -1,6 +1,6 @@
 <script type="text/javascript">
     function open_dialog(sale_id){
-        jq('#payment_popup').load(sale_id+'/abono', null, function(data, status, request) {
+        jq('#payment_popup').load('/ventas/'+sale_id+'/abono', null, function(data, status, request) {
         });
         jq('#payment_popup').dialog({
             title: 'Abonar',

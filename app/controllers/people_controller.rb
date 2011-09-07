@@ -25,7 +25,7 @@ class PeopleController < MyApplicationController
 
         @title = "Lista de cumpleaneros de la proxima semana"
     end
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @people.map(&:attributes) }

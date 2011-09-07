@@ -1,14 +1,14 @@
 <script type="text/javascript">
-        function local_ready() {
+        jQuery(document).bind('ready',function () {
             jq('table[class="dataTablesId"]').dataTable({
                 "bJQueryUI": true,
                 "sPaginationType": "full_numbers",
-                "sScrollY": document.height * 0.48 + "px",
+                "sScrollY": window.innerHeight * 0.48 + "px",
                 "sDom": '<"H"<"search-table"f>lr>t<"F"<"showing"i><"pagination"p>>S',
                 "aLengthMenu": [
                     [5, 10, 25, 50, -1],
                     [5, 10, 25, 50, "Todos"]
                 ]
             });
-        }
+        });
 </script>
