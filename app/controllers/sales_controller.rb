@@ -5,7 +5,7 @@ class SalesController < MyApplicationController
   before_filter :set_seller_id, :only=>[:create,:update]
 
   def index
-    if (current_user.is_a? Admin) || (current_user.is_a? SuperAdmin)
+    if !current_user.is_a? Seller
       if params[:headquarter]
         hq=Headquarter.find_by_name params[:headquarter]
       else
@@ -81,15 +81,22 @@ class SalesController < MyApplicationController
   end
 
   def destroy
-    @sale = Sale.find(params[:id])
-    @sale.destroy
-
-    redirect_to(:back, :notice => 'Venta borrada exitosamente.')
+    if !current_user.is_a? Seller
+      @sale = Sale.find(params[:id])
+      @sale.destroy
+      redirect_to(:back, :notice => 'Venta borrada exitosamente.')
+    else
+      s=Sale.find(params[:id])
+      s.update_attribute(:voided,!s.voided?)
+      s.save
+      redirect_to(:back, :notice => 'Venta anulada/activada exitosamente.')
+    end
   end
 
   private
   def set_seller_id
     params[:sale][:seller_id]=current_user.id
   end
+
 end
 

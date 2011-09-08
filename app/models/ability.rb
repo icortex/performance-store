@@ -13,7 +13,7 @@ class Ability
       can :manage, :all
       cannot :manage, [Report, Expense, Admin, Lot]
       cannot [:create, :update, :destroy], [Product, Stock]
-      cannot :destroy, [Person,Sale]
+      cannot :destroy, [Person]
       cannot :see, 'hq_links'
       
     end

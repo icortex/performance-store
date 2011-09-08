@@ -27,19 +27,22 @@ class Sale < ActiveRecord::Base
     self.old_quantities = sale.sale_products.collect do |sp|
       sp.quantity
     end
+    self.old_quantities=[0] if self.old_quantities.nil? || self.old_quantities.empty?
   end
 
   def update_stock
     index=0
     self.sale_products.each do |sp|
       stock = Stock.where('product_id = ? and headquarter_id = ?', sp.product_id, self.headquarter_id)[0]
-      if self.old_quantities.nil?
-        new_qty = stock.quantity - sp.quantity
-      else
-        new_qty = stock.quantity - sp.quantity + self.old_quantities[index]
+      if stock && stock.quantity
+        if self.old_quantities.nil?
+          new_qty = stock.quantity - sp.quantity
+        else
+          new_qty = stock.quantity - sp.quantity + self.old_quantities[index]
+        end
+        stock.update_attributes(:quantity => new_qty)
+        index+=1
       end
-      stock.update_attributes(:quantity => new_qty)
-      index+=1
     end
   end
 
@@ -48,7 +51,9 @@ class Sale < ActiveRecord::Base
     index=0
     self.sale_products.each do |sp|
       stock = Stock.where('product_id = ? and headquarter_id = ?', sp.product_id, self.headquarter_id)[0]
-      total_cost += stock.cost * sp.quantity
+      cost=stock.cost rescue 0
+      quantity=sp.quantity rescue 0
+      total_cost += cost* quantity rescue 0
       index+=1
     end
     self.total_cost = total_cost
@@ -73,10 +78,24 @@ class Sale < ActiveRecord::Base
 
   def balance
     if self.separated?
-      self.total-self.separates.map(&:payment).inject{|sum,x| sum+x}
+      payments=self.separates.map(&:payment).inject{|sum,x| sum+x} rescue 0
+      self.total-payments rescue self.total
     else
       0
     end
+  end
+
+  def status
+    s=''
+    if self.voided?
+      s='Anulada'
+    end
+    if self.separated?
+      s+=' Separada'
+    else
+      s+=' Vendida'
+    end
+    s
   end
 
 end

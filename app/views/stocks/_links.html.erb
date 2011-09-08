@@ -1,7 +1,5 @@
 <%= link_to 'Nuevo articulo', new_product_path, :class => 'menu_link' %>
-<%= link_to 'Articulos', products_path, :class => 'menu_link' %>
-<% if can? :see,'hq_links'%>
+<%= link_to 'Articulos', products_path, :class => 'menu_link'%>
 <% Headquarter.all.each do |hq| %>
     <%= link_to hq.name, "#{stocks_path}/sede/#{hq.name}", :class => 'menu_link_hq' %>
-<% end %>
 <% end %>

@@ -1,8 +1,8 @@
 function remove_fields(link) {
     jq(link).prev("input[type=hidden]").val("1");
     jq(link).closest(".fields").hide();
-    a = jq(link).closest('tr').find('label[for*="subtotal"]').html('0');
-    console.log(a);
+    jq(link).closest('tr').find('label[for*="subtotal"]').html('0');
+    jq(link).closest('tr').find('input[id*="quantity"]').val(0);
     calculate_total();
 }
 

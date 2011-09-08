@@ -27,13 +27,14 @@
         <td><%= sale.iva %></td>
         <td><%= sale.total %></td>
         <td><%= sale.balance %></td>
-        <td><%= sale.separated ? 'Separado' : 'Vendido' %></td>
+        <td><%= sale.status %></td>
         <td><%= sale.seller.username if sale.seller%></td>
         <td width="100px">
           <%= link_to image_tag('/images/view.png', :title => 'Ver venta'), sale_path(sale.id) %>
           <%= link_to image_tag('/images/edit.png', :title => 'Modificar venta'), edit_sale_path(sale)%>
           <%#= link_to_function image_tag('/images/edit.png', :title => 'Abonar a venta'), "open_dialog(#{sale.id});" if cannot? :update,sale%>
-          <%= link_to image_tag('/images/delete.png', :title => 'Borrar venta'), sale, :confirm => 'La venta sera borrada. Deseas continuar?', :method => :delete if can? :destroy,Sale%>
+          <%= link_to image_tag('/images/delete.png', :title => 'Borrar venta'), sale, :confirm => 'La venta sera borrada. Deseas continuar?', :method => :delete if !current_user.is_a? Seller%>
+          <%= link_to image_tag('/images/delete.png', :title => 'Anular/Activar venta'), sale, :confirm => 'La venta sera anulada/activada. Deseas continuar?', :method => :delete if current_user.is_a? Seller%>
 
         </td>
       </tr>
