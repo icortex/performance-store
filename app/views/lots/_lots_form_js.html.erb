@@ -1,0 +1,249 @@
+<script type='text/javascript'>
+
+    <%= "var products = " %><%= @products ? @products.html_safe : '[]' %><%= ';' %>
+
+    function local_ready() {
+
+
+        jq('label[for*="_in_stock"]').html('');
+        calculator_handlers();
+    <% index=0 %>
+    <% for lp in @lot.lot_products do %>
+    <%= ("autocomplete_product(\"#lot_lot_products_attributes_#{index}\","+
+   "\"#{lp.product.brand.brand rescue ''}\","+
+   "\"#{lp.product.reference rescue ''}\","+
+   "\"#{lp.product.size.size rescue ''}\","+
+   "\"#{lp.product.color.color rescue ''}\","+
+   "products[#{index}]);").html_safe %>
+    <% index+=1 %>
+    <% end %>
+
+        var discount = jq('#sale_discount');
+        var total_jq = jq('#sale_total');
+        if (discount.val() == '') {
+            jq('#discount_percentage').val('0');
+            discount.val('0');
+
+        } else {
+            jq('#discount_percentage').val(discount.val() / sum_subtotals() * 100);
+        }
+
+        jq('#sale_separated').mouseup(
+                function() {
+                    separate_visibility(true);
+
+                });
+
+        separate_visibility(false);
+
+
+    }
+
+     /*
+     *  fieldset_selector='#sale_sale_products_attributes_'+#
+     *  # stands for a number, for example:1 , 2 , 3
+     */
+    function autocomplete_product(fieldset_selector, brand, reference, size, color, product_options) {
+        var price_input = jq(fieldset_selector + '_price');
+        var quantity_input = jq(fieldset_selector + '_quantity');
+        var label_for_selector = 'label[for=' + fieldset_selector.substr(1);
+        var max_quantity_label = jq(label_for_selector + '_in_stock]');
+        var subtotal = jq(label_for_selector + '_subtotal]').html('0');
+        var size_select = jq(fieldset_selector + '_size').html('');
+        var color_select = jq(fieldset_selector + '_color').html('');
+
+        var pre_pop = [];
+        if (brand != '' || reference != '') {
+            pre_pop = [
+                {reference: brand + ', ' + reference,
+                    id:reference
+                }
+            ];
+            fill_saved_features(product_options, fieldset_selector, size, color);
+        }
+
+        function reset_fields() {
+            price_input.val(0);
+            quantity_input.val(0);
+            max_quantity_label.html('0');
+            subtotal.html('0');
+            size_select.html('');
+            color_select.html('');
+            calculate_total();
+        }
+
+        jq(fieldset_selector + '_reference').tokenInput("/articulos.json", {
+            crossDomain: false,
+            prePopulate: pre_pop,
+            search_parameter: "reference",
+            searchingText: "Buscando...",
+            noResultsText: "No hay resultados",
+            hintText: "Ingrese la referencia del articulo...",
+            minChars: 3,
+            tokenLimit:1,
+            onResult: function (results) {
+                jq.each(results, function (index, value) {
+                    value.reference = value.brand + ', ' + value.reference;
+                });
+                return results;
+            },
+            onAdd: function (item) {
+                fill_features(item, fieldset_selector);
+            },
+            onDelete: function() {
+                reset_fields();
+            }
+        });
+
+        calculate_total();
+
+        quantity_input.keyup(function() {
+            subtotal.html(quantity_input.val() * price_input.val());
+            calculate_total();
+            compare_quantity(quantity_input.val(), max_quantity_label.html());
+        });
+
+        quantity_input.mouseup(function() {
+            subtotal.html(quantity_input.val() * price_input.val());
+            calculate_total();
+            compare_quantity(quantity_input.val(), max_quantity_label.html());
+        });
+
+        price_input.keyup(function() {
+            subtotal.html(quantity_input.val() * price_input.val());
+            calculate_total();
+        });
+    }
+
+
+    function fill_features(item, fieldset_selector) {
+        var size_select = jq(fieldset_selector + '_size').html('');
+        var color_select = jq(fieldset_selector + '_color').html('');
+        var price_input = jq(fieldset_selector + '_price').html('');
+        var quantity_input = jq(fieldset_selector + '_quantity').val('0');
+        var label_for_selector = 'label[for=' + fieldset_selector.substr(1);
+        var max_quantity_label = jq(label_for_selector + '_in_stock]').html('');
+        var subtotal = jq(label_for_selector + '_subtotal]').html('');
+
+        add_options(size_select['selector'], keys(item.sizes));
+        var colors = update_colors(size_select.val(), item, color_select);
+        update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
+        calculate_total();
+
+        size_select.change(function() {
+            colors = update_colors(size_select.val(), item, color_select);
+            update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
+        });
+
+        color_select.change(function() {
+            update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
+        });
+
+
+    }
+
+    function fill_saved_features(item, fieldset_selector, size, color) {
+        var size_select = jq(fieldset_selector + '_size').html('');
+        var color_select = jq(fieldset_selector + '_color').html('');
+        var price_input = jq(fieldset_selector + '_price');
+        var quantity_input = jq(fieldset_selector + '_quantity');
+        var label_for_selector = 'label[for=' + fieldset_selector.substr(1);
+        var qty = item['sizes'][size][color][0];
+        var max_quantity_label = jq(label_for_selector + '_in_stock]').html(qty);
+        var subtotal = jq(label_for_selector + '_subtotal]').html(price_input.val() * quantity_input.val());
+
+        add_options(size_select['selector'], keys(item.sizes));
+        var colors = update_colors(size_select.val(), item, color_select);
+        size_select.val(size);
+        color_select.val(color);
+        calculate_total();
+
+        size_select.change(function() {
+            colors = update_colors(size_select.val(), item, color_select);
+            update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
+            calculate_total();
+        });
+
+        color_select.change(function() {
+            update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
+            calculate_total();
+        });
+    }
+
+    function keys(some_hash) {
+        var ret_array = [];
+        for (var key in some_hash) {
+            ret_array.push(key);
+        }
+        return ret_array;
+    }
+
+    /*
+     * options_array=[['value 1', 'value 2'],['content 1', 'content 2']]
+     * OR
+     * options_array=['value 1', 'value 2']
+     */
+    function add_options(select_css_selector_str, options_array) {
+        var i, el, select = jq(select_css_selector_str);
+        if (!(typeof(options_array[0]) == 'object')) options_array = [options_array,options_array];
+        for (i = 0; i < Math.max(options_array[0].length, options_array[1].length); i++) {
+            var value = options_array[0][i];
+            var content = options_array[1][i];
+            var option = jq("<option value=''></option>");
+            option.val(value);
+            option.html(content);
+            select.append(option);
+        }
+    }
+    function update_colors(size_str, item, color_select) {
+        var colors = item.sizes[size_str];
+        color_select.html('');
+        add_options(color_select['selector'], keys(colors));
+        return colors;
+    }
+
+    function update_price_quantity(colors, color_str, price_input, max_quantity_label, subtotal, quantity_input) {
+        var qty = colors[color_str][0];
+        var price = colors[color_str][1];
+        price_input.val(price);
+        max_quantity_label.html(qty);
+        subtotal.html(quantity_input.val() * price);
+    }
+
+    function calculator_handlers() {
+        var discount = jq('#sale_discount');
+        var discount_percentage = jq('#discount_percentage');
+        var total_jq = jq('#sale_total');
+
+        discount.keyup(function() {
+            discount_percentage.val(discount.val() / sum_subtotals() * 100);
+            calculate_total();
+        });
+
+        discount_percentage.keyup(function() {
+            discount.val(sum_subtotals() * (discount_percentage.val() / 100));
+            calculate_total();
+        });
+    }
+
+    function calculate_total() {
+        var total_jq = jq('#sale_total');
+        var iva_selector = jq('#sale_iva');
+        var total = sum_subtotals();
+        var discount = jq('#sale_discount').val();
+        total_jq.val(total - discount);
+        iva_selector.val(total_jq.val() * (parseFloat('<%= iva.to_f/100 %>')));
+    }
+
+    function sum_subtotals() {
+        var subtotals = jq('tr:visible label[for*="subtotal"]');
+        var total = 0;
+        jq.each(subtotals, function(i, subtotal) {
+            total += parseFloat(subtotal.innerHTML);
+        });
+        return total;
+    }
+
+
+
+</script>

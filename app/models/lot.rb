@@ -1,6 +1,11 @@
 class Lot < ActiveRecord::Base
   validates_numericality_of :freight, :message => 'El flete debe ser un numero.'
   validates_presence_of :arrival_date, :message => 'Por favor, ingrese la fecha de llegada del lote.'
+
+  has_many :lot_products, :dependent => :destroy
+  has_many :products, :through => :lot_products
+  accepts_nested_attributes_for :lot_products,
+                                :allow_destroy => true
 end
 
 # == Schema Information

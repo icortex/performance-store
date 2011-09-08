@@ -1,6 +1,6 @@
 class SalesController < MyApplicationController
 
-  include SalesHelper
+  include ApplicationHelper
   layout 'application',:except => [:payment]
   before_filter :set_seller_id, :only=>[:create,:update]
 

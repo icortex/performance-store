@@ -9,6 +9,9 @@ class Product < ActiveRecord::Base
   has_many :sale_products
   has_many :sales, :through => :sale_products
 
+  has_many :lot_products
+  has_many :lots, :through => :lot_products
+
   has_attached_file :image, :styles => {:medium => "250x250>", :thumb => "60x60>"}
 
   validates_uniqueness_of :brand_id, :scope => [:reference, :size_id, :color_id],

@@ -1,12 +1,18 @@
 <% content_for :secondary_menu do %>
-<%= render 'links' %>
+    <%= render 'links' %>
 <% end %>
+<%= javascript_include_tag "jquery.tokeninput" %>
+
+<%= render 'lots_form_js', :iva => Variable.find(1).value %>
+
+<%= javascript_include_tag "nested_fields_lot" %>
+
 
 <%= form_for(@lot) do |f| %>
     <%= render 'layouts/error_messages', :model => @lot %>
 
-    <div class="form_class">
-      <table>
+    <div class="float_left">
+      <table class="form_class">
         <tr>
           <td>
             <%= f.label 'Descripcion' %>
@@ -46,6 +52,11 @@
             <%= f.text_field :weight %>
           </td>
         </tr>
+      </table>
+    </div>
+
+    <div class="float_left">
+      <table class="form_class">
         <tr>
           <td>
             <%= f.label 'Transportador' %>
@@ -64,17 +75,42 @@
         </tr>
         <tr>
           <td>
-            <%= f.label 'Costo total' %>
+            <%= f.label 'Costo mercancia' %>
           </td>
           <td>
             <%= f.text_field :total_cost %>
           </td>
         </tr>
       </table>
-      <br>
+    </div>
 
-      <div class="actions">
-        <%= f.submit 'Aceptar' %>
-      </div>
+    <br>
+        <table id='productsTable'>
+      <th style="width:150px">Articulo</th>
+      <th>Talla</th>
+      <th>Color</th>
+      <th>Costo (USD)</th>
+      <th>Costo (COP)</th>
+      <th>Cantidad</th>
+      <th>Flete</th>
+      <th>Subtotal</th>
+      <th>Utilidad (%)</th>
+      <th>Ganancia</th>
+      <th>Precio</th>
+      <th>Quitar</th>
+      <%= f.fields_for :lot_products do |b| %>
+          <tr class="fields">
+            <%= render :partial => 'lot_products_fields', :locals => {:f => b} %>
+          </tr>
+      <% end %>
+      <tr id='add_product'>
+        <td>
+          <%= link_to_add_fields image_tag('add.png', :title => 'Agregar articulo'), f, :lot_products, '#add_product' %>
+        </td>
+      </tr>
+    </table>
+
+    <div class="actions">
+      <%= f.submit 'Aceptar' %>
     </div>
 <% end %>

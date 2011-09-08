@@ -1,0 +1,36 @@
+<td>
+  <%= f.text_field :reference %>
+</td>
+<td>
+  <%= f.collection_select :size, [Size.new], :size, :size %>
+</td>
+<td>
+  <%= f.collection_select :color, [Color.new], :color, :color %>
+</td>
+<td>
+  <%= f.text_field :cost, :value => 0, :autocomplete => 'off' %>
+</td>
+<td>
+  <%= text_field_tag :cost_cop, nil, :readonly =>true%>
+</td>
+<td>
+  <%= f.number_field :quantity, :autocomplete => 'off', :min => 0 %>
+</td>
+<td>
+  <%= text_field_tag :freight, nil, :readonly =>true %>
+</td>
+<td>
+  <%= text_field_tag :subtotal, nil, :readonly =>true %>
+</td>
+<td>
+  <%= f.text_field :utility, :value => Variable.find(3).value, :autocomplete => 'off' %>
+</td>
+<td>
+  <%= text_field_tag :profit, nil, :readonly =>true %>
+</td>
+<td>
+  <%= text_field_tag :price, nil, :readonly =>true %>
+</td>
+<td>
+  <%= link_to_remove_fields image_tag('remove.png', :title => 'Quitar articulo'), f %>
+</td>

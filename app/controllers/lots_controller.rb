@@ -1,7 +1,6 @@
 class LotsController < MyApplicationController
-
-  load_and_authorize_resource
-  check_authorization
+  include ApplicationHelper
+  include ProductsHelper
 
   def index
     @lots = Lot.all
@@ -13,13 +12,20 @@ class LotsController < MyApplicationController
 
   def new
     @lot = Lot.new
+    @lot.lot_products.build
+    @products='[]'
   end
 
   def edit
     @lot = Lot.find(params[:id])
+    products = @lot.products.collect do |p|
+      organize(Product.where("reference = ? ", p.reference))[0]
+    end
+    @products=products.to_json
   end
 
   def create
+    set_ids params[:lot][:lot_products_attributes] if params[:lot][:lot_products_attributes]
     @lot = Lot.new(params[:lot])
 
     respond_to do |format|
@@ -32,6 +38,7 @@ class LotsController < MyApplicationController
   end
 
   def update
+    set_ids params[:lot][:lot_products_attributes] if params[:lot][:lot_products_attributes]
     @lot = Lot.find(params[:id])
 
     respond_to do |format|
@@ -49,4 +56,5 @@ class LotsController < MyApplicationController
 
     redirect_to(:back, :notice => 'Lote borrado exitosamente.')
   end
+
 end
