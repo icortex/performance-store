@@ -4,7 +4,7 @@
 
   <% @sizes.each do |size| %>
       <tr>
-        <td><%= size.size %></td>
+        <td><%= size.name %></td>
         <td><%= link_to image_tag('/images/edit.png', :title => 'Modificar talla'), '#', :id=>'size_'+size.id.to_s %>
           <script type="text/javascript">
               jq('#size_<%= size.id%>').click(function() {

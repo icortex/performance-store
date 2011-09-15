@@ -18,10 +18,8 @@ class LotsController < MyApplicationController
 
   def edit
     @lot = Lot.find(params[:id])
-    products = @lot.products.collect do |p|
-      organize(Product.where("reference = ? ", p.reference))[0]
-    end
-    @products=products.to_json
+
+
   end
 
   def create
@@ -55,6 +53,26 @@ class LotsController < MyApplicationController
     @lot.destroy
 
     redirect_to(:back, :notice => 'Lote borrado exitosamente.')
+  end
+
+  private
+
+#[{:reference => 'perro', :brand => 'Adidas',  :sizes => {'s' =>{'am'=>[1,20]}, 'm'=> {'ne'=>[21,2]}}}, {}]
+  def organize products
+    ret=[]
+    products.collect do |p|
+      pr={}
+      pr[:reference]=p.reference
+      pr[:brand]=p.brand.brand
+      pr[:sizes]={}
+      sizes=p.available_sizes
+      sizes.each do |s|
+        pr[:sizes][s]={}
+
+      end
+
+    end
+    ret
   end
 
 end

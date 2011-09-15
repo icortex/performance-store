@@ -2,10 +2,10 @@
   <%= f.text_field :reference %>
 </td>
 <td>
-  <%= f.collection_select :size, [Size.new], :size, :size %>
+  <%= f.collection_select :size, [Size.new], :name, :name %>
 </td>
 <td>
-  <%= f.collection_select :color, [Color.new], :color, :color %>
+  <%= f.collection_select :color, [Color.new], :name, :name %>
 </td>
 <td>
   <%= f.text_field :cost, :value => 0, :autocomplete => 'off' %>
@@ -29,7 +29,7 @@
   <%= text_field_tag :profit, nil, :readonly =>true %>
 </td>
 <td>
-  <%= text_field_tag :price, nil, :readonly =>true %>
+  <%= f.text_field :price,:readonly=>true %>
 </td>
 <td>
   <%= link_to_remove_fields image_tag('remove.png', :title => 'Quitar articulo'), f %>

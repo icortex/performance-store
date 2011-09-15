@@ -42,8 +42,8 @@
           <td><%= sale_product.product.brand.brand %></td>
           <td><%= sale_product.product.reference %></td>
           <td><%= sale_product.product.model %></td>
-          <td><%= sale_product.product.size.size %></td>
-          <td><%= sale_product.product.color.color %></td>
+          <td><%= sale_product.product.size.name %></td>
+          <td><%= sale_product.product.color.name %></td>
           <td><%= sale_product.quantity %></td>
           <td><%= number_to_currency sale_product.price, :precision => 0 %></td>
         </tr>

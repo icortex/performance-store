@@ -18,6 +18,19 @@ class Product < ActiveRecord::Base
                           :message => 'El articulo ya existe.'
 
   validates_presence_of :reference, :message => 'Por favor, ingrese la referencia del articulo.'
+
+  
+  def available_sizes
+    (Product.where("reference = ?",reference).collect do |p|
+      p.size.name
+    end).uniq
+  end
+
+  def available_colors
+    (Product.where("reference = ? and size_id = ?",reference,size_id).collect do |p|
+      p.color.name
+    end).uniq
+  end
 end
 # == Schema Information
 #

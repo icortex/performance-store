@@ -7,9 +7,9 @@ module ProductsHelper
 
   #[{:reference => 'perro', :brand => 'Adidas',  :sizes => {'s' =>{'am'=>[1,20]}, 'm'=> {'ne'=>[21,2]}}}, {}]
 
-  def organize(options)
+  def organize(products)
     pm = []
-    options.each do |p|
+    products.each do |p|
 
       stocks_by_hq = p.stocks.find_by_headquarter_id(current_user.headquarter_id)
       qty = stocks_by_hq.quantity rescue 0
@@ -17,11 +17,11 @@ module ProductsHelper
 
       pm_i = search_ref pm, p.reference
       if pm_i
-        s = search_size pm_i, p.size.size
+        s = search_size pm_i, p.size.name
         if s
-          pm_i[:sizes][s][p.color.color] = [qty, price]
+          pm_i[:sizes][s][p.color.name] = [qty, price]
         else
-          pm_i[:sizes][p.size.size] = {p.color.color=>[qty, price]}
+          pm_i[:sizes][p.size.name] = {p.color.name=>[qty, price]}
         end
       else
         product_temp = {}
@@ -29,8 +29,8 @@ module ProductsHelper
         product_temp[:brand] = p.brand.brand
         product_temp[:reference] = p.reference
         feature_to_insert = {}
-        feature_to_insert[p.size.size] = {}
-        feature_to_insert[p.size.size][p.color.color] = [qty, price]
+        feature_to_insert[p.size.name] = {}
+        feature_to_insert[p.size.name][p.color.name] = [qty, price]
         product_temp[:sizes] = feature_to_insert
         pm << product_temp
       end

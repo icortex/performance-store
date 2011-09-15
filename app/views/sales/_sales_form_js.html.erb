@@ -19,8 +19,8 @@
     <%= ("autocomplete_product(\"#sale_sale_products_attributes_#{index}\","+
    "\"#{sp.product.brand.brand rescue ''}\","+
    "\"#{sp.product.reference rescue ''}\","+
-   "\"#{sp.product.size.size rescue ''}\","+
-   "\"#{sp.product.color.color rescue ''}\","+
+   "\"#{sp.product.size.name rescue ''}\","+
+   "\"#{sp.product.color.name rescue ''}\","+
    "products[#{index}]);").html_safe %>
     <% index+=1 %>
     <% end %>

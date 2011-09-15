@@ -71,7 +71,7 @@
 
             <% Size.all.each do |size| %>
                 <div style="display:inline-block;">
-                  <%= check_box_tag "size_ids[#{size.size}]", size.id, checked_if_included(@sizes, size.size) %><%= size.size %>
+                  <%= check_box_tag "size_ids[#{size.name}]", size.id, checked_if_included(@sizes, size.name) %><%= size.name %>
                 </div>
             <% end %>
 
@@ -84,7 +84,7 @@
           <td width="100px">
             <% Color.all.each do |color| %>
                 <div style="display:inline-block;">
-                  <%= check_box_tag "color_ids[#{color.color}]", color.id, checked_if_included(@colors, color.color) %>
+                  <%= check_box_tag "color_ids[#{color.name}]", color.id, checked_if_included(@colors, color.name) %>
                   <%= f.label 'ps', :style=>"background:##{color.rgb};color:##{color.rgb};", :class=>'color_selector' %>
                 </div>
             <% end %>

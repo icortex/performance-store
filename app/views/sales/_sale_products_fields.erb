@@ -2,10 +2,10 @@
   <%= f.text_field :reference %>
 </td>
 <td>
-  <%= f.collection_select :size, [Size.new], :size, :size %>
+  <%= f.collection_select :size, [Size.new], :name, :name %>
 </td>
 <td>
-  <%= f.collection_select :color, [Color.new], :color, :color %>
+  <%= f.collection_select :color, [Color.new], :name, :name %>
 </td>
 <td>
   <%= f.text_field :price, :autocomplete => 'off', :size => '14', :readonly =>true %>
