@@ -7,13 +7,19 @@ module ProductsHelper
 
   #[{:reference => 'perro', :brand => 'Adidas',  :sizes => {'s' =>{'am'=>[1,20]}, 'm'=> {'ne'=>[21,2]}}}, {}]
 
-  def organize(products)
+  def organize(products, hq_aware=true)
     pm = []
     products.each do |p|
 
-      stocks_by_hq = p.stocks.find_by_headquarter_id(current_user.headquarter_id)
-      qty = stocks_by_hq.quantity rescue 0
-      price = stocks_by_hq.price rescue 0
+      if hq_aware
+        stocks_by_hq = p.stocks.find_by_headquarter_id(current_user.headquarter_id)
+        qty = stocks_by_hq.quantity rescue 0
+        price = stocks_by_hq.price rescue 0
+      else
+
+        qty = 0
+        price = 0
+      end
 
       pm_i = search_ref pm, p.reference
       if pm_i

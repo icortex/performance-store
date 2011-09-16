@@ -4,9 +4,7 @@
 
     function local_ready() {
 
-
-        jq('label[for*="_in_stock"]').html('');
-        calculator_handlers();
+    // Tokenizes inputs at page load when editing
     <% index=0 %>
     <% for lp in @lot.lot_products do %>
     <%= ("autocomplete_product(\"#lot_lot_products_attributes_#{index}\","+
@@ -18,34 +16,22 @@
     <% index+=1 %>
     <% end %>
 
-        var discount = jq('#sale_discount');
-        var total_jq = jq('#sale_total');
-        if (discount.val() == '') {
-            jq('#discount_percentage').val('0');
-            discount.val('0');
-
-        } else {
-            jq('#discount_percentage').val(discount.val() / sum_subtotals() * 100);
-        }
-
-        jq('#sale_separated').mouseup(
-                function() {
-                    separate_visibility(true);
-
-                });
-
-        separate_visibility(false);
-
 
     }
 
-     /*
+   /*
      *  fieldset_selector='#sale_sale_products_attributes_'+#
      *  # stands for a number, for example:1 , 2 , 3
      */
     function autocomplete_product(fieldset_selector, brand, reference, size, color, product_options) {
-        var price_input = jq(fieldset_selector + '_price');
+        var cost_input = jq(fieldset_selector + '_cost');
+        var cost_cop_input = jq(fieldset_selector + '_cost_cop');
         var quantity_input = jq(fieldset_selector + '_quantity');
+//        var freight_input = jq('freight');
+//        var price_input = jq(fieldset_selector + '_price');
+//        var price_input = jq(fieldset_selector + '_price');
+//        var price_input = jq(fieldset_selector + '_price');
+//        var quantity_input = jq(fieldset_selector + '_quantity');
         var label_for_selector = 'label[for=' + fieldset_selector.substr(1);
         var max_quantity_label = jq(label_for_selector + '_in_stock]');
         var subtotal = jq(label_for_selector + '_subtotal]').html('0');
@@ -72,6 +58,7 @@
             calculate_total();
         }
 
+        console.log(fieldset_selector);
         jq(fieldset_selector + '_reference').tokenInput("/articulos.json", {
             crossDomain: false,
             prePopulate: pre_pop,
@@ -94,6 +81,7 @@
                 reset_fields();
             }
         });
+         console.log("fieldset_selector");
 
         calculate_total();
 
