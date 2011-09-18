@@ -26,7 +26,7 @@
             <%= f.label 'Fecha de llegada' %>
           </td>
           <td>
-            <%= f.text_field :arrival_date, :id => 'datepicker' %>
+            <%= f.text_field :arrival_date, :id => 'datepicker' , :value => Date.today %>
             <script>
                 jq(function() {
                     jq("#datepicker").datepicker({
@@ -70,7 +70,7 @@
             <%= f.label 'Flete' %>
           </td>
           <td>
-            <%= f.text_field :freight %>
+            <%= f.text_field :freight, :autocomplete=>'off' %>
           </td>
         </tr>
         <tr>
@@ -110,7 +110,7 @@
       </tr>
     </table>
 
-    <div class="actions">
+    <div class="actions" id="lot_submit">
       <%= f.submit 'Aceptar' %>
     </div>
 <% end %>

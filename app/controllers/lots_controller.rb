@@ -34,6 +34,16 @@ class LotsController < MyApplicationController
       if @lot.save
         format.html { redirect_to(lots_path, :notice => 'Lote creado exitosamente.') }
       else
+        products=params[:lot][:lot_products_attributes].collect do|k,lp|
+          Product.find(lp[:product_id])
+        end
+        products=products.collect do |p|
+          organize(Product.find_all_by_reference(p.reference),false)[0]
+        end
+        p 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+        p products
+        @products=products.to_json
+
         format.html { render :action => "new" }
       end
     end

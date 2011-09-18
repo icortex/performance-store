@@ -262,3 +262,7 @@ table#totals th{
 table#totals td{
     text-align:right;
 }
+
+#lot_submit{
+    margin-bottom: 30px;
+}

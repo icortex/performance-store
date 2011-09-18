@@ -1,10 +1,11 @@
 <script type='text/javascript'>
 
     <%= "var products = " %><%= @products ? @products.html_safe : '[]' %><%= ';' %>
+    <%= "var dollar= " %><%= Variable.find(2).value %><%= ';' %>
 
     function local_ready() {
 
-    // Tokenizes inputs at page load when editing
+        // Tokenizes inputs at page load when editing
     <% index=0 %>
     <% for lp in @lot.lot_products do %>
     <%= ("autocomplete_product(\"#lot_lot_products_attributes_#{index}\","+
@@ -19,7 +20,7 @@
 
     }
 
-   /*
+    /*
      *  fieldset_selector='#sale_sale_products_attributes_'+#
      *  # stands for a number, for example:1 , 2 , 3
      */
@@ -27,16 +28,58 @@
         var cost_input = jq(fieldset_selector + '_cost');
         var cost_cop_input = jq(fieldset_selector + '_cost_cop');
         var quantity_input = jq(fieldset_selector + '_quantity');
-//        var freight_input = jq('freight');
-//        var price_input = jq(fieldset_selector + '_price');
-//        var price_input = jq(fieldset_selector + '_price');
-//        var price_input = jq(fieldset_selector + '_price');
-//        var quantity_input = jq(fieldset_selector + '_quantity');
-        var label_for_selector = 'label[for=' + fieldset_selector.substr(1);
-        var max_quantity_label = jq(label_for_selector + '_in_stock]');
-        var subtotal = jq(label_for_selector + '_subtotal]').html('0');
-        var size_select = jq(fieldset_selector + '_size').html('');
-        var color_select = jq(fieldset_selector + '_color').html('');
+        var utility_input = jq(fieldset_selector + '_utility');
+        var price_input = jq(fieldset_selector + '_price');
+        var aux=price_input.closest('tr');
+        var cost_cop= aux.find('input[name="cost_cop"]');
+        var subtotal=aux.find('input[name="subtotal"]');
+        var profit= aux.find('input[name="profit"]');
+        var lot_freight=jq('#lot_freight');
+        var freight= jq('input[name="freight"]');
+
+
+
+        // Row math
+        cost_cop.val(cost_input.val()*dollar);
+        update_freight();
+        subtotal.val(parseInt(cost_cop.val())+parseInt(freight.val()));
+        profit.val(subtotal.val()*(utility_input.val()/100));
+        price_input.val(aprox(parseInt(subtotal.val())+parseInt(profit.val())));
+
+        lot_freight.bind('keyup change',function(){
+            update_freight();
+            subtotal.val(parseInt(cost_cop.val())+parseInt(freight.val()));
+            profit.val(subtotal.val()*(utility_input.val()/100));
+            price_input.val(aprox(parseInt(subtotal.val())+parseInt(profit.val())));
+        });
+
+        quantity_input.bind('keyup mouseup',function(){
+            update_freight();
+            subtotal.val(parseInt(cost_cop.val())+parseInt(freight.val()));
+            profit.val(subtotal.val()*(utility_input.val()/100));
+            price_input.val(aprox(parseInt(subtotal.val())+parseInt(profit.val())));
+        });
+
+        cost_input.keyup(function(){
+            cost_cop.val(cost_input.val()*dollar);
+            subtotal.val(parseInt(cost_cop.val())+parseInt(freight.val()));
+            profit.val(subtotal.val()*(utility_input.val()/100));
+            price_input.val(aprox(parseInt(subtotal.val())+parseInt(profit.val())));
+        });
+
+        utility_input.bind('keyup change',function(){
+            profit.val(subtotal.val()*(utility_input.val()/100));
+            price_input.val(aprox(parseInt(subtotal.val())+parseInt(profit.val())));
+        });
+
+        // Row math END
+
+        if(lot_freight.val()==''){
+            lot_freight.val(0);
+        }
+        if(utility_input.val()==''){
+                    utility_input.val(<%= Variable.find(3).value %>);
+                }
 
         var pre_pop = [];
         if (brand != '' || reference != '') {
@@ -49,16 +92,15 @@
         }
 
         function reset_fields() {
-            price_input.val(0);
-            quantity_input.val(0);
-            max_quantity_label.html('0');
-            subtotal.html('0');
-            size_select.html('');
-            color_select.html('');
-            calculate_total();
+//            price_input.val(0);
+//            quantity_input.val(0);
+//            max_quantity_label.html('0');
+//            subtotal.html('0');
+//            size_select.html('');
+//            color_select.html('');
+//            calculate_total();
         }
 
-        console.log(fieldset_selector);
         jq(fieldset_selector + '_reference').tokenInput("/articulos.json", {
             crossDomain: false,
             prePopulate: pre_pop,
@@ -81,26 +123,7 @@
                 reset_fields();
             }
         });
-         console.log("fieldset_selector");
 
-        calculate_total();
-
-        quantity_input.keyup(function() {
-            subtotal.html(quantity_input.val() * price_input.val());
-            calculate_total();
-            compare_quantity(quantity_input.val(), max_quantity_label.html());
-        });
-
-        quantity_input.mouseup(function() {
-            subtotal.html(quantity_input.val() * price_input.val());
-            calculate_total();
-            compare_quantity(quantity_input.val(), max_quantity_label.html());
-        });
-
-        price_input.keyup(function() {
-            subtotal.html(quantity_input.val() * price_input.val());
-            calculate_total();
-        });
     }
 
 
@@ -116,7 +139,6 @@
         add_options(size_select['selector'], keys(item.sizes));
         var colors = update_colors(size_select.val(), item, color_select);
         update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
-        calculate_total();
 
         size_select.change(function() {
             colors = update_colors(size_select.val(), item, color_select);
@@ -133,29 +155,18 @@
     function fill_saved_features(item, fieldset_selector, size, color) {
         var size_select = jq(fieldset_selector + '_size').html('');
         var color_select = jq(fieldset_selector + '_color').html('');
-        var price_input = jq(fieldset_selector + '_price');
         var quantity_input = jq(fieldset_selector + '_quantity');
         var label_for_selector = 'label[for=' + fieldset_selector.substr(1);
-        var qty = item['sizes'][size][color][0];
-        var max_quantity_label = jq(label_for_selector + '_in_stock]').html(qty);
-        var subtotal = jq(label_for_selector + '_subtotal]').html(price_input.val() * quantity_input.val());
 
         add_options(size_select['selector'], keys(item.sizes));
         var colors = update_colors(size_select.val(), item, color_select);
         size_select.val(size);
         color_select.val(color);
-        calculate_total();
 
         size_select.change(function() {
             colors = update_colors(size_select.val(), item, color_select);
-            update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
-            calculate_total();
         });
 
-        color_select.change(function() {
-            update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
-            calculate_total();
-        });
     }
 
     function keys(some_hash) {
@@ -190,48 +201,31 @@
         return colors;
     }
 
-    function update_price_quantity(colors, color_str, price_input, max_quantity_label, subtotal, quantity_input) {
-        var qty = colors[color_str][0];
-        var price = colors[color_str][1];
-        price_input.val(price);
-        max_quantity_label.html(qty);
-        subtotal.html(quantity_input.val() * price);
+
+    function sum_quantities(){
+        var quantities=jq('input[id*="quantity"]');
+
+        var sum=0,i=0;
+        for(i=0; i<quantities.length ; i++){
+            sum+=parseInt(quantities[i].value);
+        }
+        return sum;
     }
 
-    function calculator_handlers() {
-        var discount = jq('#sale_discount');
-        var discount_percentage = jq('#discount_percentage');
-        var total_jq = jq('#sale_total');
-
-        discount.keyup(function() {
-            discount_percentage.val(discount.val() / sum_subtotals() * 100);
-            calculate_total();
-        });
-
-        discount_percentage.keyup(function() {
-            discount.val(sum_subtotals() * (discount_percentage.val() / 100));
-            calculate_total();
-        });
+    function update_freight(){
+        var lot_freight=jq('#lot_freight');
+        var freights= jq('input[name="freight"]');
+        for(i=0; i<freights.length ; i++){
+            freights[i].value=lot_freight.val()/sum_quantities();
+        }
     }
 
-    function calculate_total() {
-        var total_jq = jq('#sale_total');
-        var iva_selector = jq('#sale_iva');
-        var total = sum_subtotals();
-        var discount = jq('#sale_discount').val();
-        total_jq.val(total - discount);
-        iva_selector.val(total_jq.val() * (parseFloat('<%= iva.to_f/100 %>')));
+    // aprox by 500
+    function aprox(number){
+        var mod=number%500;
+        var x=500-mod;
+        return mod >= 250 ? number+x : number-mod ;
     }
-
-    function sum_subtotals() {
-        var subtotals = jq('tr:visible label[for*="subtotal"]');
-        var total = 0;
-        jq.each(subtotals, function(i, subtotal) {
-            total += parseFloat(subtotal.innerHTML);
-        });
-        return total;
-    }
-
 
 
 </script>
