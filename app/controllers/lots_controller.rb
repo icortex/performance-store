@@ -14,6 +14,7 @@ class LotsController < MyApplicationController
     @lot = Lot.new
     @lot.lot_products.build
     @products='[]'
+    @product=Product.new
   end
 
   def edit
@@ -22,8 +23,7 @@ class LotsController < MyApplicationController
       organize(Product.where("reference = ? ", p.reference),false)[0]
     end
     @products=products.to_json
-
-
+    @product=Product.new
   end
 
   def create
@@ -31,19 +31,19 @@ class LotsController < MyApplicationController
     @lot = Lot.new(params[:lot])
 
     respond_to do |format|
-      if @lot.save
-        format.html { redirect_to(lots_path, :notice => 'Lote creado exitosamente.') }
-      else
-        products=params[:lot][:lot_products_attributes].collect do|k,lp|
-          Product.find(lp[:product_id])
-        end
-        products=products.collect do |p|
-          organize(Product.find_all_by_reference(p.reference),false)[0]
-        end
-        @products=products.to_json
+        if @lot.save
+          format.html { redirect_to(edit_lot_path @lot.id) }
+        else
+          products=params[:lot][:lot_products_attributes].collect do|k,lp|
+            Product.find(lp[:product_id])
+          end
+          products=products.collect do |p|
+            organize(Product.find_all_by_reference(p.reference),false)[0]
+          end
+          @products=products.to_json
 
-        format.html { render :action => "new" }
-      end
+          format.html { render :action => "new" }
+        end
     end
   end
 
@@ -53,7 +53,7 @@ class LotsController < MyApplicationController
 
     respond_to do |format|
       if @lot.update_attributes(params[:lot])
-        format.html { redirect_to(lots_path, :notice => 'Lote actualizado exitosamente.') }
+        format.html { redirect_to(:back, :notice => 'Lote guardado exitosamente.') }
       else
         format.html { render :action => "edit" }
       end
@@ -66,5 +66,4 @@ class LotsController < MyApplicationController
 
     redirect_to(:back, :notice => 'Lote borrado exitosamente.')
   end
-
 end

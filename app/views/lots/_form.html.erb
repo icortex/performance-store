@@ -7,8 +7,7 @@
 
 <%= javascript_include_tag "nested_fields_lot" %>
 
-
-<%= form_for(@lot) do |f| %>
+<%= form_for @lot do |f| %>
     <%= render 'layouts/error_messages', :model => @lot %>
 
     <div class="float_left">
@@ -113,7 +112,16 @@
       </tr>
     </table>
 
+    <%= link_to_function 'Nuevo articulo','product_dialog();'%>
+
+
     <div class="actions" id="lot_submit">
-      <%= f.submit 'Aceptar' %>
+      <%= f.submit 'Guardar' %>
+      <br>
+     <%= link_to 'Finalizar',lots_path %>
+
     </div>
 <% end %>
+<div id="product_dialog">
+  <%#= render 'products/form' %>
+</div>

@@ -8,7 +8,6 @@ class Lot < ActiveRecord::Base
                                 :allow_destroy => true, :reject_if => lambda { |lp|
        lp[:product_id].blank? || lp[:quantity].blank? || lp[:quantity] == '0'
       }
-
 end
 
 # == Schema Information

@@ -17,8 +17,8 @@
     <% index+=1 %>
     <% end %>
 
-
     }
+
 
     /*
      *  fieldset_selector='#sale_sale_products_attributes_'+#
@@ -130,7 +130,7 @@
         var size_select = jq(fieldset_selector + '_size').html('');
         var color_select = jq(fieldset_selector + '_color').html('');
         var price_input = jq(fieldset_selector + '_price').html('');
-        var quantity_input = jq(fieldset_selector + '_quantity').val('0');
+        var quantity_input = jq(fieldset_selector + '_quantity').val('1');
         var label_for_selector = 'label[for=' + fieldset_selector.substr(1);
 
         add_options(size_select['selector'], keys(item.sizes));
@@ -216,5 +216,8 @@
         return mod >= 250 ? number+x : number-mod ;
     }
 
+    function product_dialog(){
+        jq('#product_dialog').dialog();
+    }
 
 </script>
