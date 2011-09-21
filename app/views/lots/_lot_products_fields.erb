@@ -11,7 +11,7 @@
   <%= f.text_field :cost, :autocomplete => 'off' %>
 </td>
 <td>
-  <%= text_field_tag :cost_cop, nil, :readonly =>true%>
+  <%= f.text_field :cost_cop, :readonly =>true%>
 </td>
 <td>
   <%= f.number_field :quantity, :autocomplete => 'off', :min => 0 %>
@@ -20,7 +20,7 @@
   <%= text_field_tag :freight, nil, :readonly =>true  %>
 </td>
 <td>
-  <%= text_field_tag :subtotal, nil, :readonly =>true %>
+  <%= f.text_field :sales_cost, :readonly =>true %>
 </td>
 <td>
   <%= f.text_field :utility, :autocomplete => 'off' %>

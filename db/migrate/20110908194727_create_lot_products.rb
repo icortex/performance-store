@@ -4,8 +4,11 @@ class CreateLotProducts < ActiveRecord::Migration
       t.references :lot
       t.references :product
       t.integer :quantity
-      t.integer :cost
+      t.decimal :cost
+      t.integer :cost_cop
+      t.integer :sales_cost
       t.integer :utility
+      t.integer :price
 
       t.timestamps
     end

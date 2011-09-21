@@ -26,13 +26,12 @@
      */
     function autocomplete_product(fieldset_selector, brand, reference, size, color, product_options) {
         var cost_input = jq(fieldset_selector + '_cost');
-        var cost_cop_input = jq(fieldset_selector + '_cost_cop');
+        var cost_cop = jq(fieldset_selector + '_cost_cop');
         var quantity_input = jq(fieldset_selector + '_quantity');
         var utility_input = jq(fieldset_selector + '_utility');
+        var subtotal = jq(fieldset_selector + '_sales_cost');
         var price_input = jq(fieldset_selector + '_price');
         var aux=price_input.closest('tr');
-        var cost_cop= aux.find('input[name="cost_cop"]');
-        var subtotal=aux.find('input[name="subtotal"]');
         var profit= aux.find('input[name="profit"]');
         var lot_freight=jq('#lot_freight');
         var freight= jq('input[name="freight"]');
@@ -133,23 +132,13 @@
         var price_input = jq(fieldset_selector + '_price').html('');
         var quantity_input = jq(fieldset_selector + '_quantity').val('0');
         var label_for_selector = 'label[for=' + fieldset_selector.substr(1);
-        var max_quantity_label = jq(label_for_selector + '_in_stock]').html('');
-        var subtotal = jq(label_for_selector + '_subtotal]').html('');
 
         add_options(size_select['selector'], keys(item.sizes));
         var colors = update_colors(size_select.val(), item, color_select);
-        update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
 
         size_select.change(function() {
             colors = update_colors(size_select.val(), item, color_select);
-            update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
         });
-
-        color_select.change(function() {
-            update_price_quantity(colors, color_select.val(), price_input, max_quantity_label, subtotal, quantity_input);
-        });
-
-
     }
 
     function fill_saved_features(item, fieldset_selector, size, color) {

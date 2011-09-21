@@ -40,8 +40,6 @@ class LotsController < MyApplicationController
         products=products.collect do |p|
           organize(Product.find_all_by_reference(p.reference),false)[0]
         end
-        p 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-        p products
         @products=products.to_json
 
         format.html { render :action => "new" }

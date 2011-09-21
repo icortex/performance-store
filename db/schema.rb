@@ -80,11 +80,13 @@ ActiveRecord::Schema.define(:version => 20110909002010) do
     t.integer  "lot_id"
     t.integer  "product_id"
     t.integer  "quantity"
-    t.integer  "cost"
+    t.decimal  "cost",       :precision => 10, :scale => 0
+    t.integer  "cost_cop"
+    t.integer  "sales_cost"
     t.integer  "utility"
+    t.integer  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "price"
   end
 
   create_table "lots", :force => true do |t|

@@ -5,7 +5,10 @@ class Lot < ActiveRecord::Base
   has_many :lot_products, :dependent => :destroy
   has_many :products, :through => :lot_products
   accepts_nested_attributes_for :lot_products,
-                                :allow_destroy => true
+                                :allow_destroy => true, :reject_if => lambda { |lp|
+       lp[:product_id].blank? || lp[:quantity].blank? || lp[:quantity] == '0'
+      }
+
 end
 
 # == Schema Information
