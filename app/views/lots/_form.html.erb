@@ -112,8 +112,10 @@
       </tr>
     </table>
 
+    <i>Recuerda guardar antes de crear un </i>
     <%= link_to_function 'Nuevo articulo','product_dialog();'%>
 
+    <br>
 
     <div class="actions" id="lot_submit">
       <%= f.submit 'Guardar' %>
@@ -122,6 +124,13 @@
 
     </div>
 <% end %>
+
+<script type="text/javascript">
+              function product_dialog(){
+          jq('#product_dialog').dialog('open');
+      }
+</script>
+
 <div id="product_dialog">
-  <%#= render 'products/form' %>
+  <%= render 'products/form',:product=>@product %>
 </div>

@@ -1,8 +1,8 @@
 module ProductsHelper
 
   def set_default_color_size
-    params[:size_ids] = {Size.first.size => Size.first.id} if  !params[:size_ids]
-    params[:color_ids]={Color.first.color => Color.first.id} if  !params[:color_ids]
+    params[:size_ids] = {Size.first.name => Size.first.id} if  !params[:size_ids]
+    params[:color_ids]={Color.first.name => Color.first.id} if  !params[:color_ids]
   end
 
   #[{:reference => 'perro', :brand => 'Adidas',  :sizes => {'s' =>{'am'=>[1,20]}, 'm'=> {'ne'=>[21,2]}}}, {}]

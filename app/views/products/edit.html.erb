@@ -1,3 +1,5 @@
 <h1>Modificar articulo</h1>
-
-<%= render 'form' %>
+<% content_for :secondary_menu do %>
+<%= render 'stocks/links' %>
+<% end %>
+<%= render 'form',:product=>@product %>

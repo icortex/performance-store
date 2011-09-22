@@ -5,6 +5,16 @@
 
     function local_ready() {
 
+
+        jq('#product_dialog').dialog({
+            autoOpen: false,
+            resizable: false,
+            width:'700px',
+            height: 'auto',
+            title: 'Nuevo articulo',
+            modal: true
+        });
+
         // Tokenizes inputs at page load when editing
     <% index=0 %>
     <% for lp in @lot.lot_products do %>
@@ -16,6 +26,8 @@
    "products[#{index}]);").html_safe %>
     <% index+=1 %>
     <% end %>
+
+        jq('#product_dialog div.form_class').removeClass('form_class');
 
     }
 
@@ -216,8 +228,24 @@
         return mod >= 250 ? number+x : number-mod ;
     }
 
-    function product_dialog(){
-        jq('#product_dialog').dialog();
-    }
+
+    jq(document).bind('ready',function(){
+        jq('#product_reference').keyup(function(){
+            var el=jq('#product_reference').val();
+            disable(el);
+        });
+
+        function disable(el){
+            if(el.length == 0)
+                jq('#product_submit').attr('disabled',true);
+            else
+                jq('#product_submit').removeAttr('disabled');
+        }
+        var el=jq('#product_reference').val();
+        disable(el);
+
+    });
+
+
 
 </script>

@@ -49,7 +49,7 @@ class ProductsController < MyApplicationController
 
     respond_to do |format|
       if success
-        format.html { redirect_to(new_product_path, :notice => 'Articulo creado exitosamente.') }
+        format.html { redirect_to(:back, :notice => 'Articulo creado exitosamente.') }
       else
         format.html { render :action => "new" }
       end
