@@ -18,7 +18,7 @@
           <%= f.number_field :quantity, :size => 10 %>
         </td>
       </tr>
-      <tr>
+      <tr style="<%= @stock.cost ? 'display:none' : '' %>">
         <td>
           <%= f.label 'Costo' %>
         </td>
@@ -26,7 +26,7 @@
           <%= f.text_field :cost, :size => 10 %>
         </td>
       </tr>
-      <tr>
+      <tr style="<%= @stock.price ? 'display:none' : '' %>">
         <td>
           <%= f.label 'Precio' %>
         </td>

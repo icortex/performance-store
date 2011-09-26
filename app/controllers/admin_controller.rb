@@ -24,8 +24,6 @@ class AdminController < MyApplicationController
     end
 
     User.find(empty_hash_if_nil(params[:validation]).keys).each do |user|
-      p 'sssssssssssssssssssssssssssssss'
-      p user
       user.validated = true
       user.headquarter_id = params[:headquarter_id][user.id.to_s].to_i
       user.type = params[:user][:type][user.id.to_s]

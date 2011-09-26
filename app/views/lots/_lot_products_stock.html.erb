@@ -1,0 +1,25 @@
+<td>
+  <%= f.text_field :reference %>
+</td>
+<td>
+  <%= f.collection_select :size, [Size.new], :name, :name %>
+</td>
+<td>
+  <%= f.collection_select :color, [Color.new], :name, :name %>
+</td>
+<td>
+  <%= f.text_field :sales_cost, :readonly =>true %>
+</td>
+<td>
+<%= f.text_field :price, :readonly=>true %>
+</td>
+<td>
+  <%= f.text_field :quantity, :readonly=>true  %>
+</td>
+<td>
+  <%= f.text_field :unassigned_quantity, :readonly=>true %>
+</td>
+<td>
+  <% func = "add_to_stock('#{f.object.product_id}','#{f.object.sales_cost}','#{f.object.price}');return false;" %>
+<%= link_to_function image_tag('update_stock.png', :title => 'Agregar a inventario'),func %>
+</td>

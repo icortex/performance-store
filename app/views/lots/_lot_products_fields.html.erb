@@ -5,16 +5,16 @@
   <%= f.collection_select :size, [Size.new], :name, :name %>
 </td>
 <td>
-  <%= f.collection_select :color, [Color.new], :name, :name %>
-</td>
-<td>
-  <%= f.text_field :cost, :autocomplete => 'off' %>
-</td>
-<td>
-  <%= f.text_field :cost_cop, :readonly =>true%>
+<%= f.collection_select :color, [Color.new], :name, :name %>
 </td>
 <td>
   <%= f.number_field :quantity, :autocomplete => 'off', :min => 0 %>
+</td>
+<td>
+<%= f.text_field :cost, :autocomplete => 'off' %>
+</td>
+<td>
+<%= f.text_field :cost_cop, :readonly =>true%>
 </td>
 <td>
   <%= text_field_tag :freight, nil, :readonly =>true  %>

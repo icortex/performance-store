@@ -1,0 +1,34 @@
+<% content_for :secondary_menu do %>
+    <%= render 'links' %>
+<% end %>
+<%= javascript_include_tag "jquery.tokeninput" %>
+
+<%= render 'lot_stock_form_js', :iva => Variable.find(1).value %>
+
+<%= javascript_include_tag "#{stock_lots_path @lot}.js" %>
+
+<%= render 'layouts/error_messages', :model => @lot %>
+
+<h1>Agregar a inventario</h1>
+
+<%= form_for @lot do |f| %>
+<table id='productsTable'>
+  <th style="width:150px">Articulo</th>
+  <th>Talla</th>
+  <th>Color</th>
+  <th>Costo de venta</th>
+  <th>Precio</th>
+  <th>Cantidad</th>
+  <th>Cantidad sin asignar</th>
+  <th>Inventario</th>
+  <%= f.fields_for :lot_products do |b| %>
+      <tr class="fields">
+        <%= render :partial => 'lot_products_stock', :locals => {:f => b} %>
+      </tr>
+  <% end %>
+</table>
+<% end %>
+
+
+<div id="stock_dialog">
+</div>

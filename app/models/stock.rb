@@ -1,9 +1,6 @@
 class Stock < ActiveRecord::Base
   belongs_to :product
   belongs_to :headquarter
-  validates_uniqueness_of :product_id, :scope => :headquarter_id,
-                          :message => "El articulo ya esta en el inventario de esta sede."
-
 end
 
 # == Schema Information

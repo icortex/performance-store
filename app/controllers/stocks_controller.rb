@@ -8,7 +8,10 @@ class StocksController < MyApplicationController
   end
 
   def new
-    @stock = Stock.new :product_id => params[:product_id]
+    @stock = Stock.new(:product_id => params[:product_id],
+                       :cost => params[:cost],
+                       :price => params[:price]
+    )
   end
 
   def edit
@@ -20,7 +23,7 @@ class StocksController < MyApplicationController
 
     respond_to do |format|
       if @stock.save
-        format.html { redirect_to(products_path, :notice => 'El producto fue agregado al inventario exitosamente.') }
+        format.html { redirect_to(:back, :notice => 'El producto fue agregado al inventario exitosamente.') }
       else
         format.html { render :action => "new" }
       end

@@ -1,0 +1,18 @@
+
+jq(document).ready(function(){
+    jq('#stock_dialog').dialog({
+            autoOpen: false,
+            resizable: false,
+            width:'auto',
+            height: 'auto',
+            title: 'Agregar a inventario',
+            modal: true
+        });
+});
+
+function add_to_stock(product_id,cost,price){
+    jq.get('<%= new_stock_path %>', {'product_id':product_id,'cost':cost,'price':price}, function(data, status, request) {
+        jq('#stock_dialog').html(data);
+    });
+    jq('#stock_dialog').dialog('open');
+}

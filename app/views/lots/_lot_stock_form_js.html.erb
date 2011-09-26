@@ -48,43 +48,6 @@
         var lot_freight=jq('#lot_freight');
         var freight= jq('input[name="freight"]');
 
-
-
-        // Row math
-        cost_cop.val(cost_input.val()*dollar);
-        update_freight();
-        subtotal.val(parseInt(cost_cop.val())+parseInt(freight.val()));
-        profit.val(subtotal.val()*(utility_input.val()/100));
-        price_input.val(aprox(parseInt(subtotal.val())+parseInt(profit.val())));
-
-        lot_freight.bind('keyup change',function(){
-            update_freight();
-            subtotal.val(parseInt(cost_cop.val())+parseInt(freight.val()));
-            profit.val(subtotal.val()*(utility_input.val()/100));
-            price_input.val(aprox(parseInt(subtotal.val())+parseInt(profit.val())));
-        });
-
-        quantity_input.bind('keyup mouseup',function(){
-            update_freight();
-            subtotal.val(parseInt(cost_cop.val())+parseInt(freight.val()));
-            profit.val(subtotal.val()*(utility_input.val()/100));
-            price_input.val(aprox(parseInt(subtotal.val())+parseInt(profit.val())));
-        });
-
-        cost_input.keyup(function(){
-            cost_cop.val(cost_input.val()*dollar);
-            subtotal.val(parseInt(cost_cop.val())+parseInt(freight.val()));
-            profit.val(subtotal.val()*(utility_input.val()/100));
-            price_input.val(aprox(parseInt(subtotal.val())+parseInt(profit.val())));
-        });
-
-        utility_input.bind('keyup change',function(){
-            profit.val(subtotal.val()*(utility_input.val()/100));
-            price_input.val(aprox(parseInt(subtotal.val())+parseInt(profit.val())));
-        });
-
-        // Row math END
-
         if(lot_freight.val()==''){
             lot_freight.val(0);
         }

@@ -9,7 +9,9 @@ WJSport::Application.routes.draw do
 
     resources :stocks, :path => 'inventario'
     resources :products, :path => 'articulos'
-    resources :lots, :path => 'lotes'
+    resources :lots, :path => 'lotes' do
+      get ':id/inventario' => 'lots#stock', :on => :collection, :as => :stock
+    end
     resources :headquarters
     resources :colors
     resources :brands

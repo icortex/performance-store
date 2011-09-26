@@ -87,13 +87,13 @@
 
 
     <br>
-        <table id='productsTable'>
+    <table id='productsTable'>
       <th style="width:150px">Articulo</th>
       <th>Talla</th>
       <th>Color</th>
+      <th>Cantidad</th>
       <th>Costo (USD)</th>
       <th>Costo (COP)</th>
-      <th>Cantidad</th>
       <th>Flete</th>
       <th>Subtotal</th>
       <th>Utilidad (%)</th>
@@ -120,15 +120,15 @@
     <div class="actions" id="lot_submit">
       <%= f.submit 'Guardar' %>
       <br>
-     <%= link_to 'Finalizar',lots_path %>
+      <%= link_to 'Finalizar',lots_path %>
 
     </div>
 <% end %>
 
 <script type="text/javascript">
-              function product_dialog(){
-          jq('#product_dialog').dialog('open');
-      }
+    function product_dialog(){
+        jq('#product_dialog').dialog('open');
+    }
 </script>
 
 <div id="product_dialog">
