@@ -21,6 +21,7 @@
    "\"#{sp.product.reference rescue ''}\","+
    "\"#{sp.product.size.name rescue ''}\","+
    "\"#{sp.product.color.name rescue ''}\","+
+   "\"#{sp.price rescue ''}\","+
    "products[#{index}]);").html_safe %>
     <% index+=1 %>
     <% end %>
@@ -50,7 +51,7 @@
      *  fieldset_selector='#sale_sale_products_attributes_'+#
      *  # stands for a number, for example:1 , 2 , 3
      */
-    function autocomplete_product(fieldset_selector, brand, reference, size, color, product_options) {
+    function autocomplete_product(fieldset_selector, brand, reference, size, color,price, product_options) {
         var price_select = jq(fieldset_selector + '_price');
         var quantity_input = jq(fieldset_selector + '_quantity');
         var label_for_selector = 'label[for=' + fieldset_selector.substr(1);
@@ -68,13 +69,13 @@
             ];
 
 
-            fill_saved_features(product_options, fieldset_selector, size, color);
+            fill_saved_features(product_options, fieldset_selector, size, color,price);
 
         }
 
         function reset_fields() {
             quantity_input.val(0);
-            max_quantity_label.html('0');
+            max_quantity_label.html('0');prepopulate
             subtotal.html('0');
             size_select.html('');
             color_select.html('');
@@ -149,6 +150,7 @@
         });
     }
 
+    // called when added a new token input
     function fill_features(item, fieldset_selector) {
         var size_select = jq(fieldset_selector + '_size').html('');
         var color_select = jq(fieldset_selector + '_color').html('');
@@ -195,24 +197,38 @@
 
     }
 
-    function fill_saved_features(item, fieldset_selector, size, color) {
+    // called before render a saved token input
+    function fill_saved_features(item, fieldset_selector, size, color,price) {
         var size_select = jq(fieldset_selector + '_size').html('');
         var color_select = jq(fieldset_selector + '_color').html('');
         var price_select = jq(fieldset_selector + '_price');
+        var price_index = jq(price_select).closest('td').find('input:hidden[name="price_index"]');
         var quantity_input = jq(fieldset_selector + '_quantity');
         var label_for_selector = 'label[for=' + fieldset_selector.substr(1);
         var qty = item['sizes'][size][color][0];
-        console.log(price_select.val());
-        console.log(item.sizes[size_select.val()][color_select.val()][1]);
-        var selected_price=jq.inArray(parseInt(price_select.val()),item.sizes[size_select.val()][color_select.val()][1]);
-        var max_quantity_label = jq(label_for_selector + '_in_stock]').html(qty[selected_price]);
-        var subtotal = jq(label_for_selector + '_subtotal]').html(price_index.val() * quantity_input.val());
 
-
+        //  add options to selects
         add_options(size_select['selector'], keys(item.sizes));
         var colors = update_colors(size_select.val(), item, color_select);
+        price_select.html('');
+        add_options(price_select,item.sizes[size_select.val()][color_select.val()][1]);
+
+        // select the saved option
         size_select.val(size);
         color_select.val(color);
+        price_select.val(price);
+
+        //update_hidden_and_quantity
+        price_index.val(jq.inArray(parseInt(price_select.val()),item.sizes[size_select.val()][color_select.val()][1]));
+        // Sub two because in two are the stock_ids
+        price_select.closest('td').find('input:hidden[name*="stock_id"]').val(item.sizes[size_select.val()][color_select.val()][2][price_index.val()]);
+        //update_hidden_and_quantity END
+
+        // set the qty according to selected price, and set subtotal and total
+        var selected_price=jq.inArray(parseInt(price),item.sizes[size_select.val()][color_select.val()][1]);
+        var max_quantity_label = jq(label_for_selector + '_in_stock]').html(qty[selected_price]);
+        var subtotal = jq(label_for_selector + '_subtotal]').html(price_select.val() * quantity_input.val());
+
         calculate_total();
 
 
@@ -229,6 +245,9 @@
 
 
         price_select.change(function() {
+            price_index.val(jq.inArray(parseInt(price_select.val()),item.sizes[size_select.val()][color_select.val()][1]));
+            // Sub two because in two are the stock_ids
+            jq(this).closest('td').find('input:hidden[name*="stock_id"]').val(item.sizes[size_select.val()][color_select.val()][2][price_index.val()]);
             // Sub zero because in zero are the quantities
             max_quantity_label.html(item.sizes[size_select.val()][color_select.val()][0][price_index.val()]);
         });
@@ -333,7 +352,7 @@
         return total - total_payments;
     }
 
-    function set_balance() {1
+    function set_balance() {
         jq('#balance').val(calculate_balance());
     }
 
