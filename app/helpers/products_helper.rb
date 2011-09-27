@@ -16,7 +16,6 @@ module ProductsHelper
         qty = stocks_by_hq.quantity rescue 0
         price = stocks_by_hq.price rescue 0
       else
-
         qty = 0
         price = 0
       end

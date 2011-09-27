@@ -1,25 +1,21 @@
-
 jq(document).ready(function(){
     jq('#stock_dialog').dialog({
         autoOpen: false,
         resizable: false,
         width:'auto',
         height: 'auto',
-        title: 'Agregar a inventario',
+        title: 'Actualizar inventario',
         modal: true
     });
 });
 
-function add_to_stock(product_id,cost,price,lot_product_id,unassigned_qty,anchor){
-    var hq = jq(anchor).closest('tr').find('select[name*="headquarter_id"]');
+function add_to_stock(hq_id,lot_product_id,unassigned_qty){
     jq.get('<%= new_stock_path %>',
-            
+
         {'stock':
-            {'product_id':product_id,
-            'cost':cost,
-            'price':price,
+            {
             'lot_product_id':lot_product_id,
-            'headquarter_id':hq.val()
+            'headquarter_id':hq_id
             },
          'max':unassigned_qty
         },

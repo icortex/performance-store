@@ -5,13 +5,18 @@ class StocksController < MyApplicationController
     params[:headquarter] ||= current_user.headquarter.name
     @stocks = Stock.find_all_by_headquarter_id (Headquarter.find_by_name params[:headquarter]).id
     @headquarter = params[:headquarter]
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
-    @stock = Stock.new(:product_id => params[:product_id],
-                       :cost => params[:cost],
-                       :price => params[:price]
-    )
+    hq_id=params[:stock][:headquarter_id]
+    lp_id=params[:stock][:lot_product_id]
+    @stock=Stock.where('headquarter_id = ? and lot_product_id = ?',hq_id,lp_id)[0]
+    @stock = Stock.new(params[:stock]) if @stock.nil?
+    p @stock
   end
 
   def edit

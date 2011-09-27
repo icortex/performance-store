@@ -20,6 +20,16 @@
   <%= f.text_field :unassigned_quantity, :readonly=>true %>
 </td>
 <td>
-  <% func = "add_to_stock('#{f.object.product_id}','#{f.object.sales_cost}','#{f.object.price}');return false;" %>
+  <%= f.collection_select :headquarter_id, Headquarter.all, :id, :name %>
+</td>
+<td>
+
+  <% func = "add_to_stock('#{f.object.product_id}',"+
+          "'#{f.object.sales_cost}',"+
+          "'#{f.object.price}',"+
+          "'#{f.object.id}',"+
+          "'#{f.object.unassigned_quantity}',"+
+          "this"+
+          ");return false;" %>
 <%= link_to_function image_tag('update_stock.png', :title => 'Agregar a inventario'),func %>
 </td>

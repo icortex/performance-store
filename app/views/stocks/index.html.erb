@@ -1,6 +1,9 @@
 <% content_for :secondary_menu do %>
 <%= render 'links' %>
 <% end %>
+<% content_for :head do %>
+<%= javascript_include_tag stocks_path %>
+<% end %>
 
 <div><h1>Articulos en inventario en <%= @headquarter %></h1>
 </div>
@@ -12,7 +15,7 @@
     <th>Tipo</th>
     <th>Referencia</th>
     <th>Modelo</th>
-    <th>Codigo de Barras</th>
+    <!--<th>Codigo de Barras</th>-->
     <th>Genero</th>
     <th>Talla</th>
     <th>Color</th>
@@ -30,7 +33,7 @@
         <td><%= stock.product.cloth_type.cloth_type %></td>
         <td><%= stock.product.reference %></td>
         <td><%= stock.product.model %></td>
-        <td><%= stock.product.barcode %></td>
+        <!--<td><%#= stock.product.barcode %></td>-->
         <td><%= stock.product.gender %></td>
         <td><%= stock.product.size.name %></td>
         <td><%= stock.product.color.name %></td>
@@ -38,8 +41,11 @@
         <td><%= stock.price %></td>
 
         <td width="140px">
-          <%= link_to image_tag('/images/view.png', :title => 'Ver articulo'), stock.product %>
-          <%= link_to image_tag('/images/edit.png', :title => 'Modificar articulo'), edit_product_path(stock.product) if can? :update, Product %>
+          <% func = "add_to_stock('#{stock.headquarter_id}',"+
+          "'#{stock.lot_product_id}',"+
+          "'#{stock.lot_product.unassigned_quantity}'"+
+          ");return false;" %>
+          <%= link_to_function image_tag('update_stock.png', :title => 'Actualizar inventario'),func %>
           <%= link_to image_tag('/images/delete.png', :title => 'Borrar de inventario'), stock, :confirm => 'El articulo sera borrado del inventario. Deseas continuar?', :method => :delete if can? :destroy, Stock %>
         </td>
       </tr>
@@ -47,3 +53,4 @@
   </tbody>
 </table>
 <%= render 'layouts/datatables_js' %>
+<div id="stock_dialog"></div>

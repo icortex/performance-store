@@ -8,6 +8,15 @@ class Lot < ActiveRecord::Base
                                 :allow_destroy => true, :reject_if => lambda { |lp|
        lp[:product_id].blank? || lp[:quantity].blank? || lp[:quantity] == '0'
       }
+
+  before_save :set_quantities
+
+  private
+  def set_quantities
+    self.lot_products.each do |lp|
+      lp.unassigned_quantity = lp.quantity
+      end
+  end
 end
 
 # == Schema Information

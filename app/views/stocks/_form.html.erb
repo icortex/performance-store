@@ -15,7 +15,7 @@
           <%= f.label 'Cantidad' %>
         </td>
         <td>
-          <%= f.number_field :quantity, :size => 10 %>
+          <%= f.number_field :quantity, :size => 10, :min => 0 ,:max=> params[:max].to_i+@stock.quantity %>
         </td>
       </tr>
       <tr style="<%= @stock.cost ? 'display:none' : '' %>">
@@ -34,7 +34,15 @@
           <%= f.text_field :price, :size => 10 %>
         </td>
       </tr>
-      <tr id="headquarter_row">
+      <tr style="<%= @stock.lot_product_id ? 'display:none' : '' %>">
+        <td>
+          <%= f.label 'Lote producto' %>
+        </td>
+        <td>
+          <%= f.text_field :lot_product_id, :size => 10 %>
+        </td>
+      </tr>
+      <tr id="headquarter_row" style="<%= @stock.headquarter_id ? 'display:none' : '' %>">
         <td>
           <%= f.label 'Sede' %>
         </td>
@@ -46,6 +54,6 @@
     </table>
     <br/>
     <div align="center">
-      <%= f.submit 'Actualizar' %>
+      <%= f.submit 'Aceptar' %>
     </div>
 <% end %>
