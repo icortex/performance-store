@@ -13,7 +13,7 @@ Variable.create(:key => 'Reserva (%)', :value => '10')
 
 Headquarter.create(:name => 'Sede')
 
-User.create(:username=>'admin', :email=>'admin@performance.com',
+User.create(:username=>'waaa', :email=>'admin@performance.com',
             :type=>'SuperAdmin',:password=>'admin123', :validated=>'1', :headquarter_id => 1)
 
 Size.create(:size=>'S')

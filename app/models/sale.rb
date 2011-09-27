@@ -33,7 +33,7 @@ class Sale < ActiveRecord::Base
   def update_stock
     index=0
     self.sale_products.each do |sp|
-      stock = Stock.where('product_id = ? and headquarter_id = ?', sp.product_id, self.headquarter_id)[0]
+      stock = Stock.find sp.stock_id
       if stock && stock.quantity
         if self.old_quantities.nil?
           new_qty = stock.quantity - sp.quantity

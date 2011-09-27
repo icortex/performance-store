@@ -15,6 +15,7 @@
           <%= f.label 'Cantidad' %>
         </td>
         <td>
+          <%  @stock.quantity=0 if !@stock.quantity%>
           <%= f.number_field :quantity, :size => 10, :min => 0 ,:max=> params[:max].to_i+@stock.quantity %>
         </td>
       </tr>

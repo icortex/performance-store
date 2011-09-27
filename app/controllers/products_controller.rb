@@ -24,8 +24,8 @@ class ProductsController < MyApplicationController
   def edit
     @product = Product.find(params[:id])
     @products = Product.find_all_by_reference(@product.reference)
-    @colors =Color.find(@products.map(&:color_id)).map(&:color).uniq
-    @sizes =Size.find(@products.map(&:size_id)).map(&:size).uniq
+    @colors =Color.find(@products.map(&:color_id)).map(&:name).uniq
+    @sizes =Size.find(@products.map(&:size_id)).map(&:name).uniq
   end
 
   def create

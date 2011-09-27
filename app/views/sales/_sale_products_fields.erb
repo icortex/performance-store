@@ -8,7 +8,9 @@
   <%= f.collection_select :color, [Color.new], :name, :name %>
 </td>
 <td>
-  <%= f.text_field :price, :autocomplete => 'off', :size => '14', :readonly =>true %>
+  <%= f.hidden_field :stock_id %>
+  <%= hidden_field_tag :price_index %>
+  <%= f.collection_select :price, [Color.new], :name, :name %>
 </td>
 <td>
   <%= f.number_field :quantity, :autocomplete => 'off', :size => '14', :min => 0 %>

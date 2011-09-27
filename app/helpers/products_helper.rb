@@ -12,12 +12,14 @@ module ProductsHelper
     products.each do |p|
 
       if hq_aware
-        stocks_by_hq = p.stocks.find_by_headquarter_id(current_user.headquarter_id)
-        qty = stocks_by_hq.quantity rescue 0
-        price = stocks_by_hq.price rescue 0
+        stocks_by_hq = p.stocks.find_all_by_headquarter_id(current_user.headquarter_id)
+        qty = stocks_by_hq.map(&:quantity) rescue []
+        price = stocks_by_hq.map(&:price) rescue []
+        stock_ids = stocks_by_hq.map(&:id) rescue []
       else
         qty = 0
         price = 0
+        stock_ids = 0
       end
 
       pm_i = search_ref pm, p.reference
@@ -26,7 +28,7 @@ module ProductsHelper
         if s
           pm_i[:sizes][s][p.color.name] = [qty, price]
         else
-          pm_i[:sizes][p.size.name] = {p.color.name=>[qty, price]}
+          pm_i[:sizes][p.size.name] = {p.color.name=>[qty, price,stock_ids]}
         end
       else
         product_temp = {}
@@ -35,7 +37,7 @@ module ProductsHelper
         product_temp[:reference] = p.reference
         feature_to_insert = {}
         feature_to_insert[p.size.name] = {}
-        feature_to_insert[p.size.name][p.color.name] = [qty, price]
+        feature_to_insert[p.size.name][p.color.name] = [qty, price,stock_ids]
         product_temp[:sizes] = feature_to_insert
         pm << product_temp
       end

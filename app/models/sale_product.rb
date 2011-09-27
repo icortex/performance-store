@@ -1,7 +1,7 @@
 class SaleProduct < ActiveRecord::Base
 
-  attr_accessor :reference, :size, :color
-  attr_accessible :product_id, :quantity, :price
+  attr_accessor :reference, :size, :color,:stock_id
+  attr_accessible :product_id, :quantity, :price,:stock_id
 
   belongs_to :sale
   belongs_to :product
