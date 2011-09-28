@@ -8,7 +8,7 @@ class Sale < ActiveRecord::Base
   has_many :separates, :dependent => :destroy
   has_many :products, :through => :sale_products
 
-  accepts_nested_attributes_for :sale_products,
+  accepts_nested_attributes_for :sale_products, :reject_if => lambda { |sp| sp[:stock_id].blank?},
                                 :allow_destroy => true
 
   accepts_nested_attributes_for :separates, :reject_if => lambda { |sp| sp[:payment].blank?},
@@ -28,19 +28,18 @@ class Sale < ActiveRecord::Base
       sp.quantity
     end
     self.old_quantities=[0] if self.old_quantities.nil? || self.old_quantities.empty?
-    p '******************************************old_quantities'
-    p old_quantities
   end
 
   def update_stock
+    self.old_quantities=[0] if self.old_quantities.nil? || self.old_quantities.empty?
     index=0
     self.sale_products.each do |sp|
       stock = Stock.find sp.stock_id
       if stock && stock.quantity
-        if self.old_quantities.nil?
+        if self.old_quantities[index].nil?
           new_qty = stock.quantity - sp.quantity
         else
-          new_qty = stock.quantity - sp.quantity + zero_if_nil(self.old_quantities[index])
+          new_qty = stock.quantity - sp.quantity + self.old_quantities[index]
         end
         stock.update_attributes(:quantity => new_qty)
         index+=1
@@ -98,10 +97,6 @@ class Sale < ActiveRecord::Base
       s+=' Vendida'
     end
     s
-  end
-
-  def zero_if_nil arg
-    arg.nil? ? 0 : arg
   end
 
 end

@@ -10,6 +10,7 @@
     <th>Fecha</th>
     <th>Descuento</th>
     <th>Iva</th>
+    <%= "<th>Costo</th>".html_safe if can? :see,:cost %>
     <th>Total</th>
     <th>Saldo</th>
     <th>Estado</th>
@@ -25,6 +26,7 @@
         <td><%= sale.updated_at %></td>
         <td><%= sale.discount %></td>
         <td><%= sale.iva %></td>
+        <%= "<td>#{sale.total_cost}</td>".html_safe if can? :see,:cost %>
         <td><%= sale.total %></td>
         <td><%= sale.balance %></td>
         <td><%= sale.status %></td>

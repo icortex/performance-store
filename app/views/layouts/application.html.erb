@@ -35,8 +35,8 @@
 
   <nav id="secondary_menu">
     <%= yield :secondary_menu %>
-    <span class="notice"><%= notice %></span>
-    <span class="alert"><%= alert %></span>
+    <span class="notice" style="<%= notice ? '' : 'display:none' %>"><%= notice %></span>
+    <span class="alert" style="<%= alert ? '' : 'display:none' %>"><%= alert %></span>
   </nav>
 
   <section>

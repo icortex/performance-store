@@ -20,6 +20,7 @@
     <th>Talla</th>
     <th>Color</th>
     <th>Cantidad</th>
+    <%= "<th>Costo</th>".html_safe if can? :see,:cost %>
     <th>Precio</th>
     <th>Opciones</th>
   </tr>
@@ -38,6 +39,7 @@
         <td><%= stock.product.size.name %></td>
         <td><%= stock.product.color.name %></td>
         <td><%= stock.quantity %></td>
+        <%= "<td>#{stock.cost}</td>".html_safe if can? :see,:cost %>
         <td><%= stock.price %></td>
 
         <td width="140px">

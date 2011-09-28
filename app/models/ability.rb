@@ -15,6 +15,7 @@ class Ability
       cannot [:create, :update, :destroy], [Product, Stock]
       cannot :destroy, [Person]
       cannot :see, 'hq_links'
+      cannot :see, :cost
       
     end
   end

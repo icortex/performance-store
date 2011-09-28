@@ -74,6 +74,7 @@
         }
 
         function reset_fields() {
+            quantity_input.attr('min',0);
             quantity_input.val(0);
             max_quantity_label.html('0');
             subtotal.html('0');
@@ -102,14 +103,12 @@
 
             },
             onDelete: function() {
-                reset_fields();
                 remove_fields(this);
             }
         });
 
         calculate_total();
 
-        quantity_input.attr('max',parseInt(quantity_input.val())+parseInt(max_quantity_label.html()));
         quantity_input.keyup(function() {
             subtotal.html(quantity_input.val() * jq(price_select).find('>option:selected').text());
             calculate_total();
@@ -171,7 +170,7 @@
         calculate_total();
 
         toggle_quantity(max_quantity_label,quantity_input);
-
+        quantity_input.attr('max',parseInt(max_quantity_label.html()));
 
         size_select.change(function() {
             colors = update_colors(size_select.val(), item, color_select);
@@ -179,6 +178,7 @@
             update_hidden(price_select,item);
             quantity_input.val(1);
             toggle_quantity(max_quantity_label,quantity_input);
+            quantity_input.attr('max',parseInt(max_quantity_label.html()));
         });
 
         color_select.change(function() {
@@ -186,6 +186,7 @@
             update_hidden(price_select,item);
             quantity_input.val(1);
             toggle_quantity(max_quantity_label,quantity_input);
+            quantity_input.attr('max',parseInt(max_quantity_label.html()));
         });
 
 
@@ -196,6 +197,7 @@
             max_quantity_label.html(item.sizes[size_select.val()][color_select.val()][0][price_index.val()]);
             quantity_input.val(1);
             toggle_quantity(max_quantity_label,quantity_input);
+            quantity_input.attr('max',parseInt(max_quantity_label.html()));
         });
 
 
@@ -230,7 +232,7 @@
 
         update_hidden(price_select,item);
 
-        toggle_quantity(max_quantity_label,quantity_input);
+        quantity_input.attr('max',parseInt(quantity_input.val())+parseInt(max_quantity_label.html()));
 
         size_select.attr('disabled','true');
         var hidden_size=jq('<input type="hidden" value="'+size_select.val()+'"'
@@ -368,6 +370,7 @@
     }
 
     function toggle_quantity(max_quantity_label,quantity_input){
+
         if(max_quantity_label.html()==0) quantity_input.attr('disabled','true');
         else quantity_input.removeAttr('disabled');
 

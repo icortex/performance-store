@@ -27,18 +27,20 @@ div.field, div.actions {
 }
 
 .notice, .alert {
-    padding-left: 1em;
+    padding: 0.5em 1em;
     position: absolute;
     left: 40%;
 }
 
 .notice{
-    color: green;
+    background-color: #D0EFA0;
+    border: 1px solid green;
     font-size: 1.1em;
 }
 
 .alert {
-    color: red;
+    background-color: #ffa0a6;
+    border: 1px solid red;
     font-size: 1.2em;
 }
 

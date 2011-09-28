@@ -4,6 +4,8 @@
 en:
   activerecord:
       attributes:
+        carrier:
+          company: ""
         product:
           brand_id: ""
           reference: ""

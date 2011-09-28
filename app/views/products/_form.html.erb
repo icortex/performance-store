@@ -31,7 +31,7 @@
             <%= f.label 'Referencia *' %>
           </td>
           <td>
-            <%= f.text_field :reference %>
+            <%= f.text_field :reference, :autocomplete => :off %>
           </td>
         </tr>
         <tr>
@@ -94,5 +94,7 @@
         <%= f.submit 'Aceptar' %>
       </div>
     </div>
+    <br>
+    <i>* Campo requerido</i>
 
 <% end %>

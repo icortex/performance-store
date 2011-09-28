@@ -21,7 +21,7 @@
             <%= f.label 'Identificacion *' %>
           </td>
           <td>
-            <%= f.text_field :document_id %>
+            <%= f.text_field :document_id, :autocomplete => :off %>
           </td>
         </tr>
         <tr>
@@ -99,6 +99,8 @@
         <%= f.submit 'Aceptar' %>
       </div>
     </div>
+    <br>
+    <i>* Campo requerido</i>
 <% end %>
 
 <script type="text/javascript">

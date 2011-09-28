@@ -16,7 +16,7 @@ module ProductsHelper
 
         qty = stocks_by_hq.map{|s| s.quantity.nil? ? 0 : s.quantity}
         price = stocks_by_hq.map{|s| s.price.nil? ? 0 : s.price}
-        stock_ids = stocks_by_hq.map{|s| s.id.nil? ? [] : s.id}
+        stock_ids = stocks_by_hq.map{|s| s.id.nil? ? 0 : s.id}
       else
         qty = 0
         price = 0
@@ -27,7 +27,7 @@ module ProductsHelper
       if pm_i
         s = search_size pm_i, p.size.name
         if s
-          pm_i[:sizes][s][p.color.name] = [qty, price]
+          pm_i[:sizes][s][p.color.name] = [qty, price, stock_ids]
         else
           pm_i[:sizes][p.size.name] = {p.color.name=>[qty, price,stock_ids]}
         end
