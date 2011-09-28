@@ -18,7 +18,6 @@ class ReportsController < MyApplicationController
           sales_results = chart_helper(first_day_s, end_day_s,'sale',['total','total_cost'],'created_at', "separated=0 and headquarter_id=#{params[:headquarter]} and")
           expenses_results = chart_helper(first_day_s, end_day_s,'expense',['cost'],'created_at',"headquarter_id=#{params[:headquarter]} and",'','expense_type_id')
           expenses_day = chart_helper(first_day_s, end_day_s,'expense',['cost'],'created_at',"headquarter_id=#{params[:headquarter]} and")
-          lots_results = chart_helper(first_day_s, end_day_s,'lot',['freight'],'arrival_date')
           sales = sales_results[0]
           separates = separations_results[0]
           @op_expenses =   expenses_results[0][0] ? expenses_results[0][0].cost : 0
@@ -28,7 +27,6 @@ class ReportsController < MyApplicationController
           @sales_cost=sales_results[1][1]+separations_results[1][1]
           @gross_profit=@sales-@sales_cost
           @expenses=@op_expenses+@s_expenses+@ot_expenses
-          @freight=lots_results[1][0]
           @before_taxes_reserve_profit=@gross_profit-@expenses
           @taxes=Variable.find(4).value.to_f/100 * zero_if_neg(@before_taxes_reserve_profit)
           @reserve=Variable.find(5).value.to_f/100 * zero_if_neg(@before_taxes_reserve_profit)
