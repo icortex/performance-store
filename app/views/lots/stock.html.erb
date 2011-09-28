@@ -12,22 +12,39 @@
 <h1>Agregar a inventario</h1>
 
 <%= form_for @lot do |f| %>
-<table id='productsTable'>
-  <th style="width:150px">Articulo</th>
-  <th>Talla</th>
-  <th>Color</th>
-  <th>Costo de venta</th>
-  <th>Precio</th>
-  <th>Cantidad</th>
-  <th>Cantidad sin asignar</th>
-  <th style="width:120px">Sede</th>
-  <th>Inventario</th>
-  <%= f.fields_for :lot_products do |b| %>
-      <tr class="fields">
-        <%= render :partial => 'lot_products_stock', :locals => {:f => b} %>
+    <h3>Información del lote:</h3>
+
+    <table id="invoice_subtitle">
+      <tr>
+        <th>Descripción:</th>
+        <td class="paddable"><%= @lot.description %></td>
+        <th>Fecha de llegada:</th>
+        <td><%= @lot.arrival_date %></td>
       </tr>
-  <% end %>
-</table>
+      <tr>
+        <th>Origen:</th>
+        <td class="paddable"><%= @lot.origin %></td>
+        <th>Transportador:</th>
+        <td><%= @lot.carrier %></td>
+      </tr>
+    </table>
+    <br>
+    <table id='productsTable'>
+      <th style="width:150px">Articulo</th>
+      <th>Talla</th>
+      <th>Color</th>
+      <th>Costo de venta</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Cantidad sin asignar</th>
+      <th style="width:120px">Sede</th>
+      <th>Inventario</th>
+      <%= f.fields_for :lot_products do |b| %>
+          <tr class="fields">
+            <%= render :partial => 'lot_products_stock', :locals => {:f => b} %>
+          </tr>
+      <% end %>
+    </table>
 <% end %>
 
 

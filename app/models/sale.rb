@@ -28,6 +28,8 @@ class Sale < ActiveRecord::Base
       sp.quantity
     end
     self.old_quantities=[0] if self.old_quantities.nil? || self.old_quantities.empty?
+    p '******************************************old_quantities'
+    p old_quantities
   end
 
   def update_stock
@@ -38,7 +40,7 @@ class Sale < ActiveRecord::Base
         if self.old_quantities.nil?
           new_qty = stock.quantity - sp.quantity
         else
-          new_qty = stock.quantity - sp.quantity + self.old_quantities[index]
+          new_qty = stock.quantity - sp.quantity + zero_if_nil(self.old_quantities[index])
         end
         stock.update_attributes(:quantity => new_qty)
         index+=1
@@ -50,7 +52,7 @@ class Sale < ActiveRecord::Base
     total_cost = 0
     index=0
     self.sale_products.each do |sp|
-      stock = Stock.where('product_id = ? and headquarter_id = ?', sp.product_id, self.headquarter_id)[0]
+      stock = Stock.find sp.stock_id
       cost=stock.cost rescue 0
       quantity=sp.quantity rescue 0
       total_cost += cost* quantity rescue 0
@@ -96,6 +98,10 @@ class Sale < ActiveRecord::Base
       s+=' Vendida'
     end
     s
+  end
+
+  def zero_if_nil arg
+    arg.nil? ? 0 : arg
   end
 
 end

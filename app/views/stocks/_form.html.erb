@@ -19,6 +19,11 @@
           <%= f.number_field :quantity, :size => 10, :min => 0 ,:max=> params[:max].to_i+@stock.quantity %>
         </td>
       </tr>
+      <tr>
+        <td colspan="2" align="right">
+          <i><%= params[:max].to_i+@stock.quantity %> articulos disponibles</i>
+        </td>
+      </tr>
       <tr style="<%= @stock.cost ? 'display:none' : '' %>">
         <td>
           <%= f.label 'Costo' %>

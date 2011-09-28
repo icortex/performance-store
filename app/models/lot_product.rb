@@ -5,4 +5,5 @@ class LotProduct < ActiveRecord::Base
   
   belongs_to :lot
   belongs_to :product
+  has_many :stocks, :dependent => :destroy
 end

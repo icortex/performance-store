@@ -45,7 +45,7 @@
           "'#{stock.lot_product_id}',"+
           "'#{stock.lot_product.unassigned_quantity}'"+
           ");return false;" %>
-          <%= link_to_function image_tag('update_stock.png', :title => 'Actualizar inventario'),func %>
+          <%= link_to_function image_tag('update_stock.png', :title => 'Actualizar inventario'),func if can? :update, Stock%>
           <%= link_to image_tag('/images/delete.png', :title => 'Borrar de inventario'), stock, :confirm => 'El articulo sera borrado del inventario. Deseas continuar?', :method => :delete if can? :destroy, Stock %>
         </td>
       </tr>

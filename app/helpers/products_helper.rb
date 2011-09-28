@@ -10,12 +10,13 @@ module ProductsHelper
   def organize(products, hq_aware=true)
     pm = []
     products.each do |p|
-
       if hq_aware
         stocks_by_hq = p.stocks.find_all_by_headquarter_id(current_user.headquarter_id)
-        qty = stocks_by_hq.map(&:quantity) rescue []
-        price = stocks_by_hq.map(&:price) rescue []
-        stock_ids = stocks_by_hq.map(&:id) rescue []
+        stocks_by_hq << Stock.new if stocks_by_hq.empty?
+
+        qty = stocks_by_hq.map{|s| s.quantity.nil? ? 0 : s.quantity}
+        price = stocks_by_hq.map{|s| s.price.nil? ? 0 : s.price}
+        stock_ids = stocks_by_hq.map{|s| s.id.nil? ? [] : s.id}
       else
         qty = 0
         price = 0
