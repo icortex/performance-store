@@ -73,7 +73,7 @@ class Sale < ActiveRecord::Base
 
   def update_payments_cost
     self.separates.each do |s|
-      s.payment_cost=s.payment*self.total_cost/(self.total+self.discount)
+      s.payment_cost=s.payment*self.total_cost/(self.total+self.discount) rescue 0
     end
   end
 

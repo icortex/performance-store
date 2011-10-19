@@ -21,9 +21,9 @@ module ApplicationHelper
     products.each do |k, sp|
       size= Size.find_by_name sp[:size]
       color = Color.find_by_name sp[:color]
-      if !size.nil?
+      if !size.nil? && !color.nil?
         p= Product.where("reference = ? and size_id = ? and color_id = ?", sp[:reference], size.id, color.id)[0]
-        sp[:product_id] = p.id
+        sp[:product_id] = p.id if !p.nil?
       end
     end
   end

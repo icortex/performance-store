@@ -1,5 +1,7 @@
 function remove_fields(link) {
-    jq(link).prev("input[type=hidden]").val("1");
+    jq(link).closest('tr').find('input[type="hidden"][id*="_destroy"]').val('1');
+    jq(link).closest(".fields").find('input[name*=quantity]').val(0);
+    update_freight();
     jq(link).closest(".fields").hide();
 }
 

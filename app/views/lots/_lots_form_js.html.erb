@@ -129,9 +129,10 @@
             },
             onAdd: function (item) {
                 fill_features(item, fieldset_selector);
+                update_freight();
             },
             onDelete: function() {
-                reset_fields();
+                remove_fields(this);
             }
         });
 
@@ -156,7 +157,7 @@
     function fill_saved_features(item, fieldset_selector, size, color) {
         var size_select = jq(fieldset_selector + '_size').html('');
         var color_select = jq(fieldset_selector + '_color').html('');
-        var quantity_input = jq(fieldset_selector + '_quantity');
+        var quantity_input = jq(fieldset_selector + '_quantity').val();
         var label_for_selector = 'label[for=' + fieldset_selector.substr(1);
 
         add_options(size_select['selector'], keys(item.sizes));
@@ -208,7 +209,9 @@
 
         var sum=0,i=0;
         for(i=0; i<quantities.length ; i++){
-            sum+=parseInt(quantities[i].value);
+            var x = parseInt(quantities[i].value);
+            x= isNaN(x) ? 0: x;
+            sum+=x;
         }
         return sum;
     }
@@ -216,12 +219,23 @@
     function update_freight(){
         var lot_freight=jq('#lot_freight');
         var freights= jq('input[name="freight"]');
+        a=freights;
         for(i=0; i<freights.length ; i++){
             var x=sum_quantities();
             if(!isNaN(x)){
-            freights[i].value=lot_freight.val()/x;}
+                freights[i].value=lot_freight.val()/x;}
             else{
-            freights[i].value=0;}
+                freights[i].value=0;}
+            var row=jq(freights[i]).closest('tr');
+            var subtotal=row.find('input[name*=sales_cost]');
+            var cost_cop=row.find('input[name*=cost_cop]');
+            var freight=row.find('input[name*=freight]');
+            var profit=row.find('input[name*=profit]');
+            var utility_input=row.find('input[name*=utility]');
+            var price_input=row.find('input[name*=price]');
+            subtotal.val(parseInt(cost_cop.val())+parseInt(freight.val()));
+            profit.val(subtotal.val()*(utility_input.val()/100));
+            price_input.val(aprox(parseInt(subtotal.val())+parseInt(profit.val())));
         }
     }
 
