@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110926211405) do
+ActiveRecord::Schema.define(:version => 20111222224645) do
 
   create_table "brands", :force => true do |t|
     t.string   "brand"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(:version => 20110926211405) do
     t.integer  "lot_id"
     t.integer  "product_id"
     t.integer  "quantity"
-    t.decimal  "cost",                :precision => 10, :scale => 0
+    t.float    "cost"
     t.integer  "cost_cop"
     t.integer  "sales_cost"
     t.integer  "utility"
