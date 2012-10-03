@@ -11,9 +11,10 @@ Variable.create(:key => 'Utilidad (%)', :value => '20')
 Variable.create(:key => 'Impuestos (%)', :value => '0')
 Variable.create(:key => 'Reserva (%)', :value => '0')
 
-Headquarter.create(:name => 'Sede')
+Headquarter.create(:name => 'Sede 1')
+Headquarter.create(:name => 'Sede 2')
 
-User.create(:username=>'waanacona', :email=>'waaa84@hotmail.com',
+User.create(:username=>'admin', :email=>'admin@example.com',
             :type=>'SuperAdmin',:password=>'admin123', :validated=>'1', :headquarter_id => 1)
 
 Size.create(:name=>'S')
@@ -31,8 +32,10 @@ Color.create(:name=>'Violeta',:rgb=>'ff0080')
 
 Brand.create(:brand=>'Adidas')
 Brand.create(:brand=>'Nike')
+Brand.create(:brand=>'Fila')
 
 ClothType.create(:cloth_type=>'Camiseta')
+ClothType.create(:cloth_type=>'Pantaloneta')
 
 ExpenseType.create(:name => 'administrativo')
 ExpenseType.create(:name => 'ventas')
